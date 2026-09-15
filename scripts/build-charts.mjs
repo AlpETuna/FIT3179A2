@@ -19,7 +19,7 @@ const entries=[];
 async function save(id,spec,meta){
   if(id==='mosaic'){
     const columns=spec.data.values.filter(d=>d.tenure==='Owned outright'&&d.x2-d.x>.07);
-    spec.encoding.x.axis={values:columns.map(d=>(d.x+d.x2)/2),labelAngle:-25,labelLimit:110,grid:false,ticks:false,
+    spec.encoding.x.axis={values:columns.map(d=>(d.x+d.x2)/2),labelAngle:-45,labelOverlap:false,labelLimit:110,grid:false,ticks:false,
       labelExpr:columns.map(d=>`abs(datum.value - ${(d.x+d.x2)/2}) < 0.00001 ? '${d.dwelling}' : `).join('')+"''"};
   }
   const isVega=spec.$schema?.includes('/vega/v');

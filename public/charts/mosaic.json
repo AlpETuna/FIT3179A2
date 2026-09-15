@@ -272,7 +272,8 @@
           0.7865059047212434,
           0.920624072459854
         ],
-        "labelAngle": -25,
+        "labelAngle": -45,
+        "labelOverlap": false,
         "labelLimit": 110,
         "grid": false,
         "ticks": false,
