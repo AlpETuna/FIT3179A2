@@ -3,6 +3,7 @@ from pathlib import Path
 import html
 import io
 import re
+import json
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from pypdf import PdfReader
@@ -33,6 +34,9 @@ tasks = [
     for g in ['AUS', 'STE', 'SA3', 'SA4']
 ]
 tasks += [
+    ('https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia/jul-2026/640103.xlsx', 'cpi-03.xlsx'),
+    ('https://www.aihw.gov.au/scripts/components/dataAndResources.js', 'aihw-resources.js'),
+    ('https://www.aihw.gov.au/scripts/modules/dataOrResource.js', 'aihw-resource-module.js'),
     ('https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files/SA3_2021_AUST_SHP_GDA2020.zip', 'boundaries-SA3.zip'),
     ('https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia/jul-2026/640101.xlsx', 'cpi-01.xlsx'),
     ('https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia/jul-2026/640102.xlsx', 'cpi-02.xlsx'),
@@ -41,6 +45,25 @@ tasks += [
 ]
 with ThreadPoolExecutor(max_workers=4) as pool:
     list(pool.map(safe_get, tasks))
+
+# Public endpoint used by the report's own Data tab (a read-only search).
+catalogue = CACHE / 'aihw-downloads.json'
+if not catalogue.exists():
+    filters = dict(enableTagFilter=False, keywords=[], itemsPerPage=10,
+        filterByCurrentReport=False, filterByCurrentTopic=False,
+        filterByContentType=False, contentType='', filterByChildrenOfCurrentNode=True,
+        filterByChildrenOfSelectedNode='', orderByColumn='NodeOrder',
+        reportNodeGuid='f2eead56-e21e-4141-94c2-096694590a2a', currentNodeId=83381,
+        showDescription=True, showReportLink=False, showTopicsAndTags=False,
+        showDate=False, showNumResults=False, isTopicLevel=False,
+        ignoredResourceGuids='', includeDataReports=False, page=1)
+    req = urllib.request.Request('https://www.aihw.gov.au/api/search/all-downloadable-resources',
+        data=json.dumps(filters).encode(), headers={**HEADERS, 'Content-Type': 'application/json'})
+    with urllib.request.urlopen(req, timeout=90) as response:
+        catalogue.write_bytes(response.read())
+for item in json.loads(catalogue.read_text())['results']:
+    if item['resultFileType'] == 'XLSX':
+        get('https://www.aihw.gov.au' + item['resultUrl'], 'cra-quarterly.xlsx')
 
 pdf = CACHE / 'aihw-report.pdf'
 if pdf.exists():
