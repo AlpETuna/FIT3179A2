@@ -1,0 +1,249 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 520,
+  "height": 340,
+  "params": [
+    {
+      "name": "featured",
+      "value": "all"
+    }
+  ],
+  "data": {
+    "url": "data/sa3.json"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "circle",
+        "size": 32,
+        "color": "#9d9d9d",
+        "opacity": 0.45
+      },
+      "encoding": {
+        "x": {
+          "field": "income",
+          "type": "quantitative",
+          "title": "Median household income / week ($)",
+          "scale": {
+            "zero": false
+          },
+          "axis": {
+            "format": "~s"
+          }
+        },
+        "y": {
+          "field": "rent",
+          "type": "quantitative",
+          "title": "Median rent / week ($)",
+          "scale": {
+            "zero": false
+          },
+          "axis": {
+            "format": "$,.0f"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Region"
+          },
+          {
+            "field": "rent",
+            "type": "quantitative",
+            "title": "Median rent / week",
+            "format": "$,.0f"
+          },
+          {
+            "field": "income",
+            "type": "quantitative",
+            "title": "Median household income / week",
+            "format": "$,.0f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "income": 1746
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          4,
+          4
+        ],
+        "color": "#777"
+      },
+      "encoding": {
+        "x": {
+          "field": "income",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "rent": 375
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          4,
+          4
+        ],
+        "color": "#777"
+      },
+      "encoding": {
+        "y": {
+          "field": "rent",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": {
+            "field": "code",
+            "oneOf": [
+              "20604",
+              "21203",
+              "20201"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 130,
+        "color": "#8f4715",
+        "stroke": "#1d1d1d",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "x": {
+          "field": "income",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "rent",
+          "type": "quantitative"
+        },
+        "opacity": {
+          "condition": {
+            "test": "featured === 'all' || datum.code === featured",
+            "value": 1
+          },
+          "value": 0.18
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Region"
+          },
+          {
+            "field": "rent",
+            "type": "quantitative",
+            "title": "Median rent / week",
+            "format": "$,.0f"
+          },
+          {
+            "field": "income",
+            "type": "quantitative",
+            "title": "Median household income / week",
+            "format": "$,.0f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": {
+            "field": "code",
+            "oneOf": [
+              "20604",
+              "21203",
+              "20201"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 9,
+        "dy": -12,
+        "fontSize": 12,
+        "color": "#1d1d1d"
+      },
+      "encoding": {
+        "x": {
+          "field": "income",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "rent",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "name",
+          "type": "nominal"
+        },
+        "opacity": {
+          "condition": {
+            "test": "featured === 'all' || datum.code === featured",
+            "value": 1
+          },
+          "value": 0.18
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Public Sans",
+    "background": "#ffffff",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "titleFontWeight": 400,
+      "labelColor": "#585858",
+      "titleColor": "#585858",
+      "domain": false,
+      "tickColor": "#c8c8c8",
+      "gridColor": "#e9e9e9",
+      "labelPadding": 7,
+      "titlePadding": 13
+    },
+    "legend": {
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "titleFontWeight": 400,
+      "labelColor": "#585858",
+      "titleColor": "#585858",
+      "padding": 8
+    },
+    "title": {
+      "font": "Public Sans",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#1d1d1d",
+      "anchor": "start"
+    }
+  },
+  "description": "One dot is one region. Dashed lines show the published Australian household medians: $1,746 income and $375 rent per week. The association does not establish causation, and dividing these regional medians would not measure rental stress."
+}

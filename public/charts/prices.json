@@ -1,0 +1,133 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 520,
+  "height": 300,
+  "data": {
+    "url": "data/cpi.json"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.5
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "title": null,
+          "axis": {
+            "format": "%b %Y",
+            "tickCount": 4
+          }
+        },
+        "y": {
+          "field": "index",
+          "type": "quantitative",
+          "title": "Price index · April 2024 = 100",
+          "scale": {
+            "zero": false
+          },
+          "axis": {
+            "tickCount": 5
+          }
+        },
+        "color": {
+          "field": "series",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Rents",
+              "All prices"
+            ],
+            "range": [
+              "#8f4715",
+              "#1d1d1d"
+            ]
+          },
+          "legend": {
+            "orient": "top"
+          }
+        },
+        "strokeDash": {
+          "field": "series",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Rents",
+              "All prices"
+            ],
+            "range": [
+              [
+                1,
+                0
+              ],
+              [
+                6,
+                3
+              ]
+            ]
+          },
+          "legend": {
+            "orient": "top"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "date",
+            "type": "temporal",
+            "title": "Month",
+            "format": "%B %Y"
+          },
+          {
+            "field": "series",
+            "type": "nominal",
+            "title": "Series"
+          },
+          {
+            "field": "index",
+            "type": "quantitative",
+            "title": "April 2024 = 100",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "font": "Public Sans",
+    "background": "#ffffff",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "titleFontWeight": 400,
+      "labelColor": "#585858",
+      "titleColor": "#585858",
+      "domain": false,
+      "tickColor": "#c8c8c8",
+      "gridColor": "#e9e9e9",
+      "labelPadding": 7,
+      "titlePadding": 13
+    },
+    "legend": {
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "titleFontWeight": 400,
+      "labelColor": "#585858",
+      "titleColor": "#585858",
+      "padding": 8
+    },
+    "title": {
+      "font": "Public Sans",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#1d1d1d",
+      "anchor": "start"
+    }
+  },
+  "description": "Both monthly price series start at 100 in April 2024. A value of 110 means prices are 10% higher than at the start. These are weighted eight-capital-city CPI measures, not national advertised rents."
+}

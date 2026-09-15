@@ -1,0 +1,179 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 410,
+  "height": 330,
+  "data": {
+    "url": "data/cra.json"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#fff",
+        "strokeWidth": 5,
+        "cornerRadius": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "col",
+          "type": "ordinal",
+          "axis": null,
+          "scale": {
+            "domain": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        },
+        "y": {
+          "field": "row",
+          "type": "ordinal",
+          "axis": null,
+          "scale": {
+            "domain": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        },
+        "color": {
+          "field": "severe",
+          "type": "quantitative",
+          "title": "Spending over half their income on rent",
+          "scale": {
+            "domain": [
+              0,
+              30
+            ],
+            "range": [
+              "#f5eff6",
+              "#6f3473"
+            ],
+            "clamp": true
+          },
+          "legend": {
+            "orient": "bottom",
+            "format": ".0f",
+            "gradientLength": 220,
+            "title": "Share after assistance (%)"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "severe",
+            "type": "quantitative",
+            "title": "Over 50% after assistance",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": -10,
+        "fontWeight": 600,
+        "fontSize": 14
+      },
+      "encoding": {
+        "x": {
+          "field": "col",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "row",
+          "type": "ordinal"
+        },
+        "text": {
+          "field": "state",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.severe>21.6",
+            "value": "#fff"
+          },
+          "value": "#000000"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "calculate": "format(datum.severe,'.1f')+'%'",
+          "as": "label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": 13,
+        "fontSize": 17
+      },
+      "encoding": {
+        "x": {
+          "field": "col",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "row",
+          "type": "ordinal"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.severe>21.6",
+            "value": "#fff"
+          },
+          "value": "#000000"
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Public Sans",
+    "background": "#ffffff",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "titleFontWeight": 400,
+      "labelColor": "#585858",
+      "titleColor": "#585858",
+      "domain": false,
+      "tickColor": "#c8c8c8",
+      "gridColor": "#e9e9e9",
+      "labelPadding": 7,
+      "titlePadding": 13
+    },
+    "legend": {
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "titleFontWeight": 400,
+      "labelColor": "#585858",
+      "titleColor": "#585858",
+      "padding": 8
+    },
+    "title": {
+      "font": "Public Sans",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#1d1d1d",
+      "anchor": "start"
+    }
+  },
+  "description": "This tile cartogram gives each state or territory equal space in approximate geographic order. It shows the share of eligible assistance recipients whose rent, after assistance, exceeds 50% of gross income. Tile size does not represent land or population."
+}

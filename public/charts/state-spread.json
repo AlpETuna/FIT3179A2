@@ -1,0 +1,79 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 520,
+  "height": 310,
+  "data": {
+    "url": "data/sa3.json"
+  },
+  "mark": {
+    "type": "boxplot",
+    "extent": "min-max",
+    "size": 22,
+    "color": "#8f4715",
+    "median": {
+      "color": "#fff",
+      "strokeWidth": 2
+    },
+    "outliers": false
+  },
+  "encoding": {
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "NSW",
+        "Vic",
+        "Qld",
+        "SA",
+        "WA",
+        "Tas",
+        "NT",
+        "ACT"
+      ]
+    },
+    "x": {
+      "field": "rent",
+      "type": "quantitative",
+      "title": "Regional median weekly rent ($)",
+      "axis": {
+        "format": "$,.0f"
+      }
+    }
+  },
+  "config": {
+    "font": "Public Sans",
+    "background": "#ffffff",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "titleFontWeight": 400,
+      "labelColor": "#585858",
+      "titleColor": "#585858",
+      "domain": false,
+      "tickColor": "#c8c8c8",
+      "gridColor": "#e9e9e9",
+      "labelPadding": 7,
+      "titlePadding": 13
+    },
+    "legend": {
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "titleFontWeight": 400,
+      "labelColor": "#585858",
+      "titleColor": "#585858",
+      "padding": 8
+    },
+    "title": {
+      "font": "Public Sans",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#1d1d1d",
+      "anchor": "start"
+    }
+  },
+  "description": "Each box spans the middle half of regional medians; its centre line is the middle region’s median rent. Whiskers span the lowest to highest regional median. Regions have equal weight, so this is not a state household median."
+}

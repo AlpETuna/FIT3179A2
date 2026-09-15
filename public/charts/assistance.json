@@ -1,0 +1,210 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 520,
+  "height": 300,
+  "data": {
+    "url": "data/cra.json"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "stroke": "#aaa",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "NSW",
+            "Vic",
+            "Qld",
+            "SA",
+            "WA",
+            "Tas",
+            "NT",
+            "ACT"
+          ]
+        },
+        "x": {
+          "field": "after",
+          "type": "quantitative",
+          "title": "Recipients in rental stress (%)",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          },
+          "axis": {
+            "values": [
+              0,
+              25,
+              50,
+              75,
+              100
+            ]
+          }
+        },
+        "x2": {
+          "field": "before"
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "before",
+            "type": "quantitative",
+            "title": "Without assistance (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "after",
+            "type": "quantitative",
+            "title": "With assistance (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "fold": [
+            "before",
+            "after"
+          ],
+          "as": [
+            "basis",
+            "rate"
+          ]
+        },
+        {
+          "calculate": "datum.basis==='before'?'Without assistance':'With assistance'",
+          "as": "basisLabel"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 100,
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "NSW",
+            "Vic",
+            "Qld",
+            "SA",
+            "WA",
+            "Tas",
+            "NT",
+            "ACT"
+          ]
+        },
+        "x": {
+          "field": "rate",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "basisLabel",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Without assistance",
+              "With assistance"
+            ],
+            "range": [
+              "#8a8a8a",
+              "#6f3473"
+            ]
+          },
+          "legend": {
+            "orient": "top"
+          }
+        },
+        "shape": {
+          "field": "basisLabel",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Without assistance",
+              "With assistance"
+            ],
+            "range": [
+              "circle",
+              "diamond"
+            ]
+          },
+          "legend": {
+            "orient": "top"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "basisLabel",
+            "type": "nominal",
+            "title": "Calculation"
+          },
+          {
+            "field": "rate",
+            "type": "quantitative",
+            "title": "In rental stress (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "font": "Public Sans",
+    "background": "#ffffff",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "titleFontWeight": 400,
+      "labelColor": "#585858",
+      "titleColor": "#585858",
+      "domain": false,
+      "tickColor": "#c8c8c8",
+      "gridColor": "#e9e9e9",
+      "labelPadding": 7,
+      "titlePadding": 13
+    },
+    "legend": {
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "titleFontWeight": 400,
+      "labelColor": "#585858",
+      "titleColor": "#585858",
+      "padding": 8
+    },
+    "title": {
+      "font": "Public Sans",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#1d1d1d",
+      "anchor": "start"
+    }
+  },
+  "description": "Each pair describes the same recipients in March 2026. “Without” is a calculation that leaves assistance out, not an earlier observation or a controlled policy experiment. Rental stress means rent exceeds 30% of gross income."
+}

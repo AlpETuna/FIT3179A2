@@ -1,0 +1,150 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "width": 520,
+  "height": 320,
+  "padding": 2,
+  "autosize": "none",
+  "data": [
+    {
+      "name": "tree",
+      "url": "data/dwellings.json",
+      "transform": [
+        {
+          "type": "stratify",
+          "key": "id",
+          "parentKey": "parent"
+        },
+        {
+          "type": "treemap",
+          "field": "count",
+          "method": "squarify",
+          "sort": {
+            "field": "value",
+            "order": "descending"
+          },
+          "size": [
+            {
+              "signal": "width"
+            },
+            {
+              "signal": "height"
+            }
+          ],
+          "paddingInner": 2,
+          "paddingOuter": 2,
+          "paddingTop": 22,
+          "round": true
+        }
+      ]
+    },
+    {
+      "name": "leaves",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.count > 0"
+        }
+      ]
+    },
+    {
+      "name": "parents",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.depth === 1"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "colour",
+      "type": "ordinal",
+      "domain": [
+        "Separate house",
+        "Townhouse",
+        "Apartment",
+        "Other dwelling",
+        "Not stated"
+      ],
+      "range": [
+        "#d7ddd9",
+        "#b3c4ce",
+        "#6e8b9c",
+        "#bbb3a7",
+        "#e8e8e8"
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "from": {
+        "data": "leaves"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "field": "x0"
+          },
+          "y": {
+            "field": "y0"
+          },
+          "x2": {
+            "field": "x1"
+          },
+          "y2": {
+            "field": "y1"
+          },
+          "stroke": {
+            "value": "#fff"
+          },
+          "fill": {
+            "scale": "colour",
+            "field": "category"
+          },
+          "tooltip": {
+            "signal": "{'Dwelling':datum.category,'Type':datum.name,'Homes':format(datum.count,',')}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "parents"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.x0 + 9"
+          },
+          "y": {
+            "signal": "datum.y0 + 17"
+          },
+          "text": {
+            "signal": "datum.x1-datum.x0>95 ? datum.name : ''"
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fontWeight": {
+            "value": 600
+          },
+          "fill": {
+            "value": "#1d1d1d"
+          },
+          "limit": {
+            "signal": "datum.x1-datum.x0-14"
+          }
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Public Sans"
+  },
+  "description": "A treemap nests storey and building types inside five dwelling categories. Area represents occupied private dwellings. Tiny subtypes remain in the data table."
+}

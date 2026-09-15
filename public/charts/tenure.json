@@ -1,0 +1,1001 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 300,
+  "height": 300,
+  "data": {
+    "values": [
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 0,
+        "row": 0
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 1,
+        "row": 0
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 2,
+        "row": 0
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 3,
+        "row": 0
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 4,
+        "row": 0
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 5,
+        "row": 0
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 6,
+        "row": 0
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 7,
+        "row": 0
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 8,
+        "row": 0
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 9,
+        "row": 0
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 0,
+        "row": 1
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 1,
+        "row": 1
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 2,
+        "row": 1
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 3,
+        "row": 1
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 4,
+        "row": 1
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 5,
+        "row": 1
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 6,
+        "row": 1
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 7,
+        "row": 1
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 8,
+        "row": 1
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 9,
+        "row": 1
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 0,
+        "row": 2
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 1,
+        "row": 2
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 2,
+        "row": 2
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 3,
+        "row": 2
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 4,
+        "row": 2
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 5,
+        "row": 2
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 6,
+        "row": 2
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 7,
+        "row": 2
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 8,
+        "row": 2
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 9,
+        "row": 2
+      },
+      {
+        "tenure": "Owned outright",
+        "count": 2872331,
+        "share": 0.30967803772138164,
+        "tiles": 31,
+        "remainder": 0.9678137884473621,
+        "col": 0,
+        "row": 3
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 1,
+        "row": 3
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 2,
+        "row": 3
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 3,
+        "row": 3
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 4,
+        "row": 3
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 5,
+        "row": 3
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 6,
+        "row": 3
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 7,
+        "row": 3
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 8,
+        "row": 3
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 9,
+        "row": 3
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 0,
+        "row": 4
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 1,
+        "row": 4
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 2,
+        "row": 4
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 3,
+        "row": 4
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 4,
+        "row": 4
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 5,
+        "row": 4
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 6,
+        "row": 4
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 7,
+        "row": 4
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 8,
+        "row": 4
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 9,
+        "row": 4
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 0,
+        "row": 5
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 1,
+        "row": 5
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 2,
+        "row": 5
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 3,
+        "row": 5
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 4,
+        "row": 5
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 5,
+        "row": 5
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 6,
+        "row": 5
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 7,
+        "row": 5
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 8,
+        "row": 5
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 9,
+        "row": 5
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 0,
+        "row": 6
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 1,
+        "row": 6
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 2,
+        "row": 6
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 3,
+        "row": 6
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 4,
+        "row": 6
+      },
+      {
+        "tenure": "Mortgage",
+        "count": 3242449,
+        "share": 0.34958200977939385,
+        "tiles": 35,
+        "remainder": 0.9582122849133228,
+        "col": 5,
+        "row": 6
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 6,
+        "row": 6
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 7,
+        "row": 6
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 8,
+        "row": 6
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 9,
+        "row": 6
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 0,
+        "row": 7
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 1,
+        "row": 7
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 2,
+        "row": 7
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 3,
+        "row": 7
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 4,
+        "row": 7
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 5,
+        "row": 7
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 6,
+        "row": 7
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 7,
+        "row": 7
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 8,
+        "row": 7
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 9,
+        "row": 7
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 0,
+        "row": 8
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 1,
+        "row": 8
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 2,
+        "row": 8
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 3,
+        "row": 8
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 4,
+        "row": 8
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 5,
+        "row": 8
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 6,
+        "row": 8
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 7,
+        "row": 8
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 8,
+        "row": 8
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 9,
+        "row": 8
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 0,
+        "row": 9
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 1,
+        "row": 9
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 2,
+        "row": 9
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 3,
+        "row": 9
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 4,
+        "row": 9
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 5,
+        "row": 9
+      },
+      {
+        "tenure": "Renting",
+        "count": 2842378,
+        "share": 0.30644867931391795,
+        "tiles": 31,
+        "remainder": 0.6448778432497626,
+        "col": 6,
+        "row": 9
+      },
+      {
+        "tenure": "Other tenure",
+        "count": 181518,
+        "share": 0.019570215985243257,
+        "tiles": 2,
+        "remainder": 0.957022231508621,
+        "col": 7,
+        "row": 9
+      },
+      {
+        "tenure": "Other tenure",
+        "count": 181518,
+        "share": 0.019570215985243257,
+        "tiles": 2,
+        "remainder": 0.957022231508621,
+        "col": 8,
+        "row": 9
+      },
+      {
+        "tenure": "Not stated",
+        "count": 136538,
+        "share": 0.014720733757495916,
+        "tiles": 1,
+        "remainder": 0.47207385188093776,
+        "col": 9,
+        "row": 9
+      }
+    ]
+  },
+  "mark": {
+    "type": "rect",
+    "stroke": "#fff",
+    "strokeWidth": 3
+  },
+  "encoding": {
+    "x": {
+      "field": "col",
+      "type": "ordinal",
+      "axis": null
+    },
+    "y": {
+      "field": "row",
+      "type": "ordinal",
+      "axis": null
+    },
+    "color": {
+      "field": "tenure",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Owned outright",
+          "Mortgage",
+          "Renting",
+          "Other tenure",
+          "Not stated"
+        ],
+        "range": [
+          "#158374",
+          "#2b6399",
+          "#8f4715",
+          "#9e9e9e",
+          "#dedede"
+        ]
+      },
+      "legend": null
+    },
+    "tooltip": [
+      {
+        "field": "tenure",
+        "type": "nominal",
+        "title": "Tenure"
+      },
+      {
+        "field": "share",
+        "type": "quantitative",
+        "title": "Share of occupied homes",
+        "format": ".1%"
+      },
+      {
+        "field": "count",
+        "type": "quantitative",
+        "title": "Homes",
+        "format": ","
+      }
+    ]
+  },
+  "config": {
+    "font": "Public Sans",
+    "background": "#ffffff",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "titleFontWeight": 400,
+      "labelColor": "#585858",
+      "titleColor": "#585858",
+      "domain": false,
+      "tickColor": "#c8c8c8",
+      "gridColor": "#e9e9e9",
+      "labelPadding": 7,
+      "titlePadding": 13
+    },
+    "legend": {
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "titleFontWeight": 400,
+      "labelColor": "#585858",
+      "titleColor": "#585858",
+      "padding": 8
+    },
+    "title": {
+      "font": "Public Sans",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#1d1d1d",
+      "anchor": "start"
+    }
+  },
+  "description": "A hundred-square waffle shows Australia’s five tenure categories in 2021. Each square is approximately one per cent; the exact shares are listed below."
+}

@@ -34,6 +34,7 @@ tasks = [
     for g in ['AUS', 'STE', 'SA3', 'SA4']
 ]
 tasks += [
+    ('https://www.aihw.gov.au/getmedia/b85bc0f4-b3e6-4d9a-a061-8e177a0d64bd/AIHW-HOU-341-CRA_Data-tables_March-2026.xlsx', 'cra-quarterly.xlsx'),
     ('https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia/jul-2026/640103.xlsx', 'cpi-03.xlsx'),
     ('https://www.aihw.gov.au/scripts/components/dataAndResources.js', 'aihw-resources.js'),
     ('https://www.aihw.gov.au/scripts/modules/dataOrResource.js', 'aihw-resource-module.js'),
@@ -46,7 +47,8 @@ tasks += [
 with ThreadPoolExecutor(max_workers=4) as pool:
     list(pool.map(safe_get, tasks))
 
-# Public endpoint used by the report's own Data tab (a read-only search).
+# The pinned workbook above is the source of the implemented story. The public
+# catalogue below records how its official download URL was originally found.
 catalogue = CACHE / 'aihw-downloads.json'
 if not catalogue.exists():
     filters = dict(enableTagFilter=False, keywords=[], itemsPerPage=10,
@@ -61,9 +63,6 @@ if not catalogue.exists():
         data=json.dumps(filters).encode(), headers={**HEADERS, 'Content-Type': 'application/json'})
     with urllib.request.urlopen(req, timeout=90) as response:
         catalogue.write_bytes(response.read())
-for item in json.loads(catalogue.read_text())['results']:
-    if item['resultFileType'] == 'XLSX':
-        get('https://www.aihw.gov.au' + item['resultUrl'], 'cra-quarterly.xlsx')
 
 pdf = CACHE / 'aihw-report.pdf'
 if pdf.exists():

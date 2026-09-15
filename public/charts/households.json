@@ -1,0 +1,285 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "width": 520,
+  "height": 340,
+  "padding": 0,
+  "autosize": "none",
+  "signals": [
+    {
+      "name": "xLeft",
+      "update": "width*0.23"
+    },
+    {
+      "name": "xRight",
+      "update": "width*0.74"
+    },
+    {
+      "name": "plotHeight",
+      "update": "height-34"
+    }
+  ],
+  "data": [
+    {
+      "name": "bands",
+      "values": [
+        {
+          "household": "Family household",
+          "dwelling": "Separate house",
+          "count": 5223920,
+          "a": 0,
+          "b": 0,
+          "h": 0.504075148182453
+        },
+        {
+          "household": "One person",
+          "dwelling": "Separate house",
+          "count": 1291416,
+          "a": 0.6663240363760605,
+          "b": 0.504075148182453,
+          "h": 0.12461345341528789
+        },
+        {
+          "household": "Group household",
+          "dwelling": "Separate house",
+          "count": 195246,
+          "a": 0.9300860858194107,
+          "b": 0.6286886015977409,
+          "h": 0.01884000068569795
+        },
+        {
+          "household": "Family household",
+          "dwelling": "Townhouse",
+          "count": 654919,
+          "a": 0.504075148182453,
+          "b": 0.6825286022834389,
+          "h": 0.06319552978845464
+        },
+        {
+          "household": "One person",
+          "dwelling": "Townhouse",
+          "count": 453126,
+          "a": 0.7909374897913484,
+          "b": 0.7457241320718936,
+          "h": 0.04372378512598244
+        },
+        {
+          "household": "Group household",
+          "dwelling": "Townhouse",
+          "count": 60816,
+          "a": 0.9489260865051086,
+          "b": 0.789447917197876,
+          "h": 0.0058683582849400565
+        },
+        {
+          "household": "Family household",
+          "dwelling": "Apartment",
+          "count": 631631,
+          "a": 0.5672706779709077,
+          "b": 0.8303162754828161,
+          "h": 0.06094838548860453
+        },
+        {
+          "household": "One person",
+          "dwelling": "Apartment",
+          "count": 585866,
+          "a": 0.8346612749173308,
+          "b": 0.8912646609714205,
+          "h": 0.05653235324527577
+        },
+        {
+          "household": "Group household",
+          "dwelling": "Apartment",
+          "count": 101594,
+          "a": 0.9547944447900486,
+          "b": 0.9477970142166963,
+          "h": 0.009803176657461854
+        },
+        {
+          "household": "Family household",
+          "dwelling": "Other / not stated",
+          "count": 32178,
+          "a": 0.6282190634595122,
+          "b": 0.9926001908741582,
+          "h": 0.003104972916548296
+        },
+        {
+          "household": "One person",
+          "dwelling": "Other / not stated",
+          "count": 40339,
+          "a": 0.8911936281626065,
+          "b": 0.9957051637907065,
+          "h": 0.00389245765680408
+        },
+        {
+          "household": "Group household",
+          "dwelling": "Other / not stated",
+          "count": 4170,
+          "a": 0.9645976214475105,
+          "b": 0.9995976214475106,
+          "h": 0.0004023785524894771
+        }
+      ]
+    },
+    {
+      "name": "nodes",
+      "values": [
+        {
+          "name": "Family household",
+          "side": "left",
+          "start": 0,
+          "end": 0.6313240363760605,
+          "cursor": 0.6313240363760605
+        },
+        {
+          "name": "One person",
+          "side": "left",
+          "start": 0.6663240363760605,
+          "end": 0.8950860858194107,
+          "cursor": 0.8950860858194106
+        },
+        {
+          "name": "Group household",
+          "side": "left",
+          "start": 0.9300860858194107,
+          "end": 0.965,
+          "cursor": 0.965
+        },
+        {
+          "name": "Separate house",
+          "side": "right",
+          "start": 0,
+          "end": 0.6475286022834389,
+          "cursor": 0.6475286022834388
+        },
+        {
+          "name": "Townhouse",
+          "side": "right",
+          "start": 0.6825286022834389,
+          "end": 0.795316275482816,
+          "cursor": 0.795316275482816
+        },
+        {
+          "name": "Apartment",
+          "side": "right",
+          "start": 0.8303162754828161,
+          "end": 0.9576001908741583,
+          "cursor": 0.9576001908741582
+        },
+        {
+          "name": "Other / not stated",
+          "side": "right",
+          "start": 0.9926001908741582,
+          "end": 1,
+          "cursor": 1
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "colour",
+      "type": "ordinal",
+      "domain": [
+        "Family household",
+        "One person",
+        "Group household"
+      ],
+      "range": [
+        "#386b62",
+        "#a46931",
+        "#655775"
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "path",
+      "from": {
+        "data": "bands"
+      },
+      "encode": {
+        "update": {
+          "path": {
+            "signal": "'M'+xLeft+','+(datum.a*plotHeight)+' C'+(width*.5)+','+(datum.a*plotHeight)+' '+(width*.5)+','+(datum.b*plotHeight)+' '+xRight+','+(datum.b*plotHeight)+' L'+xRight+','+((datum.b+datum.h)*plotHeight)+' C'+(width*.5)+','+((datum.b+datum.h)*plotHeight)+' '+(width*.5)+','+((datum.a+datum.h)*plotHeight)+' '+xLeft+','+((datum.a+datum.h)*plotHeight)+' Z'"
+          },
+          "fill": {
+            "scale": "colour",
+            "field": "household"
+          },
+          "fillOpacity": {
+            "value": 0.65
+          },
+          "tooltip": {
+            "signal": "{'Household':datum.household,'Dwelling':datum.dwelling,'Homes':format(datum.count,',')}"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {
+        "data": "nodes"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "datum.side==='left'?xLeft-6:xRight"
+          },
+          "width": {
+            "value": 6
+          },
+          "y": {
+            "signal": "datum.start*plotHeight"
+          },
+          "y2": {
+            "signal": "datum.end*plotHeight"
+          },
+          "fill": {
+            "value": "#1d1d1d"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "nodes"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "datum.side==='left'?xLeft-12:xRight+12"
+          },
+          "y": {
+            "signal": "(datum.start+datum.end)/2*plotHeight"
+          },
+          "text": {
+            "signal": "datum.name==='One person'?['One','person']:datum.name==='Family household'?['Family','household']:datum.name==='Group household'?['Group','household']:datum.name==='Separate house'?['Separate','house']:datum.name==='Other / not stated'?['Other /','not stated']:datum.name"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "lineHeight": {
+            "value": 15
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "align": {
+            "signal": "datum.side==='left'?'right':'left'"
+          },
+          "limit": {
+            "signal": "width*.23-12"
+          },
+          "fill": {
+            "value": "#1d1d1d"
+          }
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Public Sans"
+  },
+  "description": "Bands connect household composition to dwelling type. Wider bands mean more households, not movement between homes. Other and unreported dwelling types are combined here."
+}

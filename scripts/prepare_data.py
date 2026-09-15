@@ -116,6 +116,7 @@ write('cpi',cpi)
 w=openpyxl.load_workbook(CACHE/'cra-quarterly.xlsx',read_only=True,data_only=True)
 rows2=list(w['CRA.2'].values);rows3=list(w['CRA.3'].values)
 date=max(r[0] for r in rows2 if isinstance(r[0],datetime))
+assert date == datetime(2026, 3, 27), 'Source period changed: review the narrative and charts before adopting a new release.'
 current=[r for r in rows2 if r[0]==date and r[1]=='Per cent']
 assert current, 'Do not calculate unpublished joint percentages'
 def cra_row(description,category,detail):
