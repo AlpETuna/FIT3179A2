@@ -1,0 +1,9 @@
+.claude
+FIT3179Notes/
+node_modules/
+dist/
+.cache/
+test-results/
+playwright-report/
+A2Brief/
+__pycache__/
