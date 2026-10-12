@@ -1,49 +1,60 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "width": 410,
-  "height": 330,
-  "data": {
-    "url": "data/cra.json"
+  "width": 520,
+  "height": 320,
+  "projection": {
+    "type": "albers",
+    "rotate": [
+      -132,
+      0,
+      0
+    ],
+    "center": [
+      0,
+      -28
+    ],
+    "parallels": [
+      -18,
+      -36
+    ]
   },
   "layer": [
     {
+      "data": {
+        "url": "data/states.topo.json",
+        "format": {
+          "type": "topojson",
+          "feature": "states"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "['NSW','Vic','Qld','SA','WA','Tas','NT','ACT'][toNumber(datum.properties.STE_CODE21)-1]",
+          "as": "state"
+        },
+        {
+          "lookup": "state",
+          "from": {
+            "data": {
+              "url": "data/cra.json"
+            },
+            "key": "state",
+            "fields": [
+              "severe"
+            ]
+          }
+        }
+      ],
       "mark": {
-        "type": "rect",
-        "stroke": "#fff",
-        "strokeWidth": 5,
-        "cornerRadius": 2
+        "type": "geoshape",
+        "stroke": "#ffffff",
+        "strokeWidth": 1.2
       },
       "encoding": {
-        "x": {
-          "field": "col",
-          "type": "ordinal",
-          "axis": null,
-          "scale": {
-            "domain": [
-              0,
-              1,
-              2,
-              3
-            ]
-          }
-        },
-        "y": {
-          "field": "row",
-          "type": "ordinal",
-          "axis": null,
-          "scale": {
-            "domain": [
-              0,
-              1,
-              2,
-              3
-            ]
-          }
-        },
         "color": {
           "field": "severe",
           "type": "quantitative",
-          "title": "Spending over half their income on rent",
+          "title": "Share after assistance (%)",
           "scale": {
             "domain": [
               0,
@@ -56,10 +67,14 @@
             "clamp": true
           },
           "legend": {
-            "orient": "bottom",
+            "orient": "right",
+            "direction": "vertical",
             "format": ".0f",
-            "gradientLength": 220,
-            "title": "Share after assistance (%)"
+            "gradientLength": 180,
+            "title": [
+              "Share after",
+              "assistance (%)"
+            ]
           }
         },
         "tooltip": [
@@ -71,27 +86,191 @@
           {
             "field": "severe",
             "type": "quantitative",
-            "title": "Over 50% after assistance",
+            "title": "Over 50% after assistance (%)",
             "format": ".1f"
           }
         ]
       }
     },
     {
+      "data": {
+        "values": [
+          {
+            "state": "NSW",
+            "lon": 146.8,
+            "lat": -31.9,
+            "outside": false
+          },
+          {
+            "state": "Vic",
+            "lon": 139.2,
+            "lat": -43.4,
+            "ax": 143.6,
+            "ay": -37.4,
+            "outside": true
+          },
+          {
+            "state": "Qld",
+            "lon": 144.6,
+            "lat": -22.6,
+            "outside": false
+          },
+          {
+            "state": "SA",
+            "lon": 135.2,
+            "lat": -30.2,
+            "outside": false
+          },
+          {
+            "state": "WA",
+            "lon": 122.2,
+            "lat": -26,
+            "outside": false
+          },
+          {
+            "state": "Tas",
+            "lon": 151.5,
+            "lat": -42.6,
+            "ax": 146.7,
+            "ay": -42,
+            "outside": true
+          },
+          {
+            "state": "NT",
+            "lon": 133.4,
+            "lat": -19.6,
+            "outside": false
+          },
+          {
+            "state": "ACT",
+            "lon": 154,
+            "lat": -36.6,
+            "ax": 149.1,
+            "ay": -35.45,
+            "outside": true
+          }
+        ]
+      },
+      "transform": [
+        {
+          "filter": "datum.outside"
+        }
+      ],
       "mark": {
-        "type": "text",
-        "dy": -10,
-        "fontWeight": 600,
-        "fontSize": 14
+        "type": "rule",
+        "color": "#1d1d1d",
+        "strokeWidth": 0.8
       },
       "encoding": {
-        "x": {
-          "field": "col",
-          "type": "ordinal"
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
         },
-        "y": {
-          "field": "row",
-          "type": "ordinal"
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "longitude2": {
+          "field": "ax"
+        },
+        "latitude2": {
+          "field": "ay"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "state": "NSW",
+            "lon": 146.8,
+            "lat": -31.9,
+            "outside": false
+          },
+          {
+            "state": "Vic",
+            "lon": 139.2,
+            "lat": -43.4,
+            "ax": 143.6,
+            "ay": -37.4,
+            "outside": true
+          },
+          {
+            "state": "Qld",
+            "lon": 144.6,
+            "lat": -22.6,
+            "outside": false
+          },
+          {
+            "state": "SA",
+            "lon": 135.2,
+            "lat": -30.2,
+            "outside": false
+          },
+          {
+            "state": "WA",
+            "lon": 122.2,
+            "lat": -26,
+            "outside": false
+          },
+          {
+            "state": "Tas",
+            "lon": 151.5,
+            "lat": -42.6,
+            "ax": 146.7,
+            "ay": -42,
+            "outside": true
+          },
+          {
+            "state": "NT",
+            "lon": 133.4,
+            "lat": -19.6,
+            "outside": false
+          },
+          {
+            "state": "ACT",
+            "lon": 154,
+            "lat": -36.6,
+            "ax": 149.1,
+            "ay": -35.45,
+            "outside": true
+          }
+        ]
+      },
+      "transform": [
+        {
+          "lookup": "state",
+          "from": {
+            "data": {
+              "url": "data/cra.json"
+            },
+            "key": "state",
+            "fields": [
+              "severe"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": -9,
+        "fontWeight": 600,
+        "fontSize": 13,
+        "align": {
+          "expr": "datum.outside?'left':'center'"
+        },
+        "dx": {
+          "expr": "datum.outside?6:0"
+        }
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
         },
         "text": {
           "field": "state",
@@ -99,15 +278,85 @@
         },
         "color": {
           "condition": {
-            "test": "datum.severe>21.6",
-            "value": "#fff"
+            "test": "datum.severe>21.6 && !datum.outside",
+            "value": "#ffffff"
           },
           "value": "#000000"
         }
       }
     },
     {
+      "data": {
+        "values": [
+          {
+            "state": "NSW",
+            "lon": 146.8,
+            "lat": -31.9,
+            "outside": false
+          },
+          {
+            "state": "Vic",
+            "lon": 139.2,
+            "lat": -43.4,
+            "ax": 143.6,
+            "ay": -37.4,
+            "outside": true
+          },
+          {
+            "state": "Qld",
+            "lon": 144.6,
+            "lat": -22.6,
+            "outside": false
+          },
+          {
+            "state": "SA",
+            "lon": 135.2,
+            "lat": -30.2,
+            "outside": false
+          },
+          {
+            "state": "WA",
+            "lon": 122.2,
+            "lat": -26,
+            "outside": false
+          },
+          {
+            "state": "Tas",
+            "lon": 151.5,
+            "lat": -42.6,
+            "ax": 146.7,
+            "ay": -42,
+            "outside": true
+          },
+          {
+            "state": "NT",
+            "lon": 133.4,
+            "lat": -19.6,
+            "outside": false
+          },
+          {
+            "state": "ACT",
+            "lon": 154,
+            "lat": -36.6,
+            "ax": 149.1,
+            "ay": -35.45,
+            "outside": true
+          }
+        ]
+      },
       "transform": [
+        {
+          "lookup": "state",
+          "from": {
+            "data": {
+              "url": "data/cra.json"
+            },
+            "key": "state",
+            "fields": [
+              "severe"
+            ]
+          }
+        },
         {
           "calculate": "format(datum.severe,'.1f')+'%'",
           "as": "label"
@@ -115,17 +364,23 @@
       ],
       "mark": {
         "type": "text",
-        "dy": 13,
-        "fontSize": 17
+        "dy": 8,
+        "fontSize": 14,
+        "align": {
+          "expr": "datum.outside?'left':'center'"
+        },
+        "dx": {
+          "expr": "datum.outside?6:0"
+        }
       },
       "encoding": {
-        "x": {
-          "field": "col",
-          "type": "ordinal"
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
         },
-        "y": {
-          "field": "row",
-          "type": "ordinal"
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
         },
         "text": {
           "field": "label",
@@ -133,8 +388,8 @@
         },
         "color": {
           "condition": {
-            "test": "datum.severe>21.6",
-            "value": "#fff"
+            "test": "datum.severe>21.6 && !datum.outside",
+            "value": "#ffffff"
           },
           "value": "#000000"
         }
@@ -175,5 +430,5 @@
       "anchor": "start"
     }
   },
-  "description": "This tile cartogram gives each state or territory equal space in approximate geographic order. It shows the share of eligible assistance recipients whose rent, after assistance, exceeds 50% of gross income. Tile size does not represent land or population."
+  "description": "Darker states have a larger share of assistance recipients paying over half their income in rent, after assistance. Small states are labelled offshore."
 }

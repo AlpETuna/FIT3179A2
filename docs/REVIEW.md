@@ -6,10 +6,10 @@ This is a concrete review checklist for the implemented site. It does not record
 
 - [x] Assigned topic read from `A2Brief/TOPIC.md`: **Housing and Renting in Australia**.
 - [x] Fourteen original Vega / Vega-Lite figures implemented.
-- [x] Three proposed map idioms: choropleth, proportional-symbol map, tile cartogram.
+- [x] Three map idioms: SA3 choropleth, proportional-symbol map, state choropleth.
 - [x] AIHW state × payment cross-tab confirmed before implementation.
 - [x] National context added to parallel coordinates: 335 regions.
-- [x] Severe-burden cartogram and payment heatmap use distinct measures / breakdowns.
+- [x] Severe-burden state map and payment heatmap use distinct measures / breakdowns.
 - [x] ABS and AIHW combined in one state comparison table with different dates/populations labelled.
 - [x] Opening hook, original housing illustration, dwelling glyphs and concluding synthesis.
 - [x] Equal 6/6 and 12 column structure; responsive rendering and data-table alternatives.
@@ -29,7 +29,7 @@ Show the actual local site and the JSON listed here. Record the tutor’s name/d
 | Question | Concrete artefact / rationale | Decision |
 |---|---|---|
 | Is this the assigned topic? | `TOPIC.md` wording and page opening match Housing and Renting in Australia. | Not recorded |
-| Does the tile cartogram count as a third distinct map idiom? | `public/charts/severe.json`: eight geographic tiles in schematic positions, not a generic categorical matrix. | Not recorded |
+| Does the third map count as a map idiom? | `public/charts/severe.json`: a choropleth of real state boundaries (it replaced an earlier tile grid). | Resolved by redesign |
 | Is the proportional-symbol map a map idiom distinct from choropleth? Does it count as advanced under this rubric? | `renter-map.json`: projected SA4 positions; area encodes counts and colour encodes shares. | Not recorded |
 | Does the histogram count as advanced? | `rent-distribution.json`: genuine quantitative binning and frequency aggregation. Histogram is discussed separately from categorical bars in the supplied table-idiom teaching material. | Not recorded |
 | Does the waffle count as advanced? | `tenure.json`: explicit unit allocation with accurate printed values. Do not assume a separate idiom merely because it uses squares. | Not recorded |
@@ -38,7 +38,7 @@ Show the actual local site and the JSON listed here. Record the tutor’s name/d
 
 ### Counting and revision rule
 
-There are 11 proposed advanced idioms; scatterplot, multi-line CPI and paired dots are counted as basic. Excluding waffle, proportional symbols and tile cartogram leaves eight, **provided the histogram is accepted**. Discounting that too leaves seven. That risk is documented rather than concealed by counting basic marks differently.
+There are 11 advanced idioms under the unit’s published list (waffle, treemap, mosaic, alluvial, two choropleths, proportional symbols, histogram, box plot, parallel coordinates and heatmap). Scatterplot, multi-line CPI and paired dots are counted as basic.
 
 If the tutor rejects the map count or leaves fewer than eight accepted advanced idioms, revise the inventory and sketch before submission. A dot-density map is a possible replacement only if a suitable small-area source supports defensible dot placement. Do **not** scatter dots uniformly through uninhabited SA3 polygons to gain an extra map, claim a choropleth of squares is automatically a spatial bin map, or invent a household joint distribution. Bring the tutor the option of a sourced dot-density replacement and obtain an explicit ruling before spending time on it. Adding weak or repeated charts is not a substitute for this decision.
 
@@ -73,7 +73,7 @@ Use an actual A4 sheet. This is a drawing guide, not a substitute submission ass
 3. Chapter 1: waffle | treemap, then mosaic | alluvial.
 4. Chapter 2: full-width choropleth and insets, then full-width symbol map and insets; histogram | explanatory text.
 5. Chapter 3: guided community buttons; scatter | box plot; full-width national parallel coordinates.
-6. Chapter 4: CPI | severe-burden cartogram; full-width payment heatmap; paired dots | concise finding.
+6. Chapter 4: CPI | severe-burden state choropleth; full-width payment heatmap; paired dots | concise finding.
 7. End with a two-column synthesis, two-source comparison and source/authorship notes.
 8. Label the intended units, encodings, colours, legends, annotations and interactions. Show the stacked phone layout in a small margin note if space allows.
 

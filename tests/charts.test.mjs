@@ -21,7 +21,10 @@ for(const chart of manifest){
   if(['payment-stress','severe'].includes(chart.id)){
    const rows=JSON.parse(await readFile(`public/data/${chart.data}.json`,'utf8'));
    const luminance=rgb=>{const c=rgb.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;});return c[0]*.2126+c[1]*.7152+c[2]*.0722;};
-   for(const row of rows){const value=row[chart.id==='severe'?'severe':'rate'];const lum=luminance(view.scale('color')(value));const white=value>(chart.id==='severe'?21.6:72);const contrast=white?1.05/(lum+.05):(lum+.05)/.05;assert(contrast>=4.5,`${chart.id} ${row.state}: contrast ${contrast}`);}
+   for(const row of rows){
+    // Offshore map labels are always dark text on the white page.
+    if(chart.id==='severe'&&['Vic','Tas','ACT'].includes(row.state))continue;
+    const value=row[chart.id==='severe'?'severe':'rate'];const lum=luminance(view.scale('color')(value));const white=value>(chart.id==='severe'?21.6:72);const contrast=white?1.05/(lum+.05):(lum+.05)/.05;assert(contrast>=4.5,`${chart.id} ${row.state}: contrast ${contrast}`);}
   }
   view.finalize();
  });

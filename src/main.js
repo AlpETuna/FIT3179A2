@@ -30,7 +30,13 @@ const flatIcon='<svg class="dwelling-icon" aria-hidden="true" viewBox="0 0 24 24
 async function legend(id){
  if(['tenure','mosaic'].includes(id)){const rows=await fetchJSON('data/tenure.json');return `<ul class="figure-legend">${rows.map((d,i)=>`<li><i class="swatch" style="background:${colours[i]}"></i>${esc(d.tenure)}${id==='tenure'?` <span class="legend-value">${pct(d.share*100)}</span>`:''}</li>`).join('')}</ul>`;}
  if(id==='dwellings')return `<ul class="figure-legend"><li>${houseIcon}Separate house</li><li>${houseIcon}Townhouse</li><li>${flatIcon}Apartment</li></ul>`;
- if(id==='mosaic')return '';
+ if(id==='rent-map'){
+   // Read the classes from the specification so the key cannot drift from the map.
+   const {domain,range}=(await fetchJSON('charts/rent-map.json')).vconcat[0].layer[0].encoding.color.condition.scale;
+   const labels=range.map((_,i)=>i===0?`Under ${money(domain[0])}`:i===domain.length?`${money(domain.at(-1))}+`:`${money(domain[i-1])}–${money(domain[i]-1)}`);
+   return `<div class="rent-key"><p class="box-key-title">Median weekly rent</p><ul class="figure-legend">${range.map((c,i)=>`<li><i class="swatch" style="background:${c}"></i>${labels[i]}</li>`).join('')}<li><i class="swatch" style="background:#c4c4c4"></i>No data</li></ul></div>`;
+ }
+ if(id==='state-spread')return `<div class="box-key"><p class="box-key-title">How to read each row</p><svg viewBox="0 0 360 70" role="img" aria-label="A box plot row: the line runs from the cheapest to the dearest region; the box holds the middle half of regions; the white mark is the typical region."><text x="180" y="12" text-anchor="middle">Middle half of regions</text><path d="M110 19v5h140v-5" class="bracket"/><line x1="10" x2="350" y1="38" y2="38" class="whisker"/><line x1="10" x2="10" y1="31" y2="45" class="whisker"/><line x1="350" x2="350" y1="31" y2="45" class="whisker"/><rect x="110" y="28" width="140" height="20" class="box"/><line x1="175" x2="175" y1="28" y2="48" class="median"/><text x="10" y="64">Cheapest region</text><text x="175" y="64" text-anchor="middle">Typical region</text><text x="350" y="64" text-anchor="end">Dearest region</text></svg></div>`;
  if(id==='profiles')return `<ul class="figure-legend"><li><span class="line-key"></span>Melbourne City</li><li><span class="line-key dashed"></span>Casey – South</li><li><span class="line-key dotted"></span>Bendigo</li></ul>`;
  return '';
 }
@@ -40,7 +46,11 @@ async function makeFigure(meta,index){
  if(!slot)return;
  const rows=await fetchJSON(`data/${meta.data}.json`);
  const displayRows=meta.data==='dwellings'?rows.filter(r=>r.count):rows;
- slot.innerHTML=`<figure class="figure" aria-labelledby="title-${meta.id}" aria-describedby="desc-${meta.id}"><div class="figure-label"><span>Figure ${String(index+1).padStart(2,'0')}</span><span>${sourceNames[meta.source]}</span></div><h3 id="title-${meta.id}">${esc(meta.title)}</h3><div class="chart" id="chart-${meta.id}" role="img" aria-label="${esc(meta.description)}"><p class="chart-loading">Drawing the chart…</p></div>${await legend(meta.id)}<figcaption><p class="figure-description" id="desc-${meta.id}">${esc(meta.description)}</p><p class="figure-source">Source: <a href="${sourceLinks[meta.source]}">${sourceNames[meta.source]}</a> · ${esc(meta.tables)}</p></figcaption><details class="figure-tools"><summary>Read the data &amp; chart specification</summary>${tableHTML(displayRows,columns[meta.data],`${meta.title} — source values`)}<div class="downloads"><a href="data/${meta.data}.json" download>Download data</a><a href="charts/${meta.id}.json">Readable chart JSON</a></div></details></figure>`;
+ const chart=`<div class="chart" id="chart-${meta.id}" role="img" aria-label="${esc(meta.description)}"><p class="chart-loading">Drawing the chart…</p></div>`;
+ const key=await legend(meta.id);
+ // The waffle is square, so its key sits beside it to fill the column.
+ const body=meta.id==='tenure'?`<div class="chart-with-key">${chart}${key}</div>`:chart+key;
+ slot.innerHTML=`<figure class="figure" aria-labelledby="title-${meta.id}" aria-describedby="desc-${meta.id}"><div class="figure-label"><span>Figure ${String(index+1).padStart(2,'0')}</span><span>${sourceNames[meta.source]}</span></div><h3 id="title-${meta.id}">${esc(meta.title)}</h3>${body}<figcaption><p class="figure-description" id="desc-${meta.id}">${esc(meta.description)}</p><p class="figure-source">Source: <a href="${sourceLinks[meta.source]}">${sourceNames[meta.source]}</a> · ${esc(meta.tables)}</p></figcaption><details class="figure-tools"><summary>Read the data &amp; chart specification</summary>${tableHTML(displayRows,columns[meta.data],`${meta.title} — source values`)}<div class="downloads"><a href="data/${meta.data}.json" download>Download data</a><a href="charts/${meta.id}.json">Readable chart JSON</a></div></details></figure>`;
 }
 
 function fitSpec(original,meta,width){
@@ -51,8 +61,9 @@ function fitSpec(original,meta,width){
    main.width=width;main.height=Math.round(width*.62);
    main.projection.scale=width*.99;main.projection.center=[0,-28];main.projection.translate=[width/2,main.height/2];
    const insetW=width<650?width:(width-40)/3;
-   for(const inset of insets){inset.width=insetW;inset.height=Math.round(insetW*.65);inset.projection.scale*=insetW/320;inset.projection.translate=[insetW/2,inset.height/2];}
-   spec.vconcat=[main,width<650?{vconcat:insets,spacing:20}:{hconcat:insets,spacing:20}];
+   for(const inset of insets){inset.width=insetW;inset.height=Math.round(insetW*(width<650?.8:.95));inset.projection.scale*=insetW/360;inset.projection.translate=[insetW/2,inset.height/2];}
+   const shared={spacing:20,resolve:spec.vconcat[1].resolve};
+   spec.vconcat=[main,width<650?{vconcat:insets,...shared}:{hconcat:insets,...shared}];
    return spec;
  }
  if(meta.engine==='vega'){
@@ -62,13 +73,15 @@ function fitSpec(original,meta,width){
      spec.height=300;
      // Plain two-line titles preserve meaningful axis labels on a phone.
      spec.data.find(d=>d.name==='axes').values.forEach(d=>d.label=({income:['Income','/ week'],rent:['Rent','/ week'],mortgageWeekly:['Mortgage','/ week'],apartmentShare:['Apartments']})[d.field]);
-     spec.padding.top=55;
+     spec.padding.top=45;spec.padding.left=44;
      const axisTitles=spec.marks.find(m=>m.type==='text'&&m.encode.enter.text.field==='label');
-     axisTitles.encode.enter.y.value=-42;axisTitles.encode.enter.fontSize.value=12;
+     axisTitles.encode.enter.y.value=-30;axisTitles.encode.enter.fontSize.value=12;
+     spec.data.find(d=>d.name==='ticks').values.forEach(d=>d.text=d.text.replace(',000','k'));
+     spec.marks.find(m=>m.type==='text'&&m.from.data==='ticks').encode.enter.fontSize.value=11;
    }
    return spec;
  }
- spec.width=meta.id==='tenure'?Math.min(300,width):width;
+ spec.width=meta.id==='tenure'?Math.min(spec.height,width):width;
  spec.autosize={type:'fit',contains:'padding'};
  if(meta.id==='payment-stress'&&mobile){
    // Transpose the same heatmap on small screens; keep all 48 cells.
@@ -83,11 +96,15 @@ function fitSpec(original,meta,width){
    spec.layer[0].encoding.color.legend={orient:'bottom',gradientLength:180,title:'Rental stress after assistance (%)',titleLimit:280};
    spec.layer[1].mark.fontSize=12;
  }
+ if(meta.id==='severe'&&mobile){
+   // A side legend would shrink the map on a phone.
+   Object.assign(spec.layer[0].encoding.color.legend,{orient:'bottom',direction:'horizontal',gradientLength:200,title:'Share after assistance (%)'});
+ }
  if(meta.id==='income-rent'&&mobile){
-   spec.layer.at(-1).transform.push({calculate:"datum.code==='20604'?'City':datum.code==='21203'?'Outer suburb':'Bendigo'",as:'shortName'});
-   spec.layer.at(-1).encoding.text.field='shortName';
-   spec.layer.at(-1).mark.fontSize=12;spec.layer.at(-1).mark.dx=7;
-   spec.layer.at(-1).mark.dy={expr:"datum.code==='21203'?15:-12"};
+   for(const layer of spec.layer.slice(-2)){
+     layer.transform.push({calculate:"datum.code==='20604'?'City':datum.code==='21203'?'Outer suburb':'Bendigo'",as:'shortName'});
+     layer.encoding.text.field='shortName';layer.mark.fontSize=12;
+   }
  }
  return spec;
 }

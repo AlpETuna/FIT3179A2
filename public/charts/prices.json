@@ -1,11 +1,37 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "width": 520,
-  "height": 300,
+  "height": 320,
   "data": {
     "url": "data/cpi.json"
   },
+  "transform": [
+    {
+      "calculate": "datum.index - 100",
+      "as": "change"
+    }
+  ],
   "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "change": 0
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "color": "#1d1d1d",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "y": {
+          "field": "change",
+          "type": "quantitative"
+        }
+      }
+    },
     {
       "mark": {
         "type": "line",
@@ -22,14 +48,27 @@
           }
         },
         "y": {
-          "field": "index",
+          "field": "change",
           "type": "quantitative",
-          "title": "Price index · April 2024 = 100",
+          "title": [
+            "Change since",
+            "April 2024"
+          ],
           "scale": {
-            "zero": false
+            "domain": [
+              -1,
+              12
+            ],
+            "nice": false
           },
           "axis": {
-            "tickCount": 5
+            "values": [
+              0,
+              4,
+              8,
+              12
+            ],
+            "labelExpr": "(datum.value>0?'+':'')+datum.value+'%'"
           }
         },
         "color": {
@@ -86,10 +125,10 @@
             "title": "Series"
           },
           {
-            "field": "index",
+            "field": "change",
             "type": "quantitative",
-            "title": "April 2024 = 100",
-            "format": ".1f"
+            "title": "Change since April 2024 (%)",
+            "format": "+.1f"
           }
         ]
       }
@@ -129,5 +168,5 @@
       "anchor": "start"
     }
   },
-  "description": "Both monthly price series start at 100 in April 2024. A value of 110 means prices are 10% higher than at the start. These are weighted eight-capital-city CPI measures, not national advertised rents."
+  "description": "Both lines begin at 0% in April 2024. +10% means prices are 10% higher than then. These are eight-capital-city CPI measures, not advertised rents."
 }

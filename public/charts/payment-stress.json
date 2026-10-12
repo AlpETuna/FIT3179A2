@@ -62,7 +62,8 @@
           },
           "legend": {
             "orient": "bottom",
-            "gradientLength": 240
+            "gradientLength": 240,
+            "titleLimit": 400
           }
         },
         "tooltip": [

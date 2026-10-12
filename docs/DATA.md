@@ -27,7 +27,7 @@ The administrative data author is the Department of Social Services, through the
 - Composition geometry normalises its displayed disjoint cells because privacy perturbation makes small non-additivity inevitable. This is disclosed on the page.
 - The regional plots include 335 SA3 regions with a positive published median rent and occupied-dwelling count. Special migratory/offshore/shipping and no-usual-address areas, Other Territories and unavailable values are omitted. The exclusion list is in `summary.json`.
 - A regional median is an aggregate, not an individual household record. No ratio of regional medians is presented as a household rental-stress rate.
-- Histogram: $50 bands, counting regions equally. Box plots: state groups, quartiles of regional medians, min/max whiskers. Neither is a national or state distribution weighted by renters.
+- Histogram: $50 bands, counting regions equally. Box plots: state groups, quartiles of regional medians, min/max whiskers. Neither is a national or state distribution weighted by renters. The page includes a labelled key explaining how to read a box plot row.
 - Parallel coordinates: all 335 regions on four independently labelled linear axes, each from zero to its national regional maximum. Monthly mortgage repayments are converted with ×12÷52. The three examples are selected for contrasting settings, not statistical representativeness.
 
 ## Geography
@@ -36,7 +36,7 @@ Mapshaper simplifies the ABS SA3 geometry to 2% of original vertices with shape 
 
 The national maps use Australian Albers equal-area, central meridian 132°E and standard parallels 18°S/36°S. Mercator city insets are local orientation aids with separately chosen scales. Circle **area**, not radius, is proportional to rented-home count; colour is the rental share. Symbols may overlap nationally; enlarged Sydney, Melbourne and Brisbane insets aid reading. Perth/Adelaide overlap remains inspectable via tooltips and the complete table.
 
-The state tile cartogram is an explicitly schematic geographic arrangement. Tiles have equal size to give small jurisdictions equal visibility. They do not encode land area or population.
+The severe-burden state map is a choropleth of simplified ASGS 2021 state boundaries. Vic, ACT and Tasmania are labelled offshore with leader lines because their shapes are too small to hold a label. Colour encodes a rate, so large states do not imply more recipients.
 
 ## CPI
 
@@ -55,7 +55,7 @@ Percentages come from the workbook’s **Per cent** rows. They are not recompute
 - Without assistance: weekly rent ÷ gross weekly income.
 - With assistance: (weekly rent − weekly CRA) ÷ gross weekly income.
 - Rental stress: result exceeds 30%.
-- Severe burden in the cartogram: result exceeds 50% after assistance.
+- Severe burden in the state choropleth: result exceeds 50% after assistance.
 
 The paired points compare two calculations for the **same March 2026 recipients**. They are not observations before and after a policy change, a causal experiment or a general rate for all renters.
 

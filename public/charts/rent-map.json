@@ -52,7 +52,7 @@
           ],
           "mark": {
             "type": "geoshape",
-            "stroke": "#fff",
+            "stroke": "#ffffff",
             "strokeWidth": 0.35,
             "clip": true
           },
@@ -62,25 +62,30 @@
                 "test": "isValid(datum.rent)",
                 "field": "rent",
                 "type": "quantitative",
-                "title": "Median weekly rent ($)",
+                "title": "Median weekly rent",
                 "scale": {
+                  "type": "threshold",
                   "domain": [
-                    0,
-                    800
+                    250,
+                    300,
+                    350,
+                    400,
+                    450,
+                    500
                   ],
                   "range": [
-                    "#fff3e5",
-                    "#8f4715"
-                  ],
-                  "clamp": true
+                    "#fef0d9",
+                    "#fdcc8a",
+                    "#fc8d59",
+                    "#e34a33",
+                    "#b30000",
+                    "#7a0000",
+                    "#3d0000"
+                  ]
                 },
-                "legend": {
-                  "orient": "bottom",
-                  "gradientLength": 220,
-                  "format": "$,.0f"
-                }
+                "legend": null
               },
-              "value": "#d8d8d8"
+              "value": "#c4c4c4"
             },
             "tooltip": [
               {
@@ -126,6 +131,34 @@
           "mark": {
             "type": "geoshape",
             "filled": false,
+            "stroke": "#ffffff",
+            "strokeWidth": 4,
+            "clip": true
+          }
+        },
+        {
+          "data": {
+            "url": "data/regions.topo.json",
+            "format": {
+              "type": "topojson",
+              "feature": "regions"
+            }
+          },
+          "transform": [
+            {
+              "filter": {
+                "field": "properties.SA3_CODE21",
+                "oneOf": [
+                  "20604",
+                  "21203",
+                  "20201"
+                ]
+              }
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "filled": false,
             "stroke": "#1d1d1d",
             "strokeWidth": 1.8,
             "clip": true
@@ -136,18 +169,18 @@
     {
       "hconcat": [
         {
-          "width": 320,
-          "height": 210,
+          "width": 360,
+          "height": 340,
           "projection": {
             "type": "mercator",
             "center": [
-              151.06,
-              -33.87
+              151.05,
+              -33.84
             ],
-            "scale": 18000,
+            "scale": 28000,
             "translate": [
-              160,
-              105
+              180,
+              170
             ]
           },
           "layer": [
@@ -177,7 +210,7 @@
               ],
               "mark": {
                 "type": "geoshape",
-                "stroke": "#fff",
+                "stroke": "#ffffff",
                 "strokeWidth": 0.35,
                 "clip": true
               },
@@ -187,25 +220,30 @@
                     "test": "isValid(datum.rent)",
                     "field": "rent",
                     "type": "quantitative",
-                    "title": "Median weekly rent ($)",
+                    "title": "Median weekly rent",
                     "scale": {
+                      "type": "threshold",
                       "domain": [
-                        0,
-                        800
+                        250,
+                        300,
+                        350,
+                        400,
+                        450,
+                        500
                       ],
                       "range": [
-                        "#fff3e5",
-                        "#8f4715"
-                      ],
-                      "clamp": true
+                        "#fef0d9",
+                        "#fdcc8a",
+                        "#fc8d59",
+                        "#e34a33",
+                        "#b30000",
+                        "#7a0000",
+                        "#3d0000"
+                      ]
                     },
-                    "legend": {
-                      "orient": "bottom",
-                      "gradientLength": 220,
-                      "format": "$,.0f"
-                    }
+                    "legend": null
                   },
-                  "value": "#d8d8d8"
+                  "value": "#c4c4c4"
                 },
                 "tooltip": [
                   {
@@ -226,6 +264,34 @@
                     "format": "$,.0f"
                   }
                 ]
+              }
+            },
+            {
+              "data": {
+                "url": "data/regions.topo.json",
+                "format": {
+                  "type": "topojson",
+                  "feature": "regions"
+                }
+              },
+              "transform": [
+                {
+                  "filter": {
+                    "field": "properties.SA3_CODE21",
+                    "oneOf": [
+                      "20604",
+                      "21203",
+                      "20201"
+                    ]
+                  }
+                }
+              ],
+              "mark": {
+                "type": "geoshape",
+                "filled": false,
+                "stroke": "#ffffff",
+                "strokeWidth": 4,
+                "clip": true
               }
             },
             {
@@ -260,18 +326,18 @@
           "title": "Sydney"
         },
         {
-          "width": 320,
-          "height": 210,
+          "width": 360,
+          "height": 340,
           "projection": {
             "type": "mercator",
             "center": [
-              145.03,
-              -37.89
+              145.05,
+              -37.84
             ],
-            "scale": 16000,
+            "scale": 19000,
             "translate": [
-              160,
-              105
+              180,
+              170
             ]
           },
           "layer": [
@@ -301,7 +367,7 @@
               ],
               "mark": {
                 "type": "geoshape",
-                "stroke": "#fff",
+                "stroke": "#ffffff",
                 "strokeWidth": 0.35,
                 "clip": true
               },
@@ -311,25 +377,30 @@
                     "test": "isValid(datum.rent)",
                     "field": "rent",
                     "type": "quantitative",
-                    "title": "Median weekly rent ($)",
+                    "title": "Median weekly rent",
                     "scale": {
+                      "type": "threshold",
                       "domain": [
-                        0,
-                        800
+                        250,
+                        300,
+                        350,
+                        400,
+                        450,
+                        500
                       ],
                       "range": [
-                        "#fff3e5",
-                        "#8f4715"
-                      ],
-                      "clamp": true
+                        "#fef0d9",
+                        "#fdcc8a",
+                        "#fc8d59",
+                        "#e34a33",
+                        "#b30000",
+                        "#7a0000",
+                        "#3d0000"
+                      ]
                     },
-                    "legend": {
-                      "orient": "bottom",
-                      "gradientLength": 220,
-                      "format": "$,.0f"
-                    }
+                    "legend": null
                   },
-                  "value": "#d8d8d8"
+                  "value": "#c4c4c4"
                 },
                 "tooltip": [
                   {
@@ -350,6 +421,34 @@
                     "format": "$,.0f"
                   }
                 ]
+              }
+            },
+            {
+              "data": {
+                "url": "data/regions.topo.json",
+                "format": {
+                  "type": "topojson",
+                  "feature": "regions"
+                }
+              },
+              "transform": [
+                {
+                  "filter": {
+                    "field": "properties.SA3_CODE21",
+                    "oneOf": [
+                      "20604",
+                      "21203",
+                      "20201"
+                    ]
+                  }
+                }
+              ],
+              "mark": {
+                "type": "geoshape",
+                "filled": false,
+                "stroke": "#ffffff",
+                "strokeWidth": 4,
+                "clip": true
               }
             },
             {
@@ -384,18 +483,18 @@
           "title": "Melbourne"
         },
         {
-          "width": 320,
-          "height": 210,
+          "width": 360,
+          "height": 340,
           "projection": {
             "type": "mercator",
             "center": [
-              153.02,
-              -27.48
+              153,
+              -27.5
             ],
-            "scale": 18000,
+            "scale": 24000,
             "translate": [
-              160,
-              105
+              180,
+              170
             ]
           },
           "layer": [
@@ -425,7 +524,7 @@
               ],
               "mark": {
                 "type": "geoshape",
-                "stroke": "#fff",
+                "stroke": "#ffffff",
                 "strokeWidth": 0.35,
                 "clip": true
               },
@@ -435,25 +534,30 @@
                     "test": "isValid(datum.rent)",
                     "field": "rent",
                     "type": "quantitative",
-                    "title": "Median weekly rent ($)",
+                    "title": "Median weekly rent",
                     "scale": {
+                      "type": "threshold",
                       "domain": [
-                        0,
-                        800
+                        250,
+                        300,
+                        350,
+                        400,
+                        450,
+                        500
                       ],
                       "range": [
-                        "#fff3e5",
-                        "#8f4715"
-                      ],
-                      "clamp": true
+                        "#fef0d9",
+                        "#fdcc8a",
+                        "#fc8d59",
+                        "#e34a33",
+                        "#b30000",
+                        "#7a0000",
+                        "#3d0000"
+                      ]
                     },
-                    "legend": {
-                      "orient": "bottom",
-                      "gradientLength": 220,
-                      "format": "$,.0f"
-                    }
+                    "legend": null
                   },
-                  "value": "#d8d8d8"
+                  "value": "#c4c4c4"
                 },
                 "tooltip": [
                   {
@@ -499,6 +603,34 @@
               "mark": {
                 "type": "geoshape",
                 "filled": false,
+                "stroke": "#ffffff",
+                "strokeWidth": 4,
+                "clip": true
+              }
+            },
+            {
+              "data": {
+                "url": "data/regions.topo.json",
+                "format": {
+                  "type": "topojson",
+                  "feature": "regions"
+                }
+              },
+              "transform": [
+                {
+                  "filter": {
+                    "field": "properties.SA3_CODE21",
+                    "oneOf": [
+                      "20604",
+                      "21203",
+                      "20201"
+                    ]
+                  }
+                }
+              ],
+              "mark": {
+                "type": "geoshape",
+                "filled": false,
                 "stroke": "#1d1d1d",
                 "strokeWidth": 1.8,
                 "clip": true
@@ -508,7 +640,12 @@
           "title": "Brisbane"
         }
       ],
-      "spacing": 20
+      "spacing": 20,
+      "resolve": {
+        "scale": {
+          "size": "shared"
+        }
+      }
     }
   ],
   "resolve": {
@@ -517,7 +654,7 @@
       "size": "shared"
     }
   },
-  "spacing": 12,
+  "spacing": 16,
   "config": {
     "font": "Public Sans",
     "background": "#ffffff",
@@ -552,5 +689,5 @@
       "anchor": "start"
     }
   },
-  "description": "Colour shows each of 335 Census regions’ median weekly rent, not the rent of every home. Grey means unavailable. Dark outlines locate the three featured communities. Insets enlarge metropolitan regions."
+  "description": "Colour shows each region’s median weekly rent, in $50 steps. Darker means higher rent; grey means no data. Outlines mark the three featured communities."
 }

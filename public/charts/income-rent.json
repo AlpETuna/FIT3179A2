@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "width": 520,
-  "height": 340,
+  "height": 320,
   "params": [
     {
       "name": "featured",
@@ -178,15 +178,28 @@
               "20201"
             ]
           }
+        },
+        {
+          "calculate": "replace(datum.name,' - ',' – ')",
+          "as": "label"
         }
       ],
       "mark": {
         "type": "text",
-        "align": "left",
-        "dx": 9,
-        "dy": -12,
-        "fontSize": 12,
-        "color": "#1d1d1d"
+        "fontSize": 13,
+        "fontWeight": 600,
+        "stroke": "#ffffff",
+        "strokeWidth": 4,
+        "strokeJoin": "round",
+        "align": {
+          "expr": "datum.code==='21203'?'left':'right'"
+        },
+        "dx": {
+          "expr": "datum.code==='21203'?10:-10"
+        },
+        "dy": {
+          "expr": "datum.code==='20604'?-14:datum.code==='21203'?16:0"
+        }
       },
       "encoding": {
         "x": {
@@ -198,7 +211,61 @@
           "type": "quantitative"
         },
         "text": {
-          "field": "name",
+          "field": "label",
+          "type": "nominal"
+        },
+        "opacity": {
+          "condition": {
+            "test": "featured === 'all' || datum.code === featured",
+            "value": 1
+          },
+          "value": 0.18
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": {
+            "field": "code",
+            "oneOf": [
+              "20604",
+              "21203",
+              "20201"
+            ]
+          }
+        },
+        {
+          "calculate": "replace(datum.name,' - ',' – ')",
+          "as": "label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 13,
+        "fontWeight": 600,
+        "color": "#1d1d1d",
+        "align": {
+          "expr": "datum.code==='21203'?'left':'right'"
+        },
+        "dx": {
+          "expr": "datum.code==='21203'?10:-10"
+        },
+        "dy": {
+          "expr": "datum.code==='20604'?-14:datum.code==='21203'?16:0"
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "income",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "rent",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
           "type": "nominal"
         },
         "opacity": {

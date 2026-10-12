@@ -37,13 +37,13 @@
           "transform": [],
           "mark": {
             "type": "geoshape",
-            "stroke": "#fff",
-            "strokeWidth": 0.35,
+            "stroke": "#ffffff",
+            "strokeWidth": 0.6,
             "clip": true
           },
           "encoding": {
             "color": {
-              "value": "#edf0ed"
+              "value": "#e9ece9"
             }
           }
         },
@@ -53,9 +53,9 @@
           },
           "mark": {
             "type": "circle",
-            "opacity": 0.65,
-            "stroke": "#1d1d1d",
-            "strokeWidth": 0.45,
+            "opacity": 0.82,
+            "stroke": "#ffffff",
+            "strokeWidth": 0.9,
             "clip": true
           },
           "encoding": {
@@ -67,10 +67,15 @@
               "field": "latitude",
               "type": "quantitative"
             },
+            "order": {
+              "field": "renting",
+              "type": "quantitative",
+              "sort": "descending"
+            },
             "size": {
               "field": "renting",
               "type": "quantitative",
-              "title": "Rented homes",
+              "title": null,
               "scale": {
                 "domain": [
                   0,
@@ -78,17 +83,21 @@
                 ],
                 "range": [
                   0,
-                  1600
+                  900
                 ]
               },
               "legend": {
+                "title": "Rented homes · national map",
                 "orient": "bottom",
                 "values": [
                   10000,
                   40000,
                   80000
                 ],
-                "format": "~s"
+                "format": "~s",
+                "symbolFillColor": "#c9c9c9",
+                "symbolStrokeColor": "#1d1d1d",
+                "symbolStrokeWidth": 0.6
               }
             },
             "color": {
@@ -98,18 +107,24 @@
               "scale": {
                 "domain": [
                   0,
+                  0.15,
+                  0.3,
+                  0.45,
                   0.6
                 ],
                 "range": [
-                  "#fff3e5",
-                  "#8f4715"
+                  "#fdecd6",
+                  "#f3b47a",
+                  "#d0702e",
+                  "#8f3a10",
+                  "#3d1503"
                 ],
                 "clamp": true
               },
               "legend": {
                 "orient": "bottom",
                 "format": ".0%",
-                "gradientLength": 150
+                "gradientLength": 170
               }
             },
             "tooltip": [
@@ -138,39 +153,39 @@
     {
       "hconcat": [
         {
-          "width": 320,
-          "height": 210,
+          "width": 360,
+          "height": 340,
           "projection": {
             "type": "mercator",
             "center": [
-              151.06,
-              -33.87
+              151.05,
+              -33.84
             ],
-            "scale": 18000,
+            "scale": 28000,
             "translate": [
-              160,
-              105
+              180,
+              170
             ]
           },
           "layer": [
             {
               "data": {
-                "url": "data/states.topo.json",
+                "url": "data/regions.topo.json",
                 "format": {
                   "type": "topojson",
-                  "feature": "states"
+                  "feature": "regions"
                 }
               },
               "transform": [],
               "mark": {
                 "type": "geoshape",
-                "stroke": "#fff",
-                "strokeWidth": 0.35,
+                "stroke": "#ffffff",
+                "strokeWidth": 0.8,
                 "clip": true
               },
               "encoding": {
                 "color": {
-                  "value": "#edf0ed"
+                  "value": "#e9ece9"
                 }
               }
             },
@@ -180,9 +195,9 @@
               },
               "mark": {
                 "type": "circle",
-                "opacity": 0.65,
-                "stroke": "#1d1d1d",
-                "strokeWidth": 0.45,
+                "opacity": 0.82,
+                "stroke": "#ffffff",
+                "strokeWidth": 1.4,
                 "clip": true
               },
               "encoding": {
@@ -194,10 +209,15 @@
                   "field": "latitude",
                   "type": "quantitative"
                 },
+                "order": {
+                  "field": "renting",
+                  "type": "quantitative",
+                  "sort": "descending"
+                },
                 "size": {
                   "field": "renting",
                   "type": "quantitative",
-                  "title": "Rented homes",
+                  "title": null,
                   "scale": {
                     "domain": [
                       0,
@@ -205,17 +225,21 @@
                     ],
                     "range": [
                       0,
-                      1600
+                      2600
                     ]
                   },
                   "legend": {
+                    "title": "Rented homes · city insets",
                     "orient": "bottom",
                     "values": [
                       10000,
                       40000,
                       80000
                     ],
-                    "format": "~s"
+                    "format": "~s",
+                    "symbolFillColor": "#c9c9c9",
+                    "symbolStrokeColor": "#1d1d1d",
+                    "symbolStrokeWidth": 0.6
                   }
                 },
                 "color": {
@@ -225,18 +249,24 @@
                   "scale": {
                     "domain": [
                       0,
+                      0.15,
+                      0.3,
+                      0.45,
                       0.6
                     ],
                     "range": [
-                      "#fff3e5",
-                      "#8f4715"
+                      "#fdecd6",
+                      "#f3b47a",
+                      "#d0702e",
+                      "#8f3a10",
+                      "#3d1503"
                     ],
                     "clamp": true
                   },
                   "legend": {
                     "orient": "bottom",
                     "format": ".0%",
-                    "gradientLength": 150
+                    "gradientLength": 170
                   }
                 },
                 "tooltip": [
@@ -264,39 +294,39 @@
           "title": "Sydney"
         },
         {
-          "width": 320,
-          "height": 210,
+          "width": 360,
+          "height": 340,
           "projection": {
             "type": "mercator",
             "center": [
-              145.03,
-              -37.89
+              145.05,
+              -37.84
             ],
-            "scale": 16000,
+            "scale": 19000,
             "translate": [
-              160,
-              105
+              180,
+              170
             ]
           },
           "layer": [
             {
               "data": {
-                "url": "data/states.topo.json",
+                "url": "data/regions.topo.json",
                 "format": {
                   "type": "topojson",
-                  "feature": "states"
+                  "feature": "regions"
                 }
               },
               "transform": [],
               "mark": {
                 "type": "geoshape",
-                "stroke": "#fff",
-                "strokeWidth": 0.35,
+                "stroke": "#ffffff",
+                "strokeWidth": 0.8,
                 "clip": true
               },
               "encoding": {
                 "color": {
-                  "value": "#edf0ed"
+                  "value": "#e9ece9"
                 }
               }
             },
@@ -306,9 +336,9 @@
               },
               "mark": {
                 "type": "circle",
-                "opacity": 0.65,
-                "stroke": "#1d1d1d",
-                "strokeWidth": 0.45,
+                "opacity": 0.82,
+                "stroke": "#ffffff",
+                "strokeWidth": 1.4,
                 "clip": true
               },
               "encoding": {
@@ -320,10 +350,15 @@
                   "field": "latitude",
                   "type": "quantitative"
                 },
+                "order": {
+                  "field": "renting",
+                  "type": "quantitative",
+                  "sort": "descending"
+                },
                 "size": {
                   "field": "renting",
                   "type": "quantitative",
-                  "title": "Rented homes",
+                  "title": null,
                   "scale": {
                     "domain": [
                       0,
@@ -331,17 +366,21 @@
                     ],
                     "range": [
                       0,
-                      1600
+                      2600
                     ]
                   },
                   "legend": {
+                    "title": "Rented homes · city insets",
                     "orient": "bottom",
                     "values": [
                       10000,
                       40000,
                       80000
                     ],
-                    "format": "~s"
+                    "format": "~s",
+                    "symbolFillColor": "#c9c9c9",
+                    "symbolStrokeColor": "#1d1d1d",
+                    "symbolStrokeWidth": 0.6
                   }
                 },
                 "color": {
@@ -351,18 +390,24 @@
                   "scale": {
                     "domain": [
                       0,
+                      0.15,
+                      0.3,
+                      0.45,
                       0.6
                     ],
                     "range": [
-                      "#fff3e5",
-                      "#8f4715"
+                      "#fdecd6",
+                      "#f3b47a",
+                      "#d0702e",
+                      "#8f3a10",
+                      "#3d1503"
                     ],
                     "clamp": true
                   },
                   "legend": {
                     "orient": "bottom",
                     "format": ".0%",
-                    "gradientLength": 150
+                    "gradientLength": 170
                   }
                 },
                 "tooltip": [
@@ -390,39 +435,39 @@
           "title": "Melbourne"
         },
         {
-          "width": 320,
-          "height": 210,
+          "width": 360,
+          "height": 340,
           "projection": {
             "type": "mercator",
             "center": [
-              153.02,
-              -27.48
+              153,
+              -27.5
             ],
-            "scale": 18000,
+            "scale": 24000,
             "translate": [
-              160,
-              105
+              180,
+              170
             ]
           },
           "layer": [
             {
               "data": {
-                "url": "data/states.topo.json",
+                "url": "data/regions.topo.json",
                 "format": {
                   "type": "topojson",
-                  "feature": "states"
+                  "feature": "regions"
                 }
               },
               "transform": [],
               "mark": {
                 "type": "geoshape",
-                "stroke": "#fff",
-                "strokeWidth": 0.35,
+                "stroke": "#ffffff",
+                "strokeWidth": 0.8,
                 "clip": true
               },
               "encoding": {
                 "color": {
-                  "value": "#edf0ed"
+                  "value": "#e9ece9"
                 }
               }
             },
@@ -432,9 +477,9 @@
               },
               "mark": {
                 "type": "circle",
-                "opacity": 0.65,
-                "stroke": "#1d1d1d",
-                "strokeWidth": 0.45,
+                "opacity": 0.82,
+                "stroke": "#ffffff",
+                "strokeWidth": 1.4,
                 "clip": true
               },
               "encoding": {
@@ -446,10 +491,15 @@
                   "field": "latitude",
                   "type": "quantitative"
                 },
+                "order": {
+                  "field": "renting",
+                  "type": "quantitative",
+                  "sort": "descending"
+                },
                 "size": {
                   "field": "renting",
                   "type": "quantitative",
-                  "title": "Rented homes",
+                  "title": null,
                   "scale": {
                     "domain": [
                       0,
@@ -457,17 +507,21 @@
                     ],
                     "range": [
                       0,
-                      1600
+                      2600
                     ]
                   },
                   "legend": {
+                    "title": "Rented homes · city insets",
                     "orient": "bottom",
                     "values": [
                       10000,
                       40000,
                       80000
                     ],
-                    "format": "~s"
+                    "format": "~s",
+                    "symbolFillColor": "#c9c9c9",
+                    "symbolStrokeColor": "#1d1d1d",
+                    "symbolStrokeWidth": 0.6
                   }
                 },
                 "color": {
@@ -477,18 +531,24 @@
                   "scale": {
                     "domain": [
                       0,
+                      0.15,
+                      0.3,
+                      0.45,
                       0.6
                     ],
                     "range": [
-                      "#fff3e5",
-                      "#8f4715"
+                      "#fdecd6",
+                      "#f3b47a",
+                      "#d0702e",
+                      "#8f3a10",
+                      "#3d1503"
                     ],
                     "clamp": true
                   },
                   "legend": {
                     "orient": "bottom",
                     "format": ".0%",
-                    "gradientLength": 150
+                    "gradientLength": 170
                   }
                 },
                 "tooltip": [
@@ -516,16 +576,21 @@
           "title": "Brisbane"
         }
       ],
-      "spacing": 20
+      "spacing": 20,
+      "resolve": {
+        "scale": {
+          "size": "shared"
+        }
+      }
     }
   ],
   "resolve": {
     "scale": {
       "color": "shared",
-      "size": "shared"
+      "size": "independent"
     }
   },
-  "spacing": 12,
+  "spacing": 16,
   "config": {
     "font": "Public Sans",
     "background": "#ffffff",
@@ -560,5 +625,5 @@
       "anchor": "start"
     }
   },
-  "description": "Circle area represents rented dwellings in 88 larger Census regions (SA4); darker colour means a greater share renting. Circle centres are geometric interior points, not household locations. City insets reveal overlaps."
+  "description": "Circle area shows rented homes in 88 larger Census regions (SA4). Darker colour means a greater share renting. City insets use larger circles; read them with their own size key."
 }

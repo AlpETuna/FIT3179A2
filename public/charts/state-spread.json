@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "width": 520,
-  "height": 310,
+  "height": 320,
   "data": {
     "url": "data/sa3.json"
   },
@@ -75,5 +75,5 @@
       "anchor": "start"
     }
   },
-  "description": "Each box spans the middle half of regional medians; its centre line is the middle region’s median rent. Whiskers span the lowest to highest regional median. Regions have equal weight, so this is not a state household median."
+  "description": "Each row is one state. The line runs from its cheapest region to its dearest. The box holds the middle half of its regions. The white mark is the typical region. A long row means rents vary a lot."
 }

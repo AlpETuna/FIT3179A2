@@ -44,7 +44,7 @@ The Why column states Munzner-style action–target pairs. All source tables are
 | 9 Box plot | Regional medians grouped by state | Compare distributions; locate spread | Common rent axis reveals within-state diversity concisely. The caption defines the box, centre and whiskers, including the “median of regional medians” distinction. |
 | 10 Parallel coordinates | 335 regions × income, rent, mortgage/week and apartment share | Compare multivariate profiles; locate featured items in context | All regions supply meaningful context; three highlighted profiles show combinations of attributes. Independent raw-unit axes are labelled. Selection reduces emphasis, not the underlying population. |
 | 11 Multi-line CPI | Two original monthly price indices, 28 common months | Compare trends | A shared start at 100 compares relative price change across the same period. Direct explanation replaces unexplained “rebasing”. Solid/dashed lines add a non-colour distinction. |
-| 12 Tile cartogram | Eight geographic categories + >50% after-CRA burden | Locate severe burden; compare jurisdictions | A schematic geographic arrangement makes small territories visible. This uses a distinct severity threshold, so it does not repeat the >30% overall state measure. |
+| 12 State choropleth | Eight state/territory boundaries + >50% after-CRA burden | Locate severe burden; compare jurisdictions | Real boundaries make this a genuine map idiom; small jurisdictions get offshore labels with leader lines. This uses a distinct severity threshold, so it does not repeat the >30% overall state measure. |
 | 13 Heatmap | Verified CRA state × six payment groups; after-CRA stress | Compare groups; locate high/low combinations | 48 cells support pattern reading across both dimensions. The overall column is omitted. Printed values and a complete table support precise reading; mobile transposes the same matrix. |
 | 14 Paired dots | Eight states, two CRA stress calculations | Compare paired magnitudes | A line links the same recipient population with and without assistance in the calculation. Different shapes distinguish the endpoints. Conservatively counted as basic. |
 
@@ -66,7 +66,7 @@ The opening uses an original clean architectural elevation of a house, townhouse
 
 **Bitter explicitly matches the housing topic:** its sturdy slab-like serifs and clear structural forms echo built architecture while giving the story a human reading voice. **Public Sans** supports neutral public-information body copy and chart labels. The contrast between the two families creates hierarchy without adding more fonts.
 
-Headlines are capped at 64px; body copy is 18px with a 1.65 line height and a limited line length. Figure explanations are 14–15px. Small chart labels are checked at each target viewport. Sentence case, restrained weights, left alignment and tabular numerical formatting make comparisons easier. Fonts are bundled locally.
+Headlines are capped at 38px; body copy is 18px with a 1.65 line height. Prose is capped at 36ch so no rendered line exceeds ten words; this is checked at 1440, 768 and 390px. Figure explanations are 14–15px. Small chart labels are checked at each target viewport. Sentence case, restrained weights, left alignment and tabular numerical formatting make comparisons easier. Fonts are bundled locally.
 
 ## Colour scheme and purpose
 
@@ -88,6 +88,6 @@ Sequential lightness, rather than rainbow hue, encodes rent and stress quantitie
 
 ## Classification honesty
 
-There are **14 assessed figures**, including three proposed map idioms. The planned advanced count is **11** under the brief’s definition, which excludes a specific basic list. That is an interpretation, not a tutor ruling. Excluding waffle, symbol map and tile cartogram leaves **eight**, including the histogram. If the histogram is also rejected, the count is seven. The three-map requirement also remains dependent on the tile cartogram being accepted as a distinct map.
+There are **14 assessed figures**, including three map idioms. Under the unit’s published idiom list, **11** are advanced: waffle, treemap, alluvial and heatmap are named as advanced; all map idioms count as advanced for DV II; mosaic, histogram, box plot and parallel coordinates are not on the basic list. Scatterplot, multi-line CPI and paired dots are counted as basic. The list names connected dot plots as advanced, but Figure 14 is conservatively not counted.
 
 The parallel-coordinates effectiveness concern is addressed with all 335 regions. The heatmap now uses 48 real cells; the trivial waterfall is absent. Rather than inflate the count with repetitive or weak additions, the implementation provides exact artefacts for an explicit classification decision. [REVIEW.md](REVIEW.md) makes that decision a submission gate and records what has not yet been approved.

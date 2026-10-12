@@ -46,7 +46,7 @@
   {
     "id": "rent-map",
     "title": "A national median hides local differences",
-    "description": "Colour shows each of 335 Census regions’ median weekly rent, not the rent of every home. Grey means unavailable. Dark outlines locate the three featured communities. Insets enlarge metropolitan regions.",
+    "description": "Colour shows each region’s median weekly rent, in $50 steps. Darker means higher rent; grey means no data. Outlines mark the three featured communities.",
     "data": "sa3",
     "source": "census",
     "tables": "G02, G37; ASGS 2021 boundaries",
@@ -59,7 +59,7 @@
   {
     "id": "renter-map",
     "title": "Where rented homes are concentrated",
-    "description": "Circle area represents rented dwellings in 88 larger Census regions (SA4); darker colour means a greater share renting. Circle centres are geometric interior points, not household locations. City insets reveal overlaps.",
+    "description": "Circle area shows rented homes in 88 larger Census regions (SA4). Darker colour means a greater share renting. City insets use larger circles; read them with their own size key.",
     "data": "sa4",
     "source": "census",
     "tables": "G02, G37; ASGS 2021 boundaries",
@@ -95,7 +95,7 @@
   {
     "id": "state-spread",
     "title": "There is no single rental market within a state",
-    "description": "Each box spans the middle half of regional medians; its centre line is the middle region’s median rent. Whiskers span the lowest to highest regional median. Regions have equal weight, so this is not a state household median.",
+    "description": "Each row is one state. The line runs from its cheapest region to its dearest. The box holds the middle half of its regions. The white mark is the typical region. A long row means rents vary a lot.",
     "data": "sa3",
     "source": "census",
     "tables": "G02",
@@ -106,7 +106,7 @@
   {
     "id": "profiles",
     "title": "Similar rents can come with very different homes",
-    "description": "Follow a line across four separate scales. Grey lines show all other eligible regions; the three featured communities are highlighted. Higher means more of that measure, not better. Mortgage repayments are converted from monthly to weekly using ×12÷52.",
+    "description": "Each line is one region, read across four axes. Each axis has its own scale. Higher means more, not better. Monthly mortgages are shown weekly (×12÷52).",
     "data": "sa3",
     "source": "census",
     "tables": "G02, G37",
@@ -119,7 +119,7 @@
   {
     "id": "prices",
     "title": "The cost of renting keeps changing",
-    "description": "Both monthly price series start at 100 in April 2024. A value of 110 means prices are 10% higher than at the start. These are weighted eight-capital-city CPI measures, not national advertised rents.",
+    "description": "Both lines begin at 0% in April 2024. +10% means prices are 10% higher than then. These are eight-capital-city CPI measures, not advertised rents.",
     "data": "cpi",
     "source": "cpi",
     "tables": "Table 3, original monthly series",
@@ -130,11 +130,11 @@
   {
     "id": "severe",
     "title": "Some still spend over half their income on rent",
-    "description": "This tile cartogram gives each state or territory equal space in approximate geographic order. It shows the share of eligible assistance recipients whose rent, after assistance, exceeds 50% of gross income. Tile size does not represent land or population.",
+    "description": "Darker states have a larger share of assistance recipients paying over half their income in rent, after assistance. Small states are labelled offshore.",
     "data": "cra",
     "source": "aihw",
     "tables": "CRA.3, March 2026",
-    "idiom": "Tile cartogram",
+    "idiom": "Choropleth (state)",
     "chapter": 4,
     "engine": "vega-lite"
   },

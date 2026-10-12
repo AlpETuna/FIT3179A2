@@ -25,7 +25,7 @@ The browser tests expect the development server to be running. They check all fo
 - Four chapters, an original architectural illustration, fourteen charts, three map designs and a conclusion.
 - Real Census 2021, CPI to July 2026 and CRA March 2026 extracts, with provenance and source-table references.
 - All 335 eligible SA3 regions in the parallel-coordinates context; three guided community highlights.
-- A verified 48-cell AIHW payment heatmap, separate severe-burden cartogram and assistance comparison.
+- A verified 48-cell AIHW payment heatmap, separate severe-burden state map and assistance comparison.
 - Equal-column responsive layout, local fonts, keyboard controls, data tables and readable chart JSON.
 - A manually triggered GitHub Pages workflow, ready for the approved repository.
 

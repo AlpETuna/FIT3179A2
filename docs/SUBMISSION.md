@@ -30,7 +30,7 @@ The table datasets contain categorical attributes (region/state, tenure, dwellin
 
 ## How
 
-The fourteen assessed figures use original Vega and Vega-Lite specifications. Composition is shown with a waffle, treemap, mosaic and alluvial diagram. A choropleth maps regional median rents; a proportional-symbol map separates rented-home counts and shares; a histogram shows the frequency of regional rent ranges. Scatter, box plots and parallel coordinates place three featured communities within national context. The final chapter uses a monthly line chart, schematic state cartogram, payment-group heatmap and paired-dot assistance comparison.
+The fourteen assessed figures use original Vega and Vega-Lite specifications. Composition is shown with a waffle, treemap, mosaic and alluvial diagram. A choropleth maps regional median rents; a proportional-symbol map separates rented-home counts and shares; a histogram shows the frequency of regional rent ranges. Scatter, box plots and parallel coordinates place three featured communities within national context. The final chapter uses a monthly line chart, state choropleth, payment-group heatmap and paired-dot assistance comparison.
 
 The layout uses two equal columns and deliberately chosen full-width figures, preserving shared alignment. It becomes one column on smaller screens. Bitter’s structural serif forms explicitly match the housing topic; Public Sans makes explanatory text and chart labels easy to read. Tenure colours keep consistent meanings. Sequential lightness encodes quantities; shapes, line styles, printed values and accessible data tables supplement colour.
 
@@ -56,7 +56,7 @@ Explain these without reading the source code:
 10. What is a CRA income unit, and how does it differ from a Census household?
 11. What is actually changed between the two paired-dot calculations? Why is it not a causal before-and-after study?
 12. How was the state × payment heatmap verified? Which categories are omitted, and why is there no overall column?
-13. What does the cartogram sacrifice and gain? What exactly did the tutor accept as a map idiom?
+13. Why does the state choropleth label Vic, ACT and Tasmania offshore?
 14. Why use Albers nationally and Mercator in local insets? Why are circle centres not household locations?
 15. How do keyboard users and readers with colour-vision differences access the same evidence?
 16. How do separate Vega views share the case-study selection? What happens if a chart fails to load?
