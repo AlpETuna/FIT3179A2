@@ -59,15 +59,61 @@
   {
     "id": "renter-map",
     "title": "Where rented homes are concentrated",
-    "description": "Circle area shows rented homes in 88 larger Census regions (SA4). Darker colour means a greater share renting. City insets use larger circles; read them with their own size key.",
+    "description": "Each dot is 1,000 rented homes, placed at random inside its Census region (SA3). Dots show density, not addresses. Zoom with the place buttons, ctrl + scroll or double-click; drag to move.",
     "data": "sa4",
     "source": "census",
     "tables": "G02, G37; ASGS 2021 boundaries",
-    "idiom": "Proportional-symbol map",
+    "idiom": "Dot density map (interactive)",
     "chapter": 2,
     "wide": true,
-    "map": true,
-    "engine": "vega-lite"
+    "engine": "vega",
+    "zoom": true,
+    "places": [
+      [
+        "Australia",
+        null
+      ],
+      [
+        "Sydney",
+        [
+          151.05,
+          -33.85,
+          22
+        ]
+      ],
+      [
+        "Melbourne",
+        [
+          145,
+          -37.83,
+          20
+        ]
+      ],
+      [
+        "Brisbane",
+        [
+          153.02,
+          -27.48,
+          18
+        ]
+      ],
+      [
+        "Perth",
+        [
+          115.86,
+          -31.95,
+          18
+        ]
+      ],
+      [
+        "Adelaide",
+        [
+          138.6,
+          -34.92,
+          18
+        ]
+      ]
+    ]
   },
   {
     "id": "rent-distribution",

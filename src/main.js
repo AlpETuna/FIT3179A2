@@ -36,10 +36,21 @@ async function legend(id){
    const labels=range.map((_,i)=>i===0?`Under ${money(domain[0])}`:i===domain.length?`${money(domain.at(-1))}+`:`${money(domain[i-1])}–${money(domain[i]-1)}`);
    return `<div class="rent-key"><p class="box-key-title">Median weekly rent</p><ul class="figure-legend">${range.map((c,i)=>`<li><i class="swatch" style="background:${c}"></i>${labels[i]}</li>`).join('')}<li><i class="swatch" style="background:#c4c4c4"></i>No data</li></ul></div>`;
  }
- if(id==='severe')return `<div class="zoom-controls" data-zoom-for="severe" role="group" aria-label="Map zoom"><button type="button" data-zoom="1.6" aria-label="Zoom in">＋ Zoom in</button><button type="button" data-zoom="0.625" aria-label="Zoom out">− Zoom out</button><button type="button" data-zoom="reset">Reset</button></div>`;
  if(id==='state-spread')return `<div class="box-key"><p class="box-key-title">How to read each row</p><svg viewBox="0 0 360 70" role="img" aria-label="A box plot row: the line runs from the cheapest to the dearest region; the box holds the middle half of regions; the white mark is the typical region."><text x="180" y="12" text-anchor="middle">Middle half of regions</text><path d="M110 19v5h140v-5" class="bracket"/><line x1="10" x2="350" y1="38" y2="38" class="whisker"/><line x1="10" x2="10" y1="31" y2="45" class="whisker"/><line x1="350" x2="350" y1="31" y2="45" class="whisker"/><rect x="110" y="28" width="140" height="20" class="box"/><line x1="175" x2="175" y1="28" y2="48" class="median"/><text x="10" y="64">Cheapest region</text><text x="175" y="64" text-anchor="middle">Typical region</text><text x="350" y="64" text-anchor="end">Dearest region</text></svg></div>`;
  if(id==='profiles')return `<ul class="figure-legend"><li><span class="line-key"></span>Melbourne City</li><li><span class="line-key dashed"></span>Casey – South</li><li><span class="line-key dotted"></span>Bendigo</li></ul>`;
  return '';
+}
+
+// Zoomable maps get zoom buttons, plus jump-to-place buttons when the
+// manifest lists places ([name, [longitude, latitude, zoom]], null = reset).
+function zoomControls(meta){
+ const places=(meta.places||[]).map(([name,target],i)=>`<button type="button" data-place="${i}"${target?'':' aria-pressed="true"'}>${esc(name)}</button>`).join('');
+ return `<div class="zoom-controls" data-zoom-for="${meta.id}" role="group" aria-label="Map zoom">${places}<button type="button" data-zoom="1.6" aria-label="Zoom in">＋</button><button type="button" data-zoom="0.625" aria-label="Zoom out">−</button>${places?'':'<button type="button" data-zoom="reset">Reset</button>'}</div>`;
+}
+function zoomCommand(meta,button){
+ if(button.dataset.zoom)return button.dataset.zoom==='reset'?{reset:true}:{step:Number(button.dataset.zoom)};
+ const target=meta.places[button.dataset.place][1];
+ return target?{place:target}:{reset:true};
 }
 
 async function makeFigure(meta,index){
@@ -50,7 +61,7 @@ async function makeFigure(meta,index){
  const chart=`<div class="chart" id="chart-${meta.id}" role="img" aria-label="${esc(meta.description)}"><p class="chart-loading">Drawing the chart…</p></div>`;
  const key=await legend(meta.id);
  // The waffle is square, so its key sits beside it to fill the column.
- const body=meta.id==='tenure'?`<div class="chart-with-key">${chart}${key}</div>`:chart+key;
+ const body=meta.id==='tenure'?`<div class="chart-with-key">${chart}${key}</div>`:meta.zoom?zoomControls(meta)+chart+key:chart+key;
  slot.innerHTML=`<figure class="figure" aria-labelledby="title-${meta.id}" aria-describedby="desc-${meta.id}"><div class="figure-label"><span>Figure ${String(index+1).padStart(2,'0')}</span><span>${sourceNames[meta.source]}</span></div><h3 id="title-${meta.id}">${esc(meta.title)}</h3>${body}<figcaption><p class="figure-description" id="desc-${meta.id}">${esc(meta.description)}</p><p class="figure-source">Source: <a href="${sourceLinks[meta.source]}">${sourceNames[meta.source]}</a> · ${esc(meta.tables)}</p></figcaption><details class="figure-tools"><summary>Read the data &amp; chart specification</summary>${tableHTML(displayRows,columns[meta.data],`${meta.title} — source values`)}<div class="downloads"><a href="data/${meta.data}.json" download>Download data</a><a href="charts/${meta.id}.json">Readable chart JSON</a></div></details></figure>`;
 }
 
@@ -118,7 +129,10 @@ async function render(meta){
    const result=await embed(node,spec,{actions:false,renderer:'svg',tooltip:{theme:'light'},defaultStyle:false});
    views.set(meta.id,result.view);
    if(meta.linked)await result.view.signal('featured',selected).runAsync();
-   if(meta.zoom)$$(`[data-zoom-for="${meta.id}"] button`).forEach(button=>{button.onclick=()=>views.get(meta.id)?.signal('zoomCommand',button.dataset.zoom==='reset'?{reset:true}:{step:Number(button.dataset.zoom)}).runAsync();});
+   if(meta.zoom)$$(`[data-zoom-for="${meta.id}"] button`).forEach((button,_,all)=>{button.onclick=()=>{
+     if(button.dataset.place)all.forEach(b=>b.dataset.place&&b.setAttribute('aria-pressed',String(b===button)));
+     views.get(meta.id)?.signal('zoomCommand',zoomCommand(meta,button)).runAsync();
+   };});
    node.dataset.width=String(width);node.dataset.ready='true';node.setAttribute('role','img');node.removeAttribute('aria-live');
  }catch(error){
    console.error(`Chart ${meta.id}:`,error);

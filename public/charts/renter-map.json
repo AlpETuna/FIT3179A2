@@ -1,629 +1,474 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "vconcat": [
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "description": "Each dot is 1,000 rented homes, placed at random inside its Census region (SA3). Dots show density, not addresses. Zoom with the place buttons, ctrl + scroll or double-click; drag to move.",
+  "width": 1000,
+  "height": 620,
+  "padding": {
+    "left": 2,
+    "right": 2,
+    "top": 4,
+    "bottom": 4
+  },
+  "autosize": "none",
+  "signals": [
     {
-      "width": 660,
-      "height": 450,
-      "projection": {
-        "type": "albers",
-        "rotate": [
-          -132,
-          0,
-          0
-        ],
-        "center": [
-          0,
-          -28
-        ],
-        "parallels": [
-          -18,
-          -36
-        ],
-        "scale": 653.4,
-        "translate": [
-          330,
-          225
-        ]
-      },
-      "layer": [
+      "name": "baseScale",
+      "update": "min(width/0.75, height/0.62)*0.95"
+    },
+    {
+      "name": "unit",
+      "update": "baseScale/950"
+    },
+    {
+      "name": "zoomCommand",
+      "value": null
+    },
+    {
+      "name": "recentre",
+      "value": false,
+      "on": [
         {
-          "data": {
-            "url": "data/states.topo.json",
-            "format": {
-              "type": "topojson",
-              "feature": "states"
-            }
+          "events": {
+            "signal": "zoomCommand"
           },
-          "transform": [],
-          "mark": {
-            "type": "geoshape",
-            "stroke": "#ffffff",
-            "strokeWidth": 0.6,
-            "clip": true
-          },
-          "encoding": {
-            "color": {
-              "value": "#e9ece9"
-            }
-          }
+          "update": "!!(zoomCommand.place || zoomCommand.reset)"
         },
         {
-          "data": {
-            "url": "data/sa4.json"
+          "events": "wheel, dblclick",
+          "update": "false"
+        }
+      ]
+    },
+    {
+      "name": "mapCentre",
+      "value": [
+        132,
+        -28
+      ],
+      "on": [
+        {
+          "events": {
+            "signal": "zoomCommand"
           },
-          "mark": {
-            "type": "circle",
-            "opacity": 0.82,
-            "stroke": "#ffffff",
-            "strokeWidth": 0.9,
-            "clip": true
-          },
-          "encoding": {
-            "longitude": {
-              "field": "longitude",
-              "type": "quantitative"
-            },
-            "latitude": {
-              "field": "latitude",
-              "type": "quantitative"
-            },
-            "order": {
-              "field": "renting",
-              "type": "quantitative",
-              "sort": "descending"
-            },
-            "size": {
-              "field": "renting",
-              "type": "quantitative",
-              "title": null,
-              "scale": {
-                "domain": [
-                  0,
-                  80000
-                ],
-                "range": [
-                  0,
-                  900
-                ]
-              },
-              "legend": {
-                "title": "Rented homes · national map",
-                "orient": "bottom",
-                "values": [
-                  10000,
-                  40000,
-                  80000
-                ],
-                "format": "~s",
-                "symbolFillColor": "#c9c9c9",
-                "symbolStrokeColor": "#1d1d1d",
-                "symbolStrokeWidth": 0.6
-              }
-            },
-            "color": {
-              "field": "rentalShare",
-              "type": "quantitative",
-              "title": "Share renting",
-              "scale": {
-                "domain": [
-                  0,
-                  0.15,
-                  0.3,
-                  0.45,
-                  0.6
-                ],
-                "range": [
-                  "#fdecd6",
-                  "#f3b47a",
-                  "#d0702e",
-                  "#8f3a10",
-                  "#3d1503"
-                ],
-                "clamp": true
-              },
-              "legend": {
-                "orient": "bottom",
-                "format": ".0%",
-                "gradientLength": 170
-              }
-            },
-            "tooltip": [
-              {
-                "field": "name",
-                "type": "nominal",
-                "title": "SA4 region"
-              },
-              {
-                "field": "renting",
-                "type": "quantitative",
-                "title": "Rented homes",
-                "format": ","
-              },
-              {
-                "field": "rentalShare",
-                "type": "quantitative",
-                "title": "Share renting",
-                "format": ".1%"
-              }
+          "update": "zoomCommand.place ? [zoomCommand.place[0], zoomCommand.place[1]] : zoomCommand.reset ? [132,-28] : mapCentre"
+        }
+      ]
+    },
+    {
+      "name": "anchor",
+      "value": [
+        0,
+        0
+      ],
+      "on": [
+        {
+          "events": {
+            "type": "wheel",
+            "filter": [
+              "event.ctrlKey || event.metaKey"
             ]
+          },
+          "update": "xy()"
+        },
+        {
+          "events": "dblclick",
+          "update": "xy()"
+        },
+        {
+          "events": {
+            "signal": "zoomCommand"
+          },
+          "update": "[width/2, height/2]"
+        }
+      ]
+    },
+    {
+      "name": "step",
+      "value": 1,
+      "on": [
+        {
+          "events": {
+            "type": "wheel",
+            "consume": true,
+            "filter": [
+              "event.ctrlKey || event.metaKey"
+            ]
+          },
+          "force": true,
+          "update": "pow(1.004, -event.deltaY * pow(16, event.deltaMode))"
+        },
+        {
+          "events": "dblclick",
+          "force": true,
+          "update": "2"
+        },
+        {
+          "events": {
+            "signal": "zoomCommand"
+          },
+          "force": true,
+          "update": "zoomCommand.reset ? 1/k : zoomCommand.place ? zoomCommand.place[2]/k : zoomCommand.step"
+        }
+      ]
+    },
+    {
+      "name": "factor",
+      "value": 1,
+      "on": [
+        {
+          "events": {
+            "signal": "step"
+          },
+          "force": true,
+          "update": "clamp(k * step, 1, 24) / k"
+        }
+      ]
+    },
+    {
+      "name": "k",
+      "value": 1,
+      "on": [
+        {
+          "events": {
+            "signal": "factor"
+          },
+          "update": "k * factor"
+        }
+      ]
+    },
+    {
+      "name": "down",
+      "value": null,
+      "on": [
+        {
+          "events": "mousedown",
+          "update": "xy()"
+        },
+        {
+          "events": {
+            "type": "touchstart",
+            "filter": "k > 1"
+          },
+          "update": "xy()"
+        },
+        {
+          "events": "window:mouseup, touchend",
+          "update": "null"
+        }
+      ]
+    },
+    {
+      "name": "offsetAtDown",
+      "value": [
+        0,
+        0
+      ],
+      "on": [
+        {
+          "events": "mousedown",
+          "update": "offset"
+        },
+        {
+          "events": {
+            "type": "touchstart",
+            "filter": "k > 1"
+          },
+          "update": "offset"
+        }
+      ]
+    },
+    {
+      "name": "drag",
+      "value": null,
+      "on": [
+        {
+          "events": "[mousedown, window:mouseup] > window:mousemove!",
+          "update": "down ? [x()-down[0], y()-down[1]] : null"
+        },
+        {
+          "events": {
+            "type": "touchmove",
+            "consume": true,
+            "filter": "k > 1"
+          },
+          "update": "down ? [x()-down[0], y()-down[1]] : null"
+        }
+      ]
+    },
+    {
+      "name": "limit",
+      "update": "[k*width, k*height]"
+    },
+    {
+      "name": "offset",
+      "value": [
+        0,
+        0
+      ],
+      "on": [
+        {
+          "events": {
+            "signal": "factor"
+          },
+          "update": "recentre ? [0,0] : [clamp((anchor[0]-width/2) - factor*((anchor[0]-width/2) - offset[0]), -limit[0], limit[0]), clamp((anchor[1]-height/2) - factor*((anchor[1]-height/2) - offset[1]), -limit[1], limit[1])]"
+        },
+        {
+          "events": {
+            "signal": "drag"
+          },
+          "update": "drag ? [clamp(offsetAtDown[0]+drag[0], -limit[0], limit[0]), clamp(offsetAtDown[1]+drag[1], -limit[1], limit[1])] : offset"
+        }
+      ]
+    },
+    {
+      "name": "cursor",
+      "value": "grab",
+      "on": [
+        {
+          "events": "mousedown",
+          "update": "'grabbing'"
+        },
+        {
+          "events": "window:mouseup",
+          "update": "'grab'"
+        }
+      ]
+    },
+    {
+      "name": "dotSize",
+      "update": "5 * unit * min(k, 6)"
+    }
+  ],
+  "projections": [
+    {
+      "name": "proj",
+      "type": "albers",
+      "rotate": [
+        -132,
+        0,
+        0
+      ],
+      "center": {
+        "signal": "[mapCentre[0]-132, mapCentre[1]]"
+      },
+      "parallels": [
+        -18,
+        -36
+      ],
+      "scale": {
+        "signal": "baseScale*k"
+      },
+      "translate": [
+        {
+          "signal": "width/2 + offset[0]"
+        },
+        {
+          "signal": "height/2 + offset[1]"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "sa3",
+      "url": "data/sa3.json"
+    },
+    {
+      "name": "regions",
+      "url": "data/regions.topo.json",
+      "format": {
+        "type": "topojson",
+        "feature": "regions"
+      },
+      "transform": [
+        {
+          "type": "lookup",
+          "from": "sa3",
+          "key": "code",
+          "fields": [
+            "properties.SA3_CODE21"
+          ],
+          "as": [
+            "row"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "dots",
+      "url": "data/rent-dots.json",
+      "transform": [
+        {
+          "type": "geopoint",
+          "projection": "proj",
+          "fields": [
+            "lon",
+            "lat"
+          ],
+          "as": [
+            "x",
+            "y"
+          ]
+        }
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "width": {
+            "signal": "width"
+          },
+          "height": {
+            "signal": "height"
+          },
+          "clip": {
+            "value": true
+          },
+          "fill": {
+            "value": "#ffffff"
+          },
+          "cursor": {
+            "signal": "cursor"
+          }
+        }
+      },
+      "marks": [
+        {
+          "type": "shape",
+          "from": {
+            "data": "regions"
+          },
+          "encode": {
+            "update": {
+              "fill": {
+                "value": "#ebe9e5"
+              },
+              "stroke": {
+                "value": "#ffffff"
+              },
+              "strokeWidth": {
+                "signal": "k > 3 ? 0.9 : 0.3"
+              },
+              "tooltip": {
+                "signal": "datum.row ? {'Region (SA3)':datum.row.name,'Rented homes':format(datum.row.renting,','),'Share renting':format(datum.row.rentalShare,'.1%')} : {'Region (SA3)':datum.properties.SA3_NAME21}"
+              }
+            }
+          },
+          "transform": [
+            {
+              "type": "geoshape",
+              "projection": "proj"
+            }
+          ]
+        },
+        {
+          "type": "symbol",
+          "from": {
+            "data": "dots"
+          },
+          "interactive": false,
+          "encode": {
+            "update": {
+              "x": {
+                "field": "x"
+              },
+              "y": {
+                "field": "y"
+              },
+              "shape": {
+                "value": "circle"
+              },
+              "size": {
+                "signal": "dotSize"
+              },
+              "fill": {
+                "value": "#8f4715"
+              },
+              "fillOpacity": {
+                "value": 0.75
+              }
+            }
           }
         }
       ]
     },
     {
-      "hconcat": [
-        {
-          "width": 360,
-          "height": 340,
-          "projection": {
-            "type": "mercator",
-            "center": [
-              151.05,
-              -33.84
-            ],
-            "scale": 28000,
-            "translate": [
-              180,
-              170
-            ]
+      "type": "rect",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 4
           },
-          "layer": [
-            {
-              "data": {
-                "url": "data/regions.topo.json",
-                "format": {
-                  "type": "topojson",
-                  "feature": "regions"
-                }
-              },
-              "transform": [],
-              "mark": {
-                "type": "geoshape",
-                "stroke": "#ffffff",
-                "strokeWidth": 0.8,
-                "clip": true
-              },
-              "encoding": {
-                "color": {
-                  "value": "#e9ece9"
-                }
-              }
-            },
-            {
-              "data": {
-                "url": "data/sa4.json"
-              },
-              "mark": {
-                "type": "circle",
-                "opacity": 0.82,
-                "stroke": "#ffffff",
-                "strokeWidth": 1.4,
-                "clip": true
-              },
-              "encoding": {
-                "longitude": {
-                  "field": "longitude",
-                  "type": "quantitative"
-                },
-                "latitude": {
-                  "field": "latitude",
-                  "type": "quantitative"
-                },
-                "order": {
-                  "field": "renting",
-                  "type": "quantitative",
-                  "sort": "descending"
-                },
-                "size": {
-                  "field": "renting",
-                  "type": "quantitative",
-                  "title": null,
-                  "scale": {
-                    "domain": [
-                      0,
-                      80000
-                    ],
-                    "range": [
-                      0,
-                      2600
-                    ]
-                  },
-                  "legend": {
-                    "title": "Rented homes · city insets",
-                    "orient": "bottom",
-                    "values": [
-                      10000,
-                      40000,
-                      80000
-                    ],
-                    "format": "~s",
-                    "symbolFillColor": "#c9c9c9",
-                    "symbolStrokeColor": "#1d1d1d",
-                    "symbolStrokeWidth": 0.6
-                  }
-                },
-                "color": {
-                  "field": "rentalShare",
-                  "type": "quantitative",
-                  "title": "Share renting",
-                  "scale": {
-                    "domain": [
-                      0,
-                      0.15,
-                      0.3,
-                      0.45,
-                      0.6
-                    ],
-                    "range": [
-                      "#fdecd6",
-                      "#f3b47a",
-                      "#d0702e",
-                      "#8f3a10",
-                      "#3d1503"
-                    ],
-                    "clamp": true
-                  },
-                  "legend": {
-                    "orient": "bottom",
-                    "format": ".0%",
-                    "gradientLength": 170
-                  }
-                },
-                "tooltip": [
-                  {
-                    "field": "name",
-                    "type": "nominal",
-                    "title": "SA4 region"
-                  },
-                  {
-                    "field": "renting",
-                    "type": "quantitative",
-                    "title": "Rented homes",
-                    "format": ","
-                  },
-                  {
-                    "field": "rentalShare",
-                    "type": "quantitative",
-                    "title": "Share renting",
-                    "format": ".1%"
-                  }
-                ]
-              }
-            }
-          ],
-          "title": "Sydney"
-        },
-        {
-          "width": 360,
-          "height": 340,
-          "projection": {
-            "type": "mercator",
-            "center": [
-              145.05,
-              -37.84
-            ],
-            "scale": 19000,
-            "translate": [
-              180,
-              170
-            ]
+          "y": {
+            "signal": "height - 30"
           },
-          "layer": [
-            {
-              "data": {
-                "url": "data/regions.topo.json",
-                "format": {
-                  "type": "topojson",
-                  "feature": "regions"
-                }
-              },
-              "transform": [],
-              "mark": {
-                "type": "geoshape",
-                "stroke": "#ffffff",
-                "strokeWidth": 0.8,
-                "clip": true
-              },
-              "encoding": {
-                "color": {
-                  "value": "#e9ece9"
-                }
-              }
-            },
-            {
-              "data": {
-                "url": "data/sa4.json"
-              },
-              "mark": {
-                "type": "circle",
-                "opacity": 0.82,
-                "stroke": "#ffffff",
-                "strokeWidth": 1.4,
-                "clip": true
-              },
-              "encoding": {
-                "longitude": {
-                  "field": "longitude",
-                  "type": "quantitative"
-                },
-                "latitude": {
-                  "field": "latitude",
-                  "type": "quantitative"
-                },
-                "order": {
-                  "field": "renting",
-                  "type": "quantitative",
-                  "sort": "descending"
-                },
-                "size": {
-                  "field": "renting",
-                  "type": "quantitative",
-                  "title": null,
-                  "scale": {
-                    "domain": [
-                      0,
-                      80000
-                    ],
-                    "range": [
-                      0,
-                      2600
-                    ]
-                  },
-                  "legend": {
-                    "title": "Rented homes · city insets",
-                    "orient": "bottom",
-                    "values": [
-                      10000,
-                      40000,
-                      80000
-                    ],
-                    "format": "~s",
-                    "symbolFillColor": "#c9c9c9",
-                    "symbolStrokeColor": "#1d1d1d",
-                    "symbolStrokeWidth": 0.6
-                  }
-                },
-                "color": {
-                  "field": "rentalShare",
-                  "type": "quantitative",
-                  "title": "Share renting",
-                  "scale": {
-                    "domain": [
-                      0,
-                      0.15,
-                      0.3,
-                      0.45,
-                      0.6
-                    ],
-                    "range": [
-                      "#fdecd6",
-                      "#f3b47a",
-                      "#d0702e",
-                      "#8f3a10",
-                      "#3d1503"
-                    ],
-                    "clamp": true
-                  },
-                  "legend": {
-                    "orient": "bottom",
-                    "format": ".0%",
-                    "gradientLength": 170
-                  }
-                },
-                "tooltip": [
-                  {
-                    "field": "name",
-                    "type": "nominal",
-                    "title": "SA4 region"
-                  },
-                  {
-                    "field": "renting",
-                    "type": "quantitative",
-                    "title": "Rented homes",
-                    "format": ","
-                  },
-                  {
-                    "field": "rentalShare",
-                    "type": "quantitative",
-                    "title": "Share renting",
-                    "format": ".1%"
-                  }
-                ]
-              }
-            }
-          ],
-          "title": "Melbourne"
-        },
-        {
-          "width": 360,
-          "height": 340,
-          "projection": {
-            "type": "mercator",
-            "center": [
-              153,
-              -27.5
-            ],
-            "scale": 24000,
-            "translate": [
-              180,
-              170
-            ]
+          "width": {
+            "value": 196
           },
-          "layer": [
-            {
-              "data": {
-                "url": "data/regions.topo.json",
-                "format": {
-                  "type": "topojson",
-                  "feature": "regions"
-                }
-              },
-              "transform": [],
-              "mark": {
-                "type": "geoshape",
-                "stroke": "#ffffff",
-                "strokeWidth": 0.8,
-                "clip": true
-              },
-              "encoding": {
-                "color": {
-                  "value": "#e9ece9"
-                }
-              }
-            },
-            {
-              "data": {
-                "url": "data/sa4.json"
-              },
-              "mark": {
-                "type": "circle",
-                "opacity": 0.82,
-                "stroke": "#ffffff",
-                "strokeWidth": 1.4,
-                "clip": true
-              },
-              "encoding": {
-                "longitude": {
-                  "field": "longitude",
-                  "type": "quantitative"
-                },
-                "latitude": {
-                  "field": "latitude",
-                  "type": "quantitative"
-                },
-                "order": {
-                  "field": "renting",
-                  "type": "quantitative",
-                  "sort": "descending"
-                },
-                "size": {
-                  "field": "renting",
-                  "type": "quantitative",
-                  "title": null,
-                  "scale": {
-                    "domain": [
-                      0,
-                      80000
-                    ],
-                    "range": [
-                      0,
-                      2600
-                    ]
-                  },
-                  "legend": {
-                    "title": "Rented homes · city insets",
-                    "orient": "bottom",
-                    "values": [
-                      10000,
-                      40000,
-                      80000
-                    ],
-                    "format": "~s",
-                    "symbolFillColor": "#c9c9c9",
-                    "symbolStrokeColor": "#1d1d1d",
-                    "symbolStrokeWidth": 0.6
-                  }
-                },
-                "color": {
-                  "field": "rentalShare",
-                  "type": "quantitative",
-                  "title": "Share renting",
-                  "scale": {
-                    "domain": [
-                      0,
-                      0.15,
-                      0.3,
-                      0.45,
-                      0.6
-                    ],
-                    "range": [
-                      "#fdecd6",
-                      "#f3b47a",
-                      "#d0702e",
-                      "#8f3a10",
-                      "#3d1503"
-                    ],
-                    "clamp": true
-                  },
-                  "legend": {
-                    "orient": "bottom",
-                    "format": ".0%",
-                    "gradientLength": 170
-                  }
-                },
-                "tooltip": [
-                  {
-                    "field": "name",
-                    "type": "nominal",
-                    "title": "SA4 region"
-                  },
-                  {
-                    "field": "renting",
-                    "type": "quantitative",
-                    "title": "Rented homes",
-                    "format": ","
-                  },
-                  {
-                    "field": "rentalShare",
-                    "type": "quantitative",
-                    "title": "Share renting",
-                    "format": ".1%"
-                  }
-                ]
-              }
-            }
-          ],
-          "title": "Brisbane"
+          "height": {
+            "value": 26
+          },
+          "fill": {
+            "value": "#ffffff"
+          },
+          "fillOpacity": {
+            "value": 0.85
+          }
         }
-      ],
-      "spacing": 20,
-      "resolve": {
-        "scale": {
-          "size": "shared"
+      }
+    },
+    {
+      "type": "symbol",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 14
+          },
+          "y": {
+            "signal": "height - 17"
+          },
+          "shape": {
+            "value": "circle"
+          },
+          "size": {
+            "value": 30
+          },
+          "fill": {
+            "value": "#8f4715"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 24
+          },
+          "y": {
+            "signal": "height - 17"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "text": {
+            "value": "1 dot = 1,000 rented homes"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fill": {
+            "value": "#1d1d1d"
+          }
         }
       }
     }
   ],
-  "resolve": {
-    "scale": {
-      "color": "shared",
-      "size": "independent"
-    }
-  },
-  "spacing": 16,
   "config": {
-    "font": "Public Sans",
-    "background": "#ffffff",
-    "view": {
-      "stroke": null
-    },
-    "axis": {
-      "labelFontSize": 13,
-      "titleFontSize": 13,
-      "titleFontWeight": 400,
-      "labelColor": "#585858",
-      "titleColor": "#585858",
-      "domain": false,
-      "tickColor": "#c8c8c8",
-      "gridColor": "#e9e9e9",
-      "labelPadding": 7,
-      "titlePadding": 13
-    },
-    "legend": {
-      "labelFontSize": 13,
-      "titleFontSize": 13,
-      "titleFontWeight": 400,
-      "labelColor": "#585858",
-      "titleColor": "#585858",
-      "padding": 8
-    },
-    "title": {
-      "font": "Public Sans",
-      "fontSize": 14,
-      "fontWeight": 600,
-      "color": "#1d1d1d",
-      "anchor": "start"
-    }
-  },
-  "description": "Circle area shows rented homes in 88 larger Census regions (SA4). Darker colour means a greater share renting. City insets use larger circles; read them with their own size key."
+    "font": "Public Sans"
+  }
 }
