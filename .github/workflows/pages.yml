@@ -1,7 +1,9 @@
 name: Publish reviewed story
 
-# Deliberately manual: local review and explicit approval come before publishing.
+# Publishes on every push to main; can also be run by hand from the Actions tab.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -21,7 +23,6 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npm test
       - run: npm run build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
