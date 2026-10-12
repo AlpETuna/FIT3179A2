@@ -119,7 +119,7 @@
   {
     "id": "prices",
     "title": "The cost of renting keeps changing",
-    "description": "Both lines begin at 0% in April 2024. +10% means prices are 10% higher than then. These are eight-capital-city CPI measures, not advertised rents.",
+    "description": "Both price indexes start at 100 in April 2024, on an axis from zero. By July 2026, rents were 9.8% higher and all prices 6.9% higher. These are eight-capital-city CPI measures, not advertised rents.",
     "data": "cpi",
     "source": "cpi",
     "tables": "Table 3, original monthly series",
@@ -130,13 +130,14 @@
   {
     "id": "severe",
     "title": "Some still spend over half their income on rent",
-    "description": "Darker states have a larger share of assistance recipients paying over half their income in rent, after assistance. Small states are labelled offshore.",
+    "description": "Each bar shows the share of assistance recipients paying over half their income in rent, after assistance. Zoom with the buttons, ctrl + scroll or double-click; drag to move the map.",
     "data": "cra",
     "source": "aihw",
     "tables": "CRA.3, March 2026",
-    "idiom": "Choropleth (state)",
+    "idiom": "Glyph map (interactive)",
     "chapter": 4,
-    "engine": "vega-lite"
+    "zoom": true,
+    "engine": "vega"
   },
   {
     "id": "payment-stress",

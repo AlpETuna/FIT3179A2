@@ -18,7 +18,7 @@ for(const chart of manifest){
   if(chart.linked){await view.signal('featured','20201').runAsync();assert.equal(view.signal('featured'),'20201');}
   if(chart.id==='profiles')assert.equal(view.data('profiles').length,335*4);
   if(chart.id==='dwellings')assert.equal(view.data('leaves').length,13);
-  if(['payment-stress','severe'].includes(chart.id)){
+  if(chart.id==='payment-stress'){
    const rows=JSON.parse(await readFile(`public/data/${chart.data}.json`,'utf8'));
    const luminance=rgb=>{const c=rgb.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;});return c[0]*.2126+c[1]*.7152+c[2]*.0722;};
    for(const row of rows){

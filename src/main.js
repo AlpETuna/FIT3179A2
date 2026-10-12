@@ -36,6 +36,7 @@ async function legend(id){
    const labels=range.map((_,i)=>i===0?`Under ${money(domain[0])}`:i===domain.length?`${money(domain.at(-1))}+`:`${money(domain[i-1])}–${money(domain[i]-1)}`);
    return `<div class="rent-key"><p class="box-key-title">Median weekly rent</p><ul class="figure-legend">${range.map((c,i)=>`<li><i class="swatch" style="background:${c}"></i>${labels[i]}</li>`).join('')}<li><i class="swatch" style="background:#c4c4c4"></i>No data</li></ul></div>`;
  }
+ if(id==='severe')return `<div class="zoom-controls" data-zoom-for="severe" role="group" aria-label="Map zoom"><button type="button" data-zoom="1.6" aria-label="Zoom in">＋ Zoom in</button><button type="button" data-zoom="0.625" aria-label="Zoom out">− Zoom out</button><button type="button" data-zoom="reset">Reset</button></div>`;
  if(id==='state-spread')return `<div class="box-key"><p class="box-key-title">How to read each row</p><svg viewBox="0 0 360 70" role="img" aria-label="A box plot row: the line runs from the cheapest to the dearest region; the box holds the middle half of regions; the white mark is the typical region."><text x="180" y="12" text-anchor="middle">Middle half of regions</text><path d="M110 19v5h140v-5" class="bracket"/><line x1="10" x2="350" y1="38" y2="38" class="whisker"/><line x1="10" x2="10" y1="31" y2="45" class="whisker"/><line x1="350" x2="350" y1="31" y2="45" class="whisker"/><rect x="110" y="28" width="140" height="20" class="box"/><line x1="175" x2="175" y1="28" y2="48" class="median"/><text x="10" y="64">Cheapest region</text><text x="175" y="64" text-anchor="middle">Typical region</text><text x="350" y="64" text-anchor="end">Dearest region</text></svg></div>`;
  if(id==='profiles')return `<ul class="figure-legend"><li><span class="line-key"></span>Melbourne City</li><li><span class="line-key dashed"></span>Casey – South</li><li><span class="line-key dotted"></span>Bendigo</li></ul>`;
  return '';
@@ -69,6 +70,8 @@ function fitSpec(original,meta,width){
  if(meta.engine==='vega'){
    const pads=typeof spec.padding==='object'?spec.padding:{left:2,right:2};
    spec.width=Math.max(200,width-(pads.left||0)-(pads.right||0));
+   // Keep the zoomable map's aspect on narrow screens instead of leaving empty space.
+   if(meta.zoom)spec.height=Math.min(spec.height,Math.round(spec.width*.8));
    if(meta.id==='profiles'&&mobile){
      spec.height=300;
      // Plain two-line titles preserve meaningful axis labels on a phone.
@@ -96,10 +99,6 @@ function fitSpec(original,meta,width){
    spec.layer[0].encoding.color.legend={orient:'bottom',gradientLength:180,title:'Rental stress after assistance (%)',titleLimit:280};
    spec.layer[1].mark.fontSize=12;
  }
- if(meta.id==='severe'&&mobile){
-   // A side legend would shrink the map on a phone.
-   Object.assign(spec.layer[0].encoding.color.legend,{orient:'bottom',direction:'horizontal',gradientLength:200,title:'Share after assistance (%)'});
- }
  if(meta.id==='income-rent'&&mobile){
    for(const layer of spec.layer.slice(-2)){
      layer.transform.push({calculate:"datum.code==='20604'?'City':datum.code==='21203'?'Outer suburb':'Bendigo'",as:'shortName'});
@@ -119,6 +118,7 @@ async function render(meta){
    const result=await embed(node,spec,{actions:false,renderer:'svg',tooltip:{theme:'light'},defaultStyle:false});
    views.set(meta.id,result.view);
    if(meta.linked)await result.view.signal('featured',selected).runAsync();
+   if(meta.zoom)$$(`[data-zoom-for="${meta.id}"] button`).forEach(button=>{button.onclick=()=>views.get(meta.id)?.signal('zoomCommand',button.dataset.zoom==='reset'?{reset:true}:{step:Number(button.dataset.zoom)}).runAsync();});
    node.dataset.width=String(width);node.dataset.ready='true';node.setAttribute('role','img');node.removeAttribute('aria-live');
  }catch(error){
    console.error(`Chart ${meta.id}:`,error);

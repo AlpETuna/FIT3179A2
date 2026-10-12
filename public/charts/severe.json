@@ -1,434 +1,659 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
   "width": 520,
-  "height": 320,
-  "projection": {
-    "type": "albers",
-    "rotate": [
-      -132,
-      0,
-      0
-    ],
-    "center": [
-      0,
-      -28
-    ],
-    "parallels": [
-      -18,
-      -36
-    ]
+  "height": 420,
+  "padding": {
+    "left": 2,
+    "right": 2,
+    "top": 4,
+    "bottom": 4
   },
-  "layer": [
+  "autosize": "none",
+  "signals": [
     {
-      "data": {
-        "url": "data/states.topo.json",
-        "format": {
-          "type": "topojson",
-          "feature": "states"
+      "name": "baseScale",
+      "update": "min(width/0.75, height/0.62)*0.95"
+    },
+    {
+      "name": "unit",
+      "update": "baseScale/350"
+    },
+    {
+      "name": "zoomCommand",
+      "value": null
+    },
+    {
+      "name": "anchor",
+      "value": [
+        0,
+        0
+      ],
+      "on": [
+        {
+          "events": {
+            "type": "wheel",
+            "filter": [
+              "event.ctrlKey || event.metaKey"
+            ]
+          },
+          "update": "xy()"
+        },
+        {
+          "events": "dblclick",
+          "update": "xy()"
+        },
+        {
+          "events": {
+            "signal": "zoomCommand"
+          },
+          "update": "[width/2, height/2]"
         }
+      ]
+    },
+    {
+      "name": "step",
+      "value": 1,
+      "on": [
+        {
+          "events": {
+            "type": "wheel",
+            "consume": true,
+            "filter": [
+              "event.ctrlKey || event.metaKey"
+            ]
+          },
+          "force": true,
+          "update": "pow(1.004, -event.deltaY * pow(16, event.deltaMode))"
+        },
+        {
+          "events": "dblclick",
+          "force": true,
+          "update": "2"
+        },
+        {
+          "events": {
+            "signal": "zoomCommand"
+          },
+          "force": true,
+          "update": "zoomCommand.reset ? 1/k : zoomCommand.step"
+        }
+      ]
+    },
+    {
+      "name": "factor",
+      "value": 1,
+      "on": [
+        {
+          "events": {
+            "signal": "step"
+          },
+          "force": true,
+          "update": "clamp(k * step, 1, 8) / k"
+        }
+      ]
+    },
+    {
+      "name": "k",
+      "value": 1,
+      "on": [
+        {
+          "events": {
+            "signal": "factor"
+          },
+          "update": "k * factor"
+        }
+      ]
+    },
+    {
+      "name": "down",
+      "value": null,
+      "on": [
+        {
+          "events": "mousedown",
+          "update": "xy()"
+        },
+        {
+          "events": {
+            "type": "touchstart",
+            "filter": "k > 1"
+          },
+          "update": "xy()"
+        },
+        {
+          "events": "window:mouseup, touchend",
+          "update": "null"
+        }
+      ]
+    },
+    {
+      "name": "offsetAtDown",
+      "value": [
+        0,
+        0
+      ],
+      "on": [
+        {
+          "events": "mousedown",
+          "update": "offset"
+        },
+        {
+          "events": {
+            "type": "touchstart",
+            "filter": "k > 1"
+          },
+          "update": "offset"
+        }
+      ]
+    },
+    {
+      "name": "drag",
+      "value": null,
+      "on": [
+        {
+          "events": "[mousedown, window:mouseup] > window:mousemove!",
+          "update": "down ? [x()-down[0], y()-down[1]] : null"
+        },
+        {
+          "events": {
+            "type": "touchmove",
+            "consume": true,
+            "filter": "k > 1"
+          },
+          "update": "down ? [x()-down[0], y()-down[1]] : null"
+        }
+      ]
+    },
+    {
+      "name": "limit",
+      "update": "[(k-1)*width/2 + 40, (k-1)*height/2 + 40]"
+    },
+    {
+      "name": "offset",
+      "value": [
+        0,
+        0
+      ],
+      "on": [
+        {
+          "events": {
+            "signal": "factor"
+          },
+          "update": "factor===1 && k===1 ? [0,0] : [clamp((anchor[0]-width/2) - factor*((anchor[0]-width/2) - offset[0]), -limit[0], limit[0]), clamp((anchor[1]-height/2) - factor*((anchor[1]-height/2) - offset[1]), -limit[1], limit[1])]"
+        },
+        {
+          "events": {
+            "signal": "drag"
+          },
+          "update": "drag ? [clamp(offsetAtDown[0]+drag[0], -limit[0], limit[0]), clamp(offsetAtDown[1]+drag[1], -limit[1], limit[1])] : offset"
+        }
+      ]
+    },
+    {
+      "name": "cursor",
+      "value": "grab",
+      "on": [
+        {
+          "events": "mousedown",
+          "update": "'grabbing'"
+        },
+        {
+          "events": "window:mouseup",
+          "update": "'grab'"
+        }
+      ]
+    }
+  ],
+  "projections": [
+    {
+      "name": "proj",
+      "type": "albers",
+      "rotate": [
+        -132,
+        0,
+        0
+      ],
+      "center": [
+        0,
+        -28
+      ],
+      "parallels": [
+        -18,
+        -36
+      ],
+      "scale": {
+        "signal": "baseScale*k"
+      },
+      "translate": [
+        {
+          "signal": "width/2 + offset[0]"
+        },
+        {
+          "signal": "height/2 + offset[1]"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "cra",
+      "url": "data/cra.json"
+    },
+    {
+      "name": "states",
+      "url": "data/states.topo.json",
+      "format": {
+        "type": "topojson",
+        "feature": "states"
       },
       "transform": [
         {
-          "calculate": "['NSW','Vic','Qld','SA','WA','Tas','NT','ACT'][toNumber(datum.properties.STE_CODE21)-1]",
+          "type": "formula",
+          "expr": "['NSW','Vic','Qld','SA','WA','Tas','NT','ACT'][toNumber(datum.properties.STE_CODE21)-1]",
           "as": "state"
-        },
-        {
-          "lookup": "state",
-          "from": {
-            "data": {
-              "url": "data/cra.json"
-            },
-            "key": "state",
-            "fields": [
-              "severe"
-            ]
-          }
         }
-      ],
-      "mark": {
-        "type": "geoshape",
-        "stroke": "#ffffff",
-        "strokeWidth": 1.2
-      },
-      "encoding": {
-        "color": {
-          "field": "severe",
-          "type": "quantitative",
-          "title": "Share after assistance (%)",
-          "scale": {
-            "domain": [
-              0,
-              30
-            ],
-            "range": [
-              "#f5eff6",
-              "#6f3473"
-            ],
-            "clamp": true
-          },
-          "legend": {
-            "orient": "right",
-            "direction": "vertical",
-            "format": ".0f",
-            "gradientLength": 180,
-            "title": [
-              "Share after",
-              "assistance (%)"
-            ]
-          }
-        },
-        "tooltip": [
-          {
-            "field": "state",
-            "type": "nominal",
-            "title": "State / territory"
-          },
-          {
-            "field": "severe",
-            "type": "quantitative",
-            "title": "Over 50% after assistance (%)",
-            "format": ".1f"
-          }
-        ]
-      }
+      ]
     },
     {
-      "data": {
-        "values": [
-          {
-            "state": "NSW",
-            "lon": 146.8,
-            "lat": -31.9,
-            "outside": false
-          },
-          {
-            "state": "Vic",
-            "lon": 139.2,
-            "lat": -43.4,
-            "ax": 143.6,
-            "ay": -37.4,
-            "outside": true
-          },
-          {
-            "state": "Qld",
-            "lon": 144.6,
-            "lat": -22.6,
-            "outside": false
-          },
-          {
-            "state": "SA",
-            "lon": 135.2,
-            "lat": -30.2,
-            "outside": false
-          },
-          {
-            "state": "WA",
-            "lon": 122.2,
-            "lat": -26,
-            "outside": false
-          },
-          {
-            "state": "Tas",
-            "lon": 151.5,
-            "lat": -42.6,
-            "ax": 146.7,
-            "ay": -42,
-            "outside": true
-          },
-          {
-            "state": "NT",
-            "lon": 133.4,
-            "lat": -19.6,
-            "outside": false
-          },
-          {
-            "state": "ACT",
-            "lon": 154,
-            "lat": -36.6,
-            "ax": 149.1,
-            "ay": -35.45,
-            "outside": true
-          }
-        ]
-      },
-      "transform": [
+      "name": "glyphs",
+      "values": [
         {
-          "filter": "datum.outside"
+          "state": "NSW",
+          "lon": 146,
+          "lat": -30.6,
+          "ax": null,
+          "ay": null
+        },
+        {
+          "state": "Vic",
+          "lon": 144,
+          "lat": -38,
+          "ax": null,
+          "ay": null
+        },
+        {
+          "state": "Qld",
+          "lon": 144.5,
+          "lat": -22,
+          "ax": null,
+          "ay": null
+        },
+        {
+          "state": "SA",
+          "lon": 135,
+          "lat": -30.5,
+          "ax": null,
+          "ay": null
+        },
+        {
+          "state": "WA",
+          "lon": 121.8,
+          "lat": -27,
+          "ax": null,
+          "ay": null
+        },
+        {
+          "state": "Tas",
+          "lon": 146.6,
+          "lat": -44,
+          "ax": null,
+          "ay": null
+        },
+        {
+          "state": "NT",
+          "lon": 133.4,
+          "lat": -20.5,
+          "ax": null,
+          "ay": null
+        },
+        {
+          "state": "ACT",
+          "lon": 152.8,
+          "lat": -37.2,
+          "ax": 149.1,
+          "ay": -35.45
         }
       ],
-      "mark": {
-        "type": "rule",
-        "color": "#1d1d1d",
-        "strokeWidth": 0.8
-      },
-      "encoding": {
-        "longitude": {
-          "field": "lon",
-          "type": "quantitative"
+      "transform": [
+        {
+          "type": "lookup",
+          "from": "cra",
+          "key": "state",
+          "fields": [
+            "state"
+          ],
+          "as": [
+            "row"
+          ]
         },
-        "latitude": {
-          "field": "lat",
-          "type": "quantitative"
+        {
+          "type": "formula",
+          "expr": "datum.row.severe",
+          "as": "severe"
         },
-        "longitude2": {
-          "field": "ax"
+        {
+          "type": "geopoint",
+          "projection": "proj",
+          "fields": [
+            "lon",
+            "lat"
+          ],
+          "as": [
+            "x",
+            "y"
+          ]
         },
-        "latitude2": {
-          "field": "ay"
+        {
+          "type": "geopoint",
+          "projection": "proj",
+          "fields": [
+            "ax",
+            "ay"
+          ],
+          "as": [
+            "axp",
+            "ayp"
+          ]
         }
-      }
+      ]
     },
     {
-      "data": {
-        "values": [
-          {
-            "state": "NSW",
-            "lon": 146.8,
-            "lat": -31.9,
-            "outside": false
-          },
-          {
-            "state": "Vic",
-            "lon": 139.2,
-            "lat": -43.4,
-            "ax": 143.6,
-            "ay": -37.4,
-            "outside": true
-          },
-          {
-            "state": "Qld",
-            "lon": 144.6,
-            "lat": -22.6,
-            "outside": false
-          },
-          {
-            "state": "SA",
-            "lon": 135.2,
-            "lat": -30.2,
-            "outside": false
-          },
-          {
-            "state": "WA",
-            "lon": 122.2,
-            "lat": -26,
-            "outside": false
-          },
-          {
-            "state": "Tas",
-            "lon": 151.5,
-            "lat": -42.6,
-            "ax": 146.7,
-            "ay": -42,
-            "outside": true
-          },
-          {
-            "state": "NT",
-            "lon": 133.4,
-            "lat": -19.6,
-            "outside": false
-          },
-          {
-            "state": "ACT",
-            "lon": 154,
-            "lat": -36.6,
-            "ax": 149.1,
-            "ay": -35.45,
-            "outside": true
-          }
-        ]
-      },
-      "transform": [
+      "name": "key",
+      "values": [
         {
-          "lookup": "state",
-          "from": {
-            "data": {
-              "url": "data/cra.json"
-            },
-            "key": "state",
-            "fields": [
-              "severe"
-            ]
-          }
+          "v": 10
+        },
+        {
+          "v": 20
+        },
+        {
+          "v": 30
         }
-      ],
-      "mark": {
-        "type": "text",
-        "dy": -9,
-        "fontWeight": 600,
-        "fontSize": 13,
-        "align": {
-          "expr": "datum.outside?'left':'center'"
-        },
-        "dx": {
-          "expr": "datum.outside?6:0"
-        }
-      },
-      "encoding": {
-        "longitude": {
-          "field": "lon",
-          "type": "quantitative"
-        },
-        "latitude": {
-          "field": "lat",
-          "type": "quantitative"
-        },
-        "text": {
-          "field": "state",
-          "type": "nominal"
-        },
-        "color": {
-          "condition": {
-            "test": "datum.severe>21.6 && !datum.outside",
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "width": {
+            "signal": "width"
+          },
+          "height": {
+            "signal": "height"
+          },
+          "clip": {
+            "value": true
+          },
+          "fill": {
             "value": "#ffffff"
           },
-          "value": "#000000"
+          "cursor": {
+            "signal": "cursor"
+          }
+        }
+      },
+      "marks": [
+        {
+          "type": "shape",
+          "from": {
+            "data": "states"
+          },
+          "encode": {
+            "update": {
+              "fill": {
+                "value": "#e6e3e7"
+              },
+              "stroke": {
+                "value": "#ffffff"
+              },
+              "strokeWidth": {
+                "value": 1.2
+              },
+              "tooltip": {
+                "signal": "{'State / territory':datum.state}"
+              }
+            }
+          },
+          "transform": [
+            {
+              "type": "geoshape",
+              "projection": "proj"
+            }
+          ]
+        },
+        {
+          "type": "rule",
+          "from": {
+            "data": "glyphs"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "signal": "datum.ax===null ? datum.x : datum.axp"
+              },
+              "y": {
+                "signal": "datum.ax===null ? datum.y : datum.ayp"
+              },
+              "x2": {
+                "signal": "datum.x - 8"
+              },
+              "y2": {
+                "signal": "datum.y"
+              },
+              "stroke": {
+                "value": "#1d1d1d"
+              },
+              "strokeWidth": {
+                "value": 0.8
+              },
+              "opacity": {
+                "signal": "datum.ax===null ? 0 : 1"
+              }
+            }
+          }
+        },
+        {
+          "type": "rule",
+          "from": {
+            "data": "glyphs"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "signal": "datum.x - 12"
+              },
+              "x2": {
+                "signal": "datum.x + 12"
+              },
+              "y": {
+                "field": "y"
+              },
+              "stroke": {
+                "value": "#1d1d1d"
+              },
+              "strokeWidth": {
+                "value": 1
+              }
+            }
+          }
+        },
+        {
+          "type": "rect",
+          "from": {
+            "data": "glyphs"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "signal": "datum.x - 8"
+              },
+              "width": {
+                "value": 16
+              },
+              "y": {
+                "signal": "datum.y - datum.severe*unit"
+              },
+              "y2": {
+                "field": "y"
+              },
+              "fill": {
+                "value": "#6f3473"
+              },
+              "tooltip": {
+                "signal": "{'State / territory':datum.state,'Over 50% of income on rent, after assistance':format(datum.severe,'.1f')+'%','Rental stress after assistance':format(datum.row.after,'.1f')+'%'}"
+              }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "from": {
+            "data": "glyphs"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "field": "x"
+              },
+              "y": {
+                "signal": "datum.y - datum.severe*unit - 4"
+              },
+              "text": {
+                "signal": "format(datum.severe,'.1f')+'%'"
+              },
+              "align": {
+                "value": "center"
+              },
+              "baseline": {
+                "value": "bottom"
+              },
+              "fontSize": {
+                "value": 12
+              },
+              "fill": {
+                "value": "#000000"
+              }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "from": {
+            "data": "glyphs"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "field": "x"
+              },
+              "y": {
+                "signal": "datum.y + 4"
+              },
+              "text": {
+                "field": "state"
+              },
+              "align": {
+                "value": "center"
+              },
+              "baseline": {
+                "value": "top"
+              },
+              "fontSize": {
+                "value": 12
+              },
+              "fontWeight": {
+                "value": 600
+              },
+              "fill": {
+                "value": "#000000"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 6
+          },
+          "y": {
+            "signal": "height - 26 - 30*unit"
+          },
+          "text": {
+            "value": "Bar height"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fill": {
+            "value": "#585858"
+          }
         }
       }
     },
     {
-      "data": {
-        "values": [
-          {
-            "state": "NSW",
-            "lon": 146.8,
-            "lat": -31.9,
-            "outside": false
-          },
-          {
-            "state": "Vic",
-            "lon": 139.2,
-            "lat": -43.4,
-            "ax": 143.6,
-            "ay": -37.4,
-            "outside": true
-          },
-          {
-            "state": "Qld",
-            "lon": 144.6,
-            "lat": -22.6,
-            "outside": false
-          },
-          {
-            "state": "SA",
-            "lon": 135.2,
-            "lat": -30.2,
-            "outside": false
-          },
-          {
-            "state": "WA",
-            "lon": 122.2,
-            "lat": -26,
-            "outside": false
-          },
-          {
-            "state": "Tas",
-            "lon": 151.5,
-            "lat": -42.6,
-            "ax": 146.7,
-            "ay": -42,
-            "outside": true
-          },
-          {
-            "state": "NT",
-            "lon": 133.4,
-            "lat": -19.6,
-            "outside": false
-          },
-          {
-            "state": "ACT",
-            "lon": 154,
-            "lat": -36.6,
-            "ax": 149.1,
-            "ay": -35.45,
-            "outside": true
-          }
-        ]
+      "type": "rect",
+      "from": {
+        "data": "key"
       },
-      "transform": [
-        {
-          "lookup": "state",
-          "from": {
-            "data": {
-              "url": "data/cra.json"
-            },
-            "key": "state",
-            "fields": [
-              "severe"
-            ]
-          }
-        },
-        {
-          "calculate": "format(datum.severe,'.1f')+'%'",
-          "as": "label"
-        }
-      ],
-      "mark": {
-        "type": "text",
-        "dy": 8,
-        "fontSize": 14,
-        "align": {
-          "expr": "datum.outside?'left':'center'"
-        },
-        "dx": {
-          "expr": "datum.outside?6:0"
-        }
-      },
-      "encoding": {
-        "longitude": {
-          "field": "lon",
-          "type": "quantitative"
-        },
-        "latitude": {
-          "field": "lat",
-          "type": "quantitative"
-        },
-        "text": {
-          "field": "label",
-          "type": "nominal"
-        },
-        "color": {
-          "condition": {
-            "test": "datum.severe>21.6 && !datum.outside",
-            "value": "#ffffff"
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "6 + (datum.v/10-1)*30"
           },
-          "value": "#000000"
+          "width": {
+            "value": 12
+          },
+          "y": {
+            "signal": "height - 14 - datum.v*unit"
+          },
+          "y2": {
+            "signal": "height - 14"
+          },
+          "fill": {
+            "value": "#6f3473"
+          },
+          "opacity": {
+            "value": 0.75
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "key"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "12 + (datum.v/10-1)*30"
+          },
+          "y": {
+            "signal": "height - 2"
+          },
+          "text": {
+            "signal": "datum.v+'%'"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fill": {
+            "value": "#585858"
+          }
         }
       }
     }
   ],
   "config": {
-    "font": "Public Sans",
-    "background": "#ffffff",
-    "view": {
-      "stroke": null
-    },
-    "axis": {
-      "labelFontSize": 13,
-      "titleFontSize": 13,
-      "titleFontWeight": 400,
-      "labelColor": "#585858",
-      "titleColor": "#585858",
-      "domain": false,
-      "tickColor": "#c8c8c8",
-      "gridColor": "#e9e9e9",
-      "labelPadding": 7,
-      "titlePadding": 13
-    },
-    "legend": {
-      "labelFontSize": 13,
-      "titleFontSize": 13,
-      "titleFontWeight": 400,
-      "labelColor": "#585858",
-      "titleColor": "#585858",
-      "padding": 8
-    },
-    "title": {
-      "font": "Public Sans",
-      "fontSize": 14,
-      "fontWeight": 600,
-      "color": "#1d1d1d",
-      "anchor": "start"
-    }
+    "font": "Public Sans"
   },
-  "description": "Darker states have a larger share of assistance recipients paying over half their income in rent, after assistance. Small states are labelled offshore."
+  "description": "Each bar shows the share of assistance recipients paying over half their income in rent, after assistance. Zoom with the buttons, ctrl + scroll or double-click; drag to move the map."
 }
