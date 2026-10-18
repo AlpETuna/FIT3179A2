@@ -2,8 +2,8 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "vconcat": [
     {
-      "width": 660,
-      "height": 450,
+      "width": 1100,
+      "height": 640,
       "projection": {
         "type": "albers",
         "rotate": [
@@ -11,18 +11,38 @@
           0,
           0
         ],
-        "center": [
-          0,
-          -28
-        ],
         "parallels": [
           -18,
           -36
         ],
-        "scale": 653.4,
-        "translate": [
-          330,
-          225
+        "fit": {
+          "type": "Feature",
+          "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [
+              [
+                112.9,
+                -10.4
+              ],
+              [
+                153.7,
+                -10.4
+              ],
+              [
+                153.7,
+                -43.7
+              ],
+              [
+                112.9,
+                -43.7
+              ]
+            ]
+          },
+          "properties": {}
+        },
+        "center": [
+          0,
+          -28
         ]
       },
       "layer": [
@@ -163,25 +183,251 @@
             "strokeWidth": 1.8,
             "clip": true
           }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "lon": 129.0,
+                "lat": -41,
+                "lon2": 134.9514
+              }
+            ]
+          },
+          "mark": {
+            "type": "rule",
+            "strokeWidth": 2,
+            "color": "#1d1d1d"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            },
+            "longitude2": {
+              "field": "lon2"
+            },
+            "latitude2": {
+              "field": "lat"
+            }
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "lon": 131.9757,
+                "lat": -41,
+                "label": "500 km"
+              }
+            ]
+          },
+          "mark": {
+            "type": "text",
+            "fontSize": 11,
+            "dy": -8,
+            "stroke": "#ffffff",
+            "strokeWidth": 3,
+            "strokeJoin": "round"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label"
+            }
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "lon": 131.9757,
+                "lat": -41,
+                "label": "500 km"
+              }
+            ]
+          },
+          "mark": {
+            "type": "text",
+            "fontSize": 11,
+            "dy": -8,
+            "color": "#1d1d1d"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label"
+            }
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "lon": 135.6,
+                "lat": -12.9
+              }
+            ]
+          },
+          "mark": {
+            "type": "circle",
+            "size": 70,
+            "filled": false,
+            "stroke": "#1d1d1d",
+            "strokeWidth": 1.5
+          },
+          "encoding": {
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            }
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "lon": 136.4,
+                "lat": -11.4,
+                "label": [
+                  "Arnhem Land, NT: $80,",
+                  "the cheapest regions"
+                ]
+              }
+            ]
+          },
+          "encoding": {
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label"
+            }
+          },
+          "mark": {
+            "type": "text",
+            "fontSize": 12,
+            "fontWeight": 600,
+            "align": "left",
+            "dx": 0,
+            "baseline": "middle",
+            "lineHeight": 15,
+            "stroke": "#ffffff",
+            "strokeWidth": 4,
+            "strokeJoin": "round"
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "lon": 136.4,
+                "lat": -11.4,
+                "label": [
+                  "Arnhem Land, NT: $80,",
+                  "the cheapest regions"
+                ]
+              }
+            ]
+          },
+          "encoding": {
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label"
+            }
+          },
+          "mark": {
+            "type": "text",
+            "fontSize": 12,
+            "fontWeight": 600,
+            "align": "left",
+            "dx": 0,
+            "baseline": "middle",
+            "lineHeight": 15,
+            "color": "#1d1d1d"
+          }
         }
       ]
     },
     {
       "hconcat": [
         {
-          "width": 360,
-          "height": 340,
+          "width": 353,
+          "height": 335,
           "projection": {
-            "type": "mercator",
+            "type": "albers",
+            "rotate": [
+              -151.05,
+              0,
+              0
+            ],
             "center": [
-              151.05,
+              0,
               -33.84
             ],
-            "scale": 28000,
-            "translate": [
-              180,
-              170
-            ]
+            "parallels": [
+              -18,
+              -36
+            ],
+            "fit": {
+              "type": "Feature",
+              "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                  [
+                    150.682,
+                    -34.128
+                  ],
+                  [
+                    151.418,
+                    -34.128
+                  ],
+                  [
+                    151.418,
+                    -33.551
+                  ],
+                  [
+                    150.682,
+                    -33.551
+                  ]
+                ]
+              },
+              "properties": {}
+            }
           },
           "layer": [
             {
@@ -320,25 +566,251 @@
                 "stroke": "#1d1d1d",
                 "strokeWidth": 1.8,
                 "clip": true
+              }
+            },
+            {
+              "data": {
+                "values": [
+                  {
+                    "lon": 150.72,
+                    "lat": -34.09,
+                    "lon2": 150.8285
+                  }
+                ]
+              },
+              "mark": {
+                "type": "rule",
+                "strokeWidth": 2,
+                "color": "#1d1d1d"
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "lon",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "lat",
+                  "type": "quantitative"
+                },
+                "longitude2": {
+                  "field": "lon2"
+                },
+                "latitude2": {
+                  "field": "lat"
+                }
+              }
+            },
+            {
+              "data": {
+                "values": [
+                  {
+                    "lon": 150.7742,
+                    "lat": -34.09,
+                    "label": "10 km"
+                  }
+                ]
+              },
+              "mark": {
+                "type": "text",
+                "fontSize": 11,
+                "dy": -8,
+                "stroke": "#ffffff",
+                "strokeWidth": 3,
+                "strokeJoin": "round"
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "lon",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "lat",
+                  "type": "quantitative"
+                },
+                "text": {
+                  "field": "label"
+                }
+              }
+            },
+            {
+              "data": {
+                "values": [
+                  {
+                    "lon": 150.7742,
+                    "lat": -34.09,
+                    "label": "10 km"
+                  }
+                ]
+              },
+              "mark": {
+                "type": "text",
+                "fontSize": 11,
+                "dy": -8,
+                "color": "#1d1d1d"
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "lon",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "lat",
+                  "type": "quantitative"
+                },
+                "text": {
+                  "field": "label"
+                }
+              }
+            },
+            {
+              "data": {
+                "values": [
+                  {
+                    "lon": 151.27,
+                    "lat": -33.79
+                  }
+                ]
+              },
+              "mark": {
+                "type": "circle",
+                "size": 70,
+                "filled": false,
+                "stroke": "#1d1d1d",
+                "strokeWidth": 1.5
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "lon",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "lat",
+                  "type": "quantitative"
+                }
+              }
+            },
+            {
+              "data": {
+                "values": [
+                  {
+                    "lon": 151.27,
+                    "lat": -33.7,
+                    "label": [
+                      "Manly: $720,",
+                      "the dearest"
+                    ]
+                  }
+                ]
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "lon",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "lat",
+                  "type": "quantitative"
+                },
+                "text": {
+                  "field": "label"
+                }
+              },
+              "mark": {
+                "type": "text",
+                "fontSize": 12,
+                "fontWeight": 600,
+                "align": "right",
+                "dx": -4,
+                "baseline": "middle",
+                "lineHeight": 15,
+                "stroke": "#ffffff",
+                "strokeWidth": 4,
+                "strokeJoin": "round"
+              }
+            },
+            {
+              "data": {
+                "values": [
+                  {
+                    "lon": 151.27,
+                    "lat": -33.7,
+                    "label": [
+                      "Manly: $720,",
+                      "the dearest"
+                    ]
+                  }
+                ]
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "lon",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "lat",
+                  "type": "quantitative"
+                },
+                "text": {
+                  "field": "label"
+                }
+              },
+              "mark": {
+                "type": "text",
+                "fontSize": 12,
+                "fontWeight": 600,
+                "align": "right",
+                "dx": -4,
+                "baseline": "middle",
+                "lineHeight": 15,
+                "color": "#1d1d1d"
               }
             }
           ],
           "title": "Sydney"
         },
         {
-          "width": 360,
-          "height": 340,
+          "width": 353,
+          "height": 335,
           "projection": {
-            "type": "mercator",
-            "center": [
-              145.05,
-              -37.84
+            "type": "albers",
+            "rotate": [
+              -145.05,
+              0,
+              0
             ],
-            "scale": 19000,
-            "translate": [
-              180,
-              170
-            ]
+            "center": [
+              0,
+              -37.839
+            ],
+            "parallels": [
+              -18,
+              -36
+            ],
+            "fit": {
+              "type": "Feature",
+              "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                  [
+                    144.507,
+                    -38.244
+                  ],
+                  [
+                    145.593,
+                    -38.244
+                  ],
+                  [
+                    145.593,
+                    -37.434
+                  ],
+                  [
+                    144.507,
+                    -37.434
+                  ]
+                ]
+              },
+              "properties": {}
+            }
           },
           "layer": [
             {
@@ -477,25 +949,148 @@
                 "stroke": "#1d1d1d",
                 "strokeWidth": 1.8,
                 "clip": true
+              }
+            },
+            {
+              "data": {
+                "values": [
+                  {
+                    "lon": 144.56,
+                    "lat": -38.12,
+                    "lon2": 144.6742
+                  }
+                ]
+              },
+              "mark": {
+                "type": "rule",
+                "strokeWidth": 2,
+                "color": "#1d1d1d"
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "lon",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "lat",
+                  "type": "quantitative"
+                },
+                "longitude2": {
+                  "field": "lon2"
+                },
+                "latitude2": {
+                  "field": "lat"
+                }
+              }
+            },
+            {
+              "data": {
+                "values": [
+                  {
+                    "lon": 144.6171,
+                    "lat": -38.12,
+                    "label": "10 km"
+                  }
+                ]
+              },
+              "mark": {
+                "type": "text",
+                "fontSize": 11,
+                "dy": -8,
+                "stroke": "#ffffff",
+                "strokeWidth": 3,
+                "strokeJoin": "round"
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "lon",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "lat",
+                  "type": "quantitative"
+                },
+                "text": {
+                  "field": "label"
+                }
+              }
+            },
+            {
+              "data": {
+                "values": [
+                  {
+                    "lon": 144.6171,
+                    "lat": -38.12,
+                    "label": "10 km"
+                  }
+                ]
+              },
+              "mark": {
+                "type": "text",
+                "fontSize": 11,
+                "dy": -8,
+                "color": "#1d1d1d"
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "lon",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "lat",
+                  "type": "quantitative"
+                },
+                "text": {
+                  "field": "label"
+                }
               }
             }
           ],
           "title": "Melbourne"
         },
         {
-          "width": 360,
-          "height": 340,
+          "width": 353,
+          "height": 335,
           "projection": {
-            "type": "mercator",
-            "center": [
-              153,
-              -27.5
+            "type": "albers",
+            "rotate": [
+              -153.0,
+              0,
+              0
             ],
-            "scale": 24000,
-            "translate": [
-              180,
-              170
-            ]
+            "center": [
+              0,
+              -27.499
+            ],
+            "parallels": [
+              -18,
+              -36
+            ],
+            "fit": {
+              "type": "Feature",
+              "geometry": {
+                "type": "MultiPoint",
+                "coordinates": [
+                  [
+                    152.57,
+                    -27.859
+                  ],
+                  [
+                    153.43,
+                    -27.859
+                  ],
+                  [
+                    153.43,
+                    -27.139
+                  ],
+                  [
+                    152.57,
+                    -27.139
+                  ]
+                ]
+              },
+              "properties": {}
+            }
           },
           "layer": [
             {
@@ -634,6 +1229,100 @@
                 "stroke": "#1d1d1d",
                 "strokeWidth": 1.8,
                 "clip": true
+              }
+            },
+            {
+              "data": {
+                "values": [
+                  {
+                    "lon": 152.64,
+                    "lat": -27.8,
+                    "lon2": 152.7416
+                  }
+                ]
+              },
+              "mark": {
+                "type": "rule",
+                "strokeWidth": 2,
+                "color": "#1d1d1d"
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "lon",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "lat",
+                  "type": "quantitative"
+                },
+                "longitude2": {
+                  "field": "lon2"
+                },
+                "latitude2": {
+                  "field": "lat"
+                }
+              }
+            },
+            {
+              "data": {
+                "values": [
+                  {
+                    "lon": 152.6908,
+                    "lat": -27.8,
+                    "label": "10 km"
+                  }
+                ]
+              },
+              "mark": {
+                "type": "text",
+                "fontSize": 11,
+                "dy": -8,
+                "stroke": "#ffffff",
+                "strokeWidth": 3,
+                "strokeJoin": "round"
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "lon",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "lat",
+                  "type": "quantitative"
+                },
+                "text": {
+                  "field": "label"
+                }
+              }
+            },
+            {
+              "data": {
+                "values": [
+                  {
+                    "lon": 152.6908,
+                    "lat": -27.8,
+                    "label": "10 km"
+                  }
+                ]
+              },
+              "mark": {
+                "type": "text",
+                "fontSize": 11,
+                "dy": -8,
+                "color": "#1d1d1d"
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "lon",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "lat",
+                  "type": "quantitative"
+                },
+                "text": {
+                  "field": "label"
+                }
               }
             }
           ],
@@ -689,5 +1378,5 @@
       "anchor": "start"
     }
   },
-  "description": "Colour shows each region’s median weekly rent, in $50 steps. Darker means higher rent; grey means no data. Outlines mark the three featured communities."
+  "description": "Darker regions have higher median weekly rents. Manly in Sydney ($720) costs nine times as much as Arnhem Land in the NT ($80). The city maps are enlarged, so use their 10 km bars to judge distance. Outlines mark the three communities in chapter 3."
 }

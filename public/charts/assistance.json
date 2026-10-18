@@ -1,11 +1,69 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "width": 520,
+  "description": "Each pair is the same recipients in March 2026: grey leaves rent assistance out, purple counts it. Rental stress means paying more than 30% of income in rent.",
+  "width": "container",
   "height": 320,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
   "data": {
     "url": "data/cra.json"
   },
   "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "rate": 75.1,
+            "label": "Australia 75%"
+          },
+          {
+            "rate": 44.0,
+            "label": "Australia 44%"
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "rule",
+            "strokeDash": [
+              3,
+              3
+            ],
+            "color": "#9a9a9a"
+          },
+          "encoding": {
+            "x": {
+              "field": "rate",
+              "type": "quantitative"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 11,
+            "color": "#585858",
+            "y": 0,
+            "dy": -8,
+            "dx": 4,
+            "align": "left",
+            "baseline": "bottom"
+          },
+          "encoding": {
+            "x": {
+              "field": "rate",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label"
+            }
+          }
+        }
+      ]
+    },
     {
       "mark": {
         "type": "rule",
@@ -31,7 +89,7 @@
         "x": {
           "field": "after",
           "type": "quantitative",
-          "title": "Recipients in rental stress (%)",
+          "title": "Share of rent-assistance recipients paying over 30% of income in rent",
           "scale": {
             "domain": [
               0,
@@ -45,7 +103,8 @@
               50,
               75,
               100
-            ]
+            ],
+            "labelExpr": "datum.value + '%'"
           }
         },
         "x2": {
@@ -170,6 +229,52 @@
           }
         ]
       }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "state": "ACT",
+            "after": 51.5,
+            "label": "ACT: still one in two"
+          },
+          {
+            "state": "Tas",
+            "after": 32.9,
+            "label": "Tas: one in three"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11.5,
+        "color": "#1d1d1d",
+        "align": "right",
+        "dx": -12
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": [
+            "NSW",
+            "Vic",
+            "Qld",
+            "SA",
+            "WA",
+            "Tas",
+            "NT",
+            "ACT"
+          ]
+        },
+        "x": {
+          "field": "after",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
     }
   ],
   "config": {
@@ -205,6 +310,5 @@
       "color": "#1d1d1d",
       "anchor": "start"
     }
-  },
-  "description": "Each pair describes the same recipients in March 2026. “Without” is a calculation that leaves assistance out, not an earlier observation or a controlled policy experiment. Rental stress means rent exceeds 30% of gross income."
+  }
 }

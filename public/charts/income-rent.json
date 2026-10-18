@@ -1,7 +1,12 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "width": 520,
+  "description": "Each dot is a region; dashed lines mark the Australian medians. Melbourne City renters pay above-median rent on below-median incomes.",
+  "width": "container",
   "height": 320,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
   "params": [
     {
       "name": "featured",
@@ -71,20 +76,46 @@
           }
         ]
       },
-      "mark": {
-        "type": "rule",
-        "strokeDash": [
-          4,
-          4
-        ],
-        "color": "#777"
-      },
-      "encoding": {
-        "x": {
-          "field": "income",
-          "type": "quantitative"
+      "layer": [
+        {
+          "mark": {
+            "type": "rule",
+            "strokeDash": [
+              4,
+              4
+            ],
+            "color": "#777"
+          },
+          "encoding": {
+            "x": {
+              "field": "income",
+              "type": "quantitative"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 11,
+            "color": "#585858",
+            "align": "right",
+            "angle": 270,
+            "baseline": "bottom",
+            "dx": 4,
+            "dy": -4,
+            "y": 0
+          },
+          "encoding": {
+            "x": {
+              "field": "income",
+              "type": "quantitative"
+            },
+            "text": {
+              "value": "Australia $1,746"
+            }
+          }
         }
-      }
+      ]
     },
     {
       "data": {
@@ -94,18 +125,88 @@
           }
         ]
       },
+      "layer": [
+        {
+          "mark": {
+            "type": "rule",
+            "strokeDash": [
+              4,
+              4
+            ],
+            "color": "#777"
+          },
+          "encoding": {
+            "y": {
+              "field": "rent",
+              "type": "quantitative"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 11,
+            "color": "#585858",
+            "align": "right",
+            "x": "width",
+            "baseline": "bottom",
+            "dy": -4
+          },
+          "encoding": {
+            "y": {
+              "field": "rent",
+              "type": "quantitative"
+            },
+            "text": {
+              "value": "Australia $375"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "income": 3272,
+            "rent": 720,
+            "label": [
+              "Manly: highest rent",
+              "$720 a week"
+            ],
+            "align": "right"
+          },
+          {
+            "income": 3114,
+            "rent": 220,
+            "label": [
+              "West Pilbara: mining wages,",
+              "company housing, low rent"
+            ],
+            "align": "right"
+          }
+        ]
+      },
       "mark": {
-        "type": "rule",
-        "strokeDash": [
-          4,
-          4
-        ],
-        "color": "#777"
+        "type": "text",
+        "fontSize": 11.5,
+        "color": "#1d1d1d",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -9,
+        "lineHeight": 14
       },
       "encoding": {
+        "x": {
+          "field": "income",
+          "type": "quantitative"
+        },
         "y": {
           "field": "rent",
           "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
         }
       }
     },
@@ -311,6 +412,5 @@
       "color": "#1d1d1d",
       "anchor": "start"
     }
-  },
-  "description": "One dot is one region. Dashed lines show the published Australian household medians: $1,746 income and $375 rent per week. The association does not establish causation, and dividing these regional medians would not measure rental stress."
+  }
 }

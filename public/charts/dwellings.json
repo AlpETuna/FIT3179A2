@@ -1,9 +1,15 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v6.json",
-  "width": 520,
+  "description": "Box area shows how many occupied homes of each type there were. Seven in ten Australian homes are separate houses.",
   "height": 316,
   "padding": 2,
   "autosize": "none",
+  "signals": [
+    {
+      "name": "width",
+      "init": "max(200, containerSize()[0] - 4)"
+    }
+  ],
   "data": [
     {
       "name": "tree",
@@ -85,7 +91,7 @@
         "data": "leaves"
       },
       "encode": {
-        "enter": {
+        "update": {
           "x": {
             "field": "x0"
           },
@@ -117,7 +123,7 @@
         "data": "parents"
       },
       "encode": {
-        "enter": {
+        "update": {
           "x": {
             "signal": "datum.x0 + 9"
           },
@@ -145,6 +151,5 @@
   ],
   "config": {
     "font": "Public Sans"
-  },
-  "description": "A treemap nests storey and building types inside five dwelling categories. Area represents occupied private dwellings. Tiny subtypes remain in the data table."
+  }
 }

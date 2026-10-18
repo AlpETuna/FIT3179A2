@@ -5,7 +5,7 @@ import './style.css';
 import embed from 'vega-embed';
 
 const sourceLinks={census:'https://www.abs.gov.au/census/find-census-data/datapacks',cpi:'https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia/jul-2026',aihw:'https://www.aihw.gov.au/reports/housing-assistance/cwlth-rent-assistance-in-australia-quarterly-data/contents/data'};
-const sourceNames={census:'ABS · Census 2021',cpi:'ABS · April 2024–July 2026',aihw:'AIHW / DSS · March 2026'};
+const sourceNames={census:'ABS · Census 2021',cpi:'ABS · Consumer prices, 2024–26',aihw:'AIHW · Rent assistance, March 2026'};
 const colours=['#158374','#2b6399','#8f4715','#9e9e9e','#dedede'];
 const $=s=>document.querySelector(s);
 const $$=s=>[...document.querySelectorAll(s)];
@@ -20,9 +20,9 @@ let selected='all';
 let manifest=[];
 let resizeTimer;
 let renderQueue=Promise.resolve();
-const headers={tenure:'Tenure',count:'Homes',share:'Share of homes',name:'Region / category',state:'State / territory',households:'Occupied homes',renting:'Rented homes',rentalShare:'Share renting',apartmentShare:'Share apartments',rent:'Median rent / week',income:'Median income / week',mortgage:'Median mortgage / month',mortgageWeekly:'Mortgage / week equivalent',dwelling:'Dwelling',household:'Household composition',before:'Without assistance (%)',after:'With assistance (%)',severe:'Over 50% after assistance (%)',payment:'Payment group',rate:'In stress after assistance (%)',date:'Month',series:'Price series',index:'April 2024 = 100',sourceIndex:'Published index',category:'Dwelling category',kind:'Community setting'};
-const columns={tenure:['tenure','count','share'],dwellings:['category','name','count'],mosaic:['dwelling','tenure','count'],households:['household','dwelling','count'],sa3:['name','state','rent','income','apartmentShare','mortgageWeekly'],sa4:['name','state','renting','rentalShare'],cra:['state','before','after','severe'],heatmap:['state','payment','rate'],cpi:['date','series','index'],cases:['name','kind','rent','income','apartmentShare','mortgageWeekly']};
-function cell(key,value){if(value===null||value===undefined)return 'Not available';if(['share','rentalShare','apartmentShare'].includes(key))return pct(value*100);if(['rent','income','mortgage','mortgageWeekly'].includes(key))return money(value);return typeof value==='number'?number(value):esc(value);}
+const headers={tenure:'Tenure',count:'Homes',share:'Share of homes',name:'Region / category',state:'State / territory',households:'Occupied homes',renting:'Rented homes',rentalShare:'Share renting',apartmentShare:'Share apartments',rent:'Median rent / week',income:'Median income / week',mortgage:'Median mortgage / month',mortgageWeekly:'Mortgage / week equivalent',dwelling:'Dwelling',household:'Household composition',before:'Without assistance (%)',after:'With assistance (%)',severe:'Over 50% after assistance (%)',payment:'Payment group',rate:'In stress after assistance (%)',date:'Month',series:'Price series',index:'Change since April 2024 (%)',recipients:'All recipients',severeCount:'Paying over half their income',sourceIndex:'Published index',category:'Dwelling category',kind:'Community setting'};
+const columns={tenure:['tenure','count','share'],dwellings:['category','name','count'],mosaic:['dwelling','tenure','count'],households:['household','dwelling','count'],sa3:['name','state','rent','income','apartmentShare','mortgageWeekly'],sa4:['name','state','renting','rentalShare'],cra:['state','recipients','before','after','severe','severeCount'],heatmap:['state','payment','rate'],cpi:['date','series','index'],cases:['name','kind','rent','income','apartmentShare','mortgageWeekly']};
+function cell(key,value){if(value===null||value===undefined)return 'Not available';if(['share','rentalShare','apartmentShare'].includes(key))return pct(value*100);if(['rent','income','mortgage','mortgageWeekly'].includes(key))return money(value);if(key==='index')return number(value-100);return typeof value==='number'?number(value):esc(value);}
 function tableHTML(rows,keys,caption){return `<div class="table-wrap" tabindex="0" role="region" aria-label="${esc(caption)}"><table><caption>${esc(caption)}</caption><thead><tr>${keys.map(k=>`<th scope="col">${esc(headers[k]||k)}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${keys.map((k,i)=>i===0?`<th scope="row">${cell(k,r[k])}</th>`:`<td>${cell(k,r[k])}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;}
 
 const houseIcon='<svg class="dwelling-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m2 11 10-8 10 8M5 9v12h14V9M10 21v-7h4v7"/></svg>';
@@ -62,60 +62,20 @@ async function makeFigure(meta,index){
  const key=await legend(meta.id);
  // The waffle is square, so its key sits beside it to fill the column.
  const body=meta.id==='tenure'?`<div class="chart-with-key">${chart}${key}</div>`:meta.zoom?zoomControls(meta)+chart+key:chart+key;
- slot.innerHTML=`<figure class="figure" aria-labelledby="title-${meta.id}" aria-describedby="desc-${meta.id}"><div class="figure-label"><span>Figure ${String(index+1).padStart(2,'0')}</span><span>${sourceNames[meta.source]}</span></div><h3 id="title-${meta.id}">${esc(meta.title)}</h3>${body}<figcaption><p class="figure-description" id="desc-${meta.id}">${esc(meta.description)}</p><p class="figure-source">Source: <a href="${sourceLinks[meta.source]}">${sourceNames[meta.source]}</a> · ${esc(meta.tables)}</p></figcaption><details class="figure-tools"><summary>Read the data &amp; chart specification</summary>${tableHTML(displayRows,columns[meta.data],`${meta.title} — source values`)}<div class="downloads"><a href="data/${meta.data}.json" download>Download data</a><a href="charts/${meta.id}.json">Readable chart JSON</a></div></details></figure>`;
+ slot.innerHTML=`<figure class="figure" aria-labelledby="title-${meta.id}" aria-describedby="desc-${meta.id}"><div class="figure-label"><span>Figure ${String(index+1).padStart(2,'0')}</span><span>${sourceNames[meta.source]}</span></div><h3 id="title-${meta.id}">${esc(meta.title)}</h3>${body}<figcaption><p class="figure-description" id="desc-${meta.id}">${esc(meta.description)}</p><p class="figure-source">Source: <a href="${sourceLinks[meta.source]}">${sourceNames[meta.source]}</a></p></figcaption><details class="figure-tools"><summary>Read the data &amp; chart specification</summary>${tableHTML(displayRows,columns[meta.data],`${meta.title} — source values`)}<div class="downloads"><a href="data/${meta.data}.json" download>Download data</a><a href="charts/${meta.id}.json">Readable chart JSON</a></div></details></figure>`;
 }
 
+// Every spec sizes itself to its container, except the choropleth: Vega-Lite
+// cannot fit concatenated views to a container, so its view sizes are set here
+// (the fitted projections rescale themselves) and the city maps stack on phones.
 function fitSpec(original,meta,width){
+ if(!meta.map)return original;
  const spec=structuredClone(original);
- const mobile=width<500;
- if(meta.map){
-   const main=spec.vconcat[0];const insets=spec.vconcat[1].hconcat;
-   main.width=width;main.height=Math.round(width*.62);
-   main.projection.scale=width*.99;main.projection.center=[0,-28];main.projection.translate=[width/2,main.height/2];
-   const insetW=width<650?width:(width-40)/3;
-   for(const inset of insets){inset.width=insetW;inset.height=Math.round(insetW*(width<650?.8:.95));inset.projection.scale*=insetW/360;inset.projection.translate=[insetW/2,inset.height/2];}
-   const shared={spacing:20,resolve:spec.vconcat[1].resolve};
-   spec.vconcat=[main,width<650?{vconcat:insets,...shared}:{hconcat:insets,...shared}];
-   return spec;
- }
- if(meta.engine==='vega'){
-   const pads=typeof spec.padding==='object'?spec.padding:{left:2,right:2};
-   spec.width=Math.max(200,width-(pads.left||0)-(pads.right||0));
-   // Keep the zoomable map's aspect on narrow screens instead of leaving empty space.
-   if(meta.zoom)spec.height=Math.min(spec.height,Math.round(spec.width*.8));
-   if(meta.id==='profiles'&&mobile){
-     spec.height=300;
-     // Plain two-line titles preserve meaningful axis labels on a phone.
-     spec.data.find(d=>d.name==='axes').values.forEach(d=>d.label=({income:['Income','/ week'],rent:['Rent','/ week'],mortgageWeekly:['Mortgage','/ week'],apartmentShare:['Apartments']})[d.field]);
-     spec.padding.top=45;spec.padding.left=44;
-     const axisTitles=spec.marks.find(m=>m.type==='text'&&m.encode.enter.text.field==='label');
-     axisTitles.encode.enter.y.value=-30;axisTitles.encode.enter.fontSize.value=12;
-     spec.data.find(d=>d.name==='ticks').values.forEach(d=>d.text=d.text.replace(',000','k'));
-     spec.marks.find(m=>m.type==='text'&&m.from.data==='ticks').encode.enter.fontSize.value=11;
-   }
-   return spec;
- }
- spec.width=meta.id==='tenure'?Math.min(spec.height,width):width;
- spec.autosize={type:'fit',contains:'padding'};
- if(meta.id==='payment-stress'&&mobile){
-   // Transpose the same heatmap on small screens; keep all 48 cells.
-   spec.height=540;
-   for(const layer of spec.layer){
-     const enc=layer.encoding;[enc.x,enc.y]=[enc.y,enc.x];
-     enc.x.sort=['NSW','Vic','Qld','SA','WA','Tas','NT','ACT'];
-     enc.y.sort=['Age pension','Disability support','Carer','Single parent','JobSeeker','Student / apprentice'];
-     enc.x.axis={orient:'top',labelAngle:0,labelFontSize:12};
-     enc.y.axis={labelAngle:0,labelLimit:90,labelFontSize:12,labelLineHeight:14,labelExpr:"datum.label==='Disability support'?['Disability','support']:datum.label==='Student / apprentice'?['Student /','apprentice']:datum.label==='Single parent'?['Single','parent']:datum.label"};
-   }
-   spec.layer[0].encoding.color.legend={orient:'bottom',gradientLength:180,title:'Rental stress after assistance (%)',titleLimit:280};
-   spec.layer[1].mark.fontSize=12;
- }
- if(meta.id==='income-rent'&&mobile){
-   for(const layer of spec.layer.slice(-2)){
-     layer.transform.push({calculate:"datum.code==='20604'?'City':datum.code==='21203'?'Outer suburb':'Bendigo'",as:'shortName'});
-     layer.encoding.text.field='shortName';layer.mark.fontSize=12;
-   }
- }
+ const [main,{hconcat:insets,...row}]=spec.vconcat;
+ main.width=width;main.height=Math.round(width*main.height/1100);
+ const narrow=width<650,insetW=narrow?width:Math.floor((width-2*row.spacing)/3);
+ for(const inset of insets){inset.width=insetW;inset.height=Math.round(insetW*(narrow?.8:.95));}
+ if(narrow)spec.vconcat[1]={vconcat:insets,...row};
  return spec;
 }
 
@@ -150,7 +110,7 @@ async function init(){
  $$('[data-stat]').forEach(node=>{const key=node.dataset.stat;node.textContent=pct(key==='rental-share'?summary.rentalShare*100:key==='cra-before'?summary.craBefore:summary.craAfter);});
  $('#case-facts').innerHTML=cases.map((d,i)=>`<div data-case-fact="${d.code}"><h3><span class="line-key ${i===1?'dashed':i===2?'dotted':''}"></span>${esc(d.name.replace(' - ',' – '))}</h3><p>${esc(d.kind)} · ${money(d.rent)} median weekly rent<br/>${pct(d.apartmentShare*100)} of homes are apartments</p></div>`).join('');
  const combined=states.map(d=>({...d,after:cra.find(r=>r.state===d.state).after}));
- $('#combined-table').innerHTML=tableHTML(combined,['state','rentalShare','after'],'Census 2021 share renting and CRA March 2026 rental stress after assistance — different populations');
+ $('#combined-table').innerHTML=tableHTML(combined,['state','rentalShare','after'],'Share of homes rented (Census 2021) and share of rent-assistance recipients in rental stress (March 2026)');
  await Promise.all(manifest.map(makeFigure));
  await document.fonts.ready;
  await enqueueRender();
@@ -160,7 +120,7 @@ async function init(){
    $$('[data-case]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
    $$('[data-case-fact]').forEach(n=>n.classList.toggle('dimmed',selected!=='all'&&n.dataset.caseFact!==selected));
    const d=cases.find(c=>c.code===selected);
-   $('#case-description').textContent=d?`${d.name.replace(' - ',' – ')}: ${d.kind.toLowerCase()}, ${money(d.rent)} median weekly rent and ${money(d.income)} median weekly household income in 2021. Highlighted below; national context remains visible.`:'Three examples, with every other region retained as context. These communities illustrate different settings; they are not a representative national sample.';
+   $('#case-description').textContent=d?`${d.name.replace(' - ',' – ')}: ${d.kind.toLowerCase()}, ${money(d.rent)} median weekly rent and ${money(d.income)} median weekly household income in 2021. Highlighted below; national context remains visible.`:'Three Victorian communities: an inner city, an outer suburb and a regional centre. Every other region stays in grey for context.';
    await Promise.all(manifest.filter(m=>m.linked).map(m=>views.get(m.id)?.signal('featured',selected).runAsync()));
  }));
  window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(enqueueRender,180);});

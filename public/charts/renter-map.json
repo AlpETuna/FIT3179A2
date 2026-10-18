@@ -1,8 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v6.json",
-  "description": "Each dot is 1,000 rented homes, placed at random inside its Census region (SA3). Dots show density, not addresses. Zoom with the place buttons, ctrl + scroll or double-click; drag to move.",
-  "width": 1000,
-  "height": 620,
+  "description": "Each dot is 1,000 rented homes, placed inside the small Census areas where those renters live. Most dots crowd into the capital cities and the coast. Zoom with the buttons, ctrl + scroll or double-click; drag to move.",
   "padding": {
     "left": 2,
     "right": 2,
@@ -11,6 +9,14 @@
   },
   "autosize": "none",
   "signals": [
+    {
+      "name": "width",
+      "init": "max(200, containerSize()[0] - 4)"
+    },
+    {
+      "name": "height",
+      "update": "min(620, round(width * 0.8))"
+    },
     {
       "name": "baseScale",
       "update": "min(width/0.75, height/0.62)*0.95"

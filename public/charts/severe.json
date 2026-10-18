@@ -1,7 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v6.json",
-  "width": 520,
-  "height": 420,
+  "description": "Circle area shows how many rent-assistance recipients pay more than half their income in rent after assistance; colour shows their share of the state’s recipients. Most live in the big eastern states, but the ACT has the highest share.",
   "padding": {
     "left": 2,
     "right": 2,
@@ -11,196 +10,25 @@
   "autosize": "none",
   "signals": [
     {
+      "name": "width",
+      "init": "max(200, containerSize()[0] - 4)"
+    },
+    {
+      "name": "mapHeight",
+      "update": "min(420, round(width * 0.8))"
+    },
+    {
+      "name": "height",
+      "update": "mapHeight + 118"
+    },
+    {
       "name": "baseScale",
-      "update": "min(width/0.75, height/0.62)*0.95"
+      "update": "min(width / 0.75, mapHeight / 0.62) * 0.95"
     },
     {
-      "name": "unit",
-      "update": "baseScale/350"
-    },
-    {
-      "name": "zoomCommand",
-      "value": null
-    },
-    {
-      "name": "anchor",
-      "value": [
-        0,
-        0
-      ],
-      "on": [
-        {
-          "events": {
-            "type": "wheel",
-            "filter": [
-              "event.ctrlKey || event.metaKey"
-            ]
-          },
-          "update": "xy()"
-        },
-        {
-          "events": "dblclick",
-          "update": "xy()"
-        },
-        {
-          "events": {
-            "signal": "zoomCommand"
-          },
-          "update": "[width/2, height/2]"
-        }
-      ]
-    },
-    {
-      "name": "step",
-      "value": 1,
-      "on": [
-        {
-          "events": {
-            "type": "wheel",
-            "consume": true,
-            "filter": [
-              "event.ctrlKey || event.metaKey"
-            ]
-          },
-          "force": true,
-          "update": "pow(1.004, -event.deltaY * pow(16, event.deltaMode))"
-        },
-        {
-          "events": "dblclick",
-          "force": true,
-          "update": "2"
-        },
-        {
-          "events": {
-            "signal": "zoomCommand"
-          },
-          "force": true,
-          "update": "zoomCommand.reset ? 1/k : zoomCommand.step"
-        }
-      ]
-    },
-    {
-      "name": "factor",
-      "value": 1,
-      "on": [
-        {
-          "events": {
-            "signal": "step"
-          },
-          "force": true,
-          "update": "clamp(k * step, 1, 8) / k"
-        }
-      ]
-    },
-    {
-      "name": "k",
-      "value": 1,
-      "on": [
-        {
-          "events": {
-            "signal": "factor"
-          },
-          "update": "k * factor"
-        }
-      ]
-    },
-    {
-      "name": "down",
-      "value": null,
-      "on": [
-        {
-          "events": "mousedown",
-          "update": "xy()"
-        },
-        {
-          "events": {
-            "type": "touchstart",
-            "filter": "k > 1"
-          },
-          "update": "xy()"
-        },
-        {
-          "events": "window:mouseup, touchend",
-          "update": "null"
-        }
-      ]
-    },
-    {
-      "name": "offsetAtDown",
-      "value": [
-        0,
-        0
-      ],
-      "on": [
-        {
-          "events": "mousedown",
-          "update": "offset"
-        },
-        {
-          "events": {
-            "type": "touchstart",
-            "filter": "k > 1"
-          },
-          "update": "offset"
-        }
-      ]
-    },
-    {
-      "name": "drag",
-      "value": null,
-      "on": [
-        {
-          "events": "[mousedown, window:mouseup] > window:mousemove!",
-          "update": "down ? [x()-down[0], y()-down[1]] : null"
-        },
-        {
-          "events": {
-            "type": "touchmove",
-            "consume": true,
-            "filter": "k > 1"
-          },
-          "update": "down ? [x()-down[0], y()-down[1]] : null"
-        }
-      ]
-    },
-    {
-      "name": "limit",
-      "update": "[(k-1)*width/2 + 40, (k-1)*height/2 + 40]"
-    },
-    {
-      "name": "offset",
-      "value": [
-        0,
-        0
-      ],
-      "on": [
-        {
-          "events": {
-            "signal": "factor"
-          },
-          "update": "factor===1 && k===1 ? [0,0] : [clamp((anchor[0]-width/2) - factor*((anchor[0]-width/2) - offset[0]), -limit[0], limit[0]), clamp((anchor[1]-height/2) - factor*((anchor[1]-height/2) - offset[1]), -limit[1], limit[1])]"
-        },
-        {
-          "events": {
-            "signal": "drag"
-          },
-          "update": "drag ? [clamp(offsetAtDown[0]+drag[0], -limit[0], limit[0]), clamp(offsetAtDown[1]+drag[1], -limit[1], limit[1])] : offset"
-        }
-      ]
-    },
-    {
-      "name": "cursor",
-      "value": "grab",
-      "on": [
-        {
-          "events": "mousedown",
-          "update": "'grabbing'"
-        },
-        {
-          "events": "window:mouseup",
-          "update": "'grab'"
-        }
-      ]
+      "name": "maxRadius",
+      "update": "min(width, mapHeight * 1.25) * 0.08",
+      "description": "Radius of a circle for 100,000 people."
     }
   ],
   "projections": [
@@ -221,14 +49,14 @@
         -36
       ],
       "scale": {
-        "signal": "baseScale*k"
+        "signal": "baseScale"
       },
       "translate": [
         {
-          "signal": "width/2 + offset[0]"
+          "signal": "width / 2"
         },
         {
-          "signal": "height/2 + offset[1]"
+          "signal": "mapHeight / 2"
         }
       ]
     }
@@ -254,7 +82,8 @@
       ]
     },
     {
-      "name": "glyphs",
+      "name": "symbols",
+      "description": "Where each state’s circle sits. The ACT circle is moved out to sea, with a leader line to Canberra.",
       "values": [
         {
           "state": "NSW",
@@ -294,7 +123,7 @@
         {
           "state": "Tas",
           "lon": 146.6,
-          "lat": -44,
+          "lat": -41.9,
           "ax": null,
           "ay": null
         },
@@ -327,8 +156,8 @@
         },
         {
           "type": "formula",
-          "expr": "datum.row.severe",
-          "as": "severe"
+          "expr": "sqrt(datum.row.severeCount / 100000) * maxRadius",
+          "as": "r"
         },
         {
           "type": "geopoint",
@@ -353,21 +182,90 @@
             "axp",
             "ayp"
           ]
+        },
+        {
+          "type": "formula",
+          "expr": "datum.r >= 18",
+          "as": "inside"
         }
       ]
     },
     {
-      "name": "key",
+      "name": "sizeKey",
       "values": [
         {
-          "v": 10
+          "v": 10000,
+          "label": "10,000"
         },
         {
-          "v": 20
+          "v": 50000,
+          "label": "50,000"
         },
         {
-          "v": 30
+          "v": 100000,
+          "label": "100,000 people"
         }
+      ],
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "sqrt(datum.v / 100000) * maxRadius",
+          "as": "r"
+        }
+      ]
+    },
+    {
+      "name": "colourKey",
+      "values": [
+        {
+          "i": 0,
+          "label": "Under 15%"
+        },
+        {
+          "i": 1,
+          "label": "15–20%"
+        },
+        {
+          "i": 2,
+          "label": "20–25%"
+        },
+        {
+          "i": 3,
+          "label": "25% or more"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "colour",
+      "type": "threshold",
+      "domain": [
+        15,
+        20,
+        25
+      ],
+      "range": [
+        "#e3d3e5",
+        "#a06aa5",
+        "#7a4180",
+        "#4f1f55"
+      ]
+    },
+    {
+      "name": "swatch",
+      "type": "ordinal",
+      "domain": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "range": [
+        "#e3d3e5",
+        "#a06aa5",
+        "#7a4180",
+        "#4f1f55"
       ]
     }
   ],
@@ -380,16 +278,10 @@
             "signal": "width"
           },
           "height": {
-            "signal": "height"
-          },
-          "clip": {
-            "value": true
+            "signal": "mapHeight"
           },
           "fill": {
             "value": "#ffffff"
-          },
-          "cursor": {
-            "signal": "cursor"
           }
         }
       },
@@ -402,16 +294,13 @@
           "encode": {
             "update": {
               "fill": {
-                "value": "#e6e3e7"
+                "value": "#ebe9e5"
               },
               "stroke": {
                 "value": "#ffffff"
               },
               "strokeWidth": {
                 "value": 1.2
-              },
-              "tooltip": {
-                "signal": "{'State / territory':datum.state}"
               }
             }
           },
@@ -425,21 +314,21 @@
         {
           "type": "rule",
           "from": {
-            "data": "glyphs"
+            "data": "symbols"
           },
           "encode": {
             "update": {
               "x": {
-                "signal": "datum.ax===null ? datum.x : datum.axp"
+                "field": "axp"
               },
               "y": {
-                "signal": "datum.ax===null ? datum.y : datum.ayp"
+                "field": "ayp"
               },
               "x2": {
-                "signal": "datum.x - 8"
+                "field": "x"
               },
               "y2": {
-                "signal": "datum.y"
+                "field": "y"
               },
               "stroke": {
                 "value": "#1d1d1d"
@@ -448,60 +337,42 @@
                 "value": 0.8
               },
               "opacity": {
-                "signal": "datum.ax===null ? 0 : 1"
+                "signal": "datum.ax === null ? 0 : 1"
               }
             }
           }
         },
         {
-          "type": "rule",
+          "type": "symbol",
           "from": {
-            "data": "glyphs"
+            "data": "symbols"
           },
           "encode": {
             "update": {
               "x": {
-                "signal": "datum.x - 12"
-              },
-              "x2": {
-                "signal": "datum.x + 12"
+                "field": "x"
               },
               "y": {
                 "field": "y"
+              },
+              "shape": {
+                "value": "circle"
+              },
+              "size": {
+                "signal": "pow(2 * datum.r, 2)"
+              },
+              "fill": {
+                "scale": "colour",
+                "signal": "datum.row.severe"
               },
               "stroke": {
-                "value": "#1d1d1d"
+                "value": "#ffffff"
               },
               "strokeWidth": {
-                "value": 1
-              }
-            }
-          }
-        },
-        {
-          "type": "rect",
-          "from": {
-            "data": "glyphs"
-          },
-          "encode": {
-            "update": {
-              "x": {
-                "signal": "datum.x - 8"
-              },
-              "width": {
-                "value": 16
-              },
-              "y": {
-                "signal": "datum.y - datum.severe*unit"
-              },
-              "y2": {
-                "field": "y"
-              },
-              "fill": {
-                "value": "#6f3473"
+                "value": 1.5
               },
               "tooltip": {
-                "signal": "{'State / territory':datum.state,'Over 50% of income on rent, after assistance':format(datum.severe,'.1f')+'%','Rental stress after assistance':format(datum.row.after,'.1f')+'%'}"
+                "signal": "{'State / territory': datum.state, 'Paying over half their income in rent': format(datum.row.severeCount, ','), 'Share of recipients': format(datum.row.severe, '.1f') + '%', 'All rent-assistance recipients': format(datum.row.recipients, ',')}"
               }
             }
           }
@@ -509,64 +380,73 @@
         {
           "type": "text",
           "from": {
-            "data": "glyphs"
+            "data": "symbols"
           },
+          "interactive": false,
           "encode": {
             "update": {
               "x": {
-                "field": "x"
+                "signal": "datum.inside ? datum.x : datum.x + datum.r + 5"
               },
               "y": {
-                "signal": "datum.y - datum.severe*unit - 4"
-              },
-              "text": {
-                "signal": "format(datum.severe,'.1f')+'%'"
+                "field": "y"
               },
               "align": {
-                "value": "center"
+                "signal": "datum.inside ? 'center' : 'left'"
               },
               "baseline": {
-                "value": "bottom"
+                "value": "middle"
+              },
+              "text": {
+                "signal": "[datum.state, format(datum.row.severeCount, ','), format(datum.row.severe, '.0f') + '%']"
+              },
+              "lineHeight": {
+                "signal": "width < 450 ? 13 : 14"
               },
               "fontSize": {
-                "value": 12
+                "signal": "width < 450 ? 11 : 12"
               },
               "fill": {
-                "value": "#000000"
+                "signal": "datum.inside && datum.row.severe >= 15 ? '#ffffff' : '#1d1d1d'"
+              },
+              "dy": {
+                "signal": "width < 450 ? -13 : -14"
               }
             }
           }
         },
         {
           "type": "text",
-          "from": {
-            "data": "glyphs"
-          },
+          "interactive": false,
           "encode": {
             "update": {
               "x": {
-                "field": "x"
+                "value": 6
               },
               "y": {
-                "signal": "datum.y + 4"
-              },
-              "text": {
-                "field": "state"
-              },
-              "align": {
-                "value": "center"
+                "signal": "mapHeight - 46"
               },
               "baseline": {
                 "value": "top"
               },
+              "lineHeight": {
+                "value": 15
+              },
               "fontSize": {
-                "value": 12
+                "value": 11.5
               },
               "fontWeight": {
                 "value": 600
               },
               "fill": {
-                "value": "#000000"
+                "value": "#1d1d1d"
+              },
+              "text": {
+                "value": [
+                  "NSW: the most people paying",
+                  "over half their income.",
+                  "ACT: the highest share, 27%."
+                ]
               }
             }
           }
@@ -578,13 +458,75 @@
       "encode": {
         "update": {
           "x": {
-            "value": 6
+            "value": 4
           },
           "y": {
-            "signal": "height - 26 - 30*unit"
+            "signal": "mapHeight + 16"
           },
           "text": {
-            "value": "Bar height"
+            "value": [
+              "Circle area: people paying",
+              "over half their income"
+            ]
+          },
+          "lineHeight": {
+            "value": 14
+          },
+          "fontSize": {
+            "value": 11.5
+          },
+          "fill": {
+            "value": "#585858"
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {
+        "data": "sizeKey"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "4 + maxRadius"
+          },
+          "y": {
+            "signal": "mapHeight + 44 + 2 * maxRadius - datum.r"
+          },
+          "shape": {
+            "value": "circle"
+          },
+          "size": {
+            "signal": "pow(2 * datum.r, 2)"
+          },
+          "fill": {
+            "value": "transparent"
+          },
+          "stroke": {
+            "value": "#7a7a7a"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "sizeKey"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "8 + 2 * maxRadius"
+          },
+          "y": {
+            "signal": "mapHeight + 44 + 2 * maxRadius - 2 * datum.r"
+          },
+          "text": {
+            "field": "label"
+          },
+          "baseline": {
+            "value": "middle"
           },
           "fontSize": {
             "value": 11
@@ -596,29 +538,55 @@
       }
     },
     {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "width * (width < 450 ? 0.58 : 0.55)"
+          },
+          "y": {
+            "signal": "mapHeight + 16"
+          },
+          "text": {
+            "value": [
+              "Colour: their share of",
+              "all recipients"
+            ]
+          },
+          "lineHeight": {
+            "value": 14
+          },
+          "fontSize": {
+            "value": 11.5
+          },
+          "fill": {
+            "value": "#585858"
+          }
+        }
+      }
+    },
+    {
       "type": "rect",
       "from": {
-        "data": "key"
+        "data": "colourKey"
       },
       "encode": {
         "update": {
           "x": {
-            "signal": "6 + (datum.v/10-1)*30"
+            "signal": "width * (width < 450 ? 0.58 : 0.55)"
+          },
+          "y": {
+            "signal": "mapHeight + 40 + datum.i * 18"
           },
           "width": {
             "value": 12
           },
-          "y": {
-            "signal": "height - 14 - datum.v*unit"
-          },
-          "y2": {
-            "signal": "height - 14"
+          "height": {
+            "value": 12
           },
           "fill": {
-            "value": "#6f3473"
-          },
-          "opacity": {
-            "value": 0.75
+            "scale": "swatch",
+            "field": "i"
           }
         }
       }
@@ -626,21 +594,21 @@
     {
       "type": "text",
       "from": {
-        "data": "key"
+        "data": "colourKey"
       },
       "encode": {
         "update": {
           "x": {
-            "signal": "12 + (datum.v/10-1)*30"
+            "signal": "width * (width < 450 ? 0.58 : 0.55) + 18"
           },
           "y": {
-            "signal": "height - 2"
+            "signal": "mapHeight + 46 + datum.i * 18"
           },
           "text": {
-            "signal": "datum.v+'%'"
+            "field": "label"
           },
-          "align": {
-            "value": "center"
+          "baseline": {
+            "value": "middle"
           },
           "fontSize": {
             "value": 11
@@ -654,6 +622,5 @@
   ],
   "config": {
     "font": "Public Sans"
-  },
-  "description": "Each bar shows the share of assistance recipients paying over half their income in rent, after assistance. Zoom with the buttons, ctrl + scroll or double-click; drag to move the map."
+  }
 }

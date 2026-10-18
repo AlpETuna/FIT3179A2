@@ -1,366 +1,107 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "width": 520,
-  "height": 320,
+  "description": "Each column is a dwelling type, as wide as its share of homes; colours show how those homes are held. 63% of apartments are rented, against 21% of houses.",
+  "width": "container",
+  "height": 300,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
   "data": {
-    "values": [
-      {
-        "dwelling": "Separate house",
-        "tenure": "Owned outright",
-        "count": 2388013,
-        "x": 0,
-        "x2": 0.7234965696175988,
-        "y": 0,
-        "y2": 0.3558579669503928,
-        "within": 0.3558579669503928
-      },
-      {
-        "dwelling": "Separate house",
-        "tenure": "Mortgage",
-        "count": 2703200,
-        "x": 0,
-        "x2": 0.7234965696175988,
-        "y": 0.3558579669503928,
-        "y2": 0.7586846082878989,
-        "within": 0.40282664133750606
-      },
-      {
-        "dwelling": "Separate house",
-        "tenure": "Renting",
-        "count": 1430826,
-        "x": 0,
-        "x2": 0.7234965696175988,
-        "y": 0.7586846082878989,
-        "y2": 0.9719040637178997,
-        "within": 0.2132194554300009
-      },
-      {
-        "dwelling": "Separate house",
-        "tenure": "Other tenure",
-        "count": 98730,
-        "x": 0,
-        "x2": 0.7234965696175988,
-        "y": 0.9719040637178997,
-        "y2": 0.9866166540919942,
-        "within": 0.014712590374094397
-      },
-      {
-        "dwelling": "Separate house",
-        "tenure": "Not stated",
-        "count": 89810,
-        "x": 0,
-        "x2": 0.7234965696175988,
-        "y": 0.9866166540919942,
-        "y2": 1,
-        "within": 0.013383345908005852
-      },
-      {
-        "dwelling": "Townhouse",
-        "tenure": "Owned outright",
-        "count": 260615,
-        "x": 0.7234965696175988,
-        "x2": 0.849515239824888,
-        "y": 0,
-        "y2": 0.22296720962245764,
-        "within": 0.22296720962245764
-      },
-      {
-        "dwelling": "Townhouse",
-        "tenure": "Mortgage",
-        "count": 284759,
-        "x": 0.7234965696175988,
-        "x2": 0.849515239824888,
-        "y": 0.22296720962245764,
-        "y2": 0.46659063745616414,
-        "within": 0.2436234278337065
-      },
-      {
-        "dwelling": "Townhouse",
-        "tenure": "Renting",
-        "count": 555488,
-        "x": 0.7234965696175988,
-        "x2": 0.849515239824888,
-        "y": 0.46659063745616414,
-        "y2": 0.9418342317955527,
-        "within": 0.47524359433938856
-      },
-      {
-        "dwelling": "Townhouse",
-        "tenure": "Other tenure",
-        "count": 46562,
-        "x": 0.7234965696175988,
-        "x2": 0.849515239824888,
-        "y": 0.9418342317955527,
-        "y2": 0.9816700018565272,
-        "within": 0.03983577006097452
-      },
-      {
-        "dwelling": "Townhouse",
-        "tenure": "Not stated",
-        "count": 21425,
-        "x": 0.7234965696175988,
-        "x2": 0.849515239824888,
-        "y": 0.9816700018565272,
-        "y2": 1,
-        "within": 0.01832999814347277
-      },
-      {
-        "dwelling": "Apartment",
-        "tenure": "Owned outright",
-        "count": 195123,
-        "x": 0.849515239824888,
-        "x2": 0.99173290509482,
-        "y": 0,
-        "y2": 0.1479215342605326,
-        "within": 0.1479215342605326
-      },
-      {
-        "dwelling": "Apartment",
-        "tenure": "Mortgage",
-        "count": 246765,
-        "x": 0.849515239824888,
-        "x2": 0.99173290509482,
-        "y": 0.1479215342605326,
-        "y2": 0.3349925479380607,
-        "within": 0.18707101367752813
-      },
-      {
-        "dwelling": "Apartment",
-        "tenure": "Renting",
-        "count": 825137,
-        "x": 0.849515239824888,
-        "x2": 0.99173290509482,
-        "y": 0.3349925479380607,
-        "y2": 0.9605237821602337,
-        "within": 0.625531234222173
-      },
-      {
-        "dwelling": "Apartment",
-        "tenure": "Other tenure",
-        "count": 32288,
-        "x": 0.849515239824888,
-        "x2": 0.99173290509482,
-        "y": 0.9605237821602337,
-        "y2": 0.9850011143978689,
-        "within": 0.02447733223763511
-      },
-      {
-        "dwelling": "Apartment",
-        "tenure": "Not stated",
-        "count": 19785,
-        "x": 0.849515239824888,
-        "x2": 0.99173290509482,
-        "y": 0.9850011143978689,
-        "y2": 1,
-        "within": 0.014998885602131154
-      },
-      {
-        "dwelling": "Other dwelling",
-        "tenure": "Owned outright",
-        "count": 23695,
-        "x": 0.99173290509482,
-        "x2": 0.9976311035712958,
-        "y": 0,
-        "y2": 0.4331255598003912,
-        "within": 0.4331255598003912
-      },
-      {
-        "dwelling": "Other dwelling",
-        "tenure": "Mortgage",
-        "count": 4407,
-        "x": 0.99173290509482,
-        "x2": 0.9976311035712958,
-        "y": 0.4331255598003912,
-        "y2": 0.5136819785402233,
-        "within": 0.0805564187398322
-      },
-      {
-        "dwelling": "Other dwelling",
-        "tenure": "Renting",
-        "count": 21131,
-        "x": 0.99173290509482,
-        "x2": 0.9976311035712958,
-        "y": 0.5136819785402233,
-        "y2": 0.8999396786517264,
-        "within": 0.3862577001115031
-      },
-      {
-        "dwelling": "Other dwelling",
-        "tenure": "Other tenure",
-        "count": 2216,
-        "x": 0.99173290509482,
-        "x2": 0.9976311035712958,
-        "y": 0.8999396786517264,
-        "y2": 0.9404463779772241,
-        "within": 0.04050669932549765
-      },
-      {
-        "dwelling": "Other dwelling",
-        "tenure": "Not stated",
-        "count": 3258,
-        "x": 0.99173290509482,
-        "x2": 0.9976311035712958,
-        "y": 0.9404463779772241,
-        "y2": 1,
-        "within": 0.05955362202277588
-      },
-      {
-        "dwelling": "Not stated",
-        "tenure": "Owned outright",
-        "count": 4881,
-        "x": 0.9976311035712958,
-        "x2": 1,
-        "y": 0,
-        "y2": 0.22214636810486074,
-        "within": 0.22214636810486074
-      },
-      {
-        "dwelling": "Not stated",
-        "tenure": "Mortgage",
-        "count": 3318,
-        "x": 0.9976311035712958,
-        "x2": 1,
-        "y": 0.22214636810486074,
-        "y2": 0.3731567449481158,
-        "within": 0.15101037684325505
-      },
-      {
-        "dwelling": "Not stated",
-        "tenure": "Renting",
-        "count": 9800,
-        "x": 0.9976311035712958,
-        "x2": 1,
-        "y": 0.3731567449481158,
-        "y2": 0.8191789550336792,
-        "within": 0.4460222100855634
-      },
-      {
-        "dwelling": "Not stated",
-        "tenure": "Other tenure",
-        "count": 1718,
-        "x": 0.9976311035712958,
-        "x2": 1,
-        "y": 0.8191789550336792,
-        "y2": 0.8973693792099035,
-        "within": 0.07819042417622428
-      },
-      {
-        "dwelling": "Not stated",
-        "tenure": "Not stated",
-        "count": 2255,
-        "x": 0.9976311035712958,
-        "x2": 1,
-        "y": 0.8973693792099035,
-        "y2": 0.9999999999999999,
-        "within": 0.10263062079009648
-      }
-    ]
+    "url": "data/mosaic.json"
   },
-  "mark": {
-    "type": "rect",
-    "stroke": "#fff",
-    "strokeWidth": 1.5
-  },
-  "encoding": {
-    "x": {
-      "field": "x",
-      "type": "quantitative",
-      "title": null,
-      "axis": {
-        "values": [
-          0.3617482848087994,
-          0.7865059047212434,
-          0.920624072459854
-        ],
-        "labelAngle": -45,
-        "labelOverlap": false,
-        "labelLimit": 110,
-        "grid": false,
-        "ticks": false,
-        "labelExpr": "abs(datum.value - 0.3617482848087994) < 0.00001 ? 'Separate house' : abs(datum.value - 0.7865059047212434) < 0.00001 ? 'Townhouse' : abs(datum.value - 0.920624072459854) < 0.00001 ? 'Apartment' : ''"
-      },
-      "scale": {
-        "domain": [
-          0,
-          1
-        ],
-        "nice": false
-      }
+  "transform": [
+    {
+      "calculate": "indexof([\"Separate house\", \"Townhouse\", \"Apartment\", \"Other dwelling\", \"Not stated\"], datum.dwelling)",
+      "as": "dOrder"
     },
-    "x2": {
-      "field": "x2"
+    {
+      "calculate": "indexof([\"Owned outright\", \"Mortgage\", \"Renting\", \"Other tenure\", \"Not stated\"], datum.tenure)",
+      "as": "tOrder"
     },
-    "y": {
-      "field": "y",
-      "type": "quantitative",
-      "title": "Share within dwelling type",
-      "axis": {
-        "format": ".0%",
-        "values": [
-          0,
-          0.25,
-          0.5,
-          0.75,
-          1
-        ]
-      },
-      "scale": {
-        "domain": [
-          0,
-          1
-        ],
-        "nice": false
-      }
+    {
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "count",
+          "as": "dwellingTotal"
+        }
+      ],
+      "groupby": [
+        "dwelling"
+      ]
     },
-    "y2": {
-      "field": "y2"
+    {
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "count",
+          "as": "total"
+        }
+      ]
     },
-    "color": {
-      "field": "tenure",
-      "type": "nominal",
-      "scale": {
-        "domain": [
-          "Owned outright",
-          "Mortgage",
-          "Renting",
-          "Other tenure",
-          "Not stated"
-        ],
-        "range": [
-          "#158374",
-          "#2b6399",
-          "#8f4715",
-          "#9e9e9e",
-          "#dedede"
-        ]
-      },
-      "legend": null
+    {
+      "calculate": "datum.count / datum.dwellingTotal",
+      "as": "within"
     },
-    "tooltip": [
-      {
-        "field": "dwelling",
-        "type": "nominal",
-        "title": "Dwelling"
-      },
-      {
-        "field": "tenure",
-        "type": "nominal",
-        "title": "Tenure"
-      },
-      {
-        "field": "within",
-        "type": "quantitative",
-        "title": "Share within dwelling type",
-        "format": ".1%"
-      },
-      {
-        "field": "count",
-        "type": "quantitative",
-        "title": "Homes",
-        "format": ","
-      }
-    ]
-  },
+    {
+      "stack": "count",
+      "groupby": [
+        "dwelling"
+      ],
+      "sort": [
+        {
+          "field": "tOrder"
+        }
+      ],
+      "offset": "normalize",
+      "as": [
+        "y",
+        "y2"
+      ]
+    },
+    {
+      "window": [
+        {
+          "op": "sum",
+          "field": "count",
+          "as": "running"
+        }
+      ],
+      "sort": [
+        {
+          "field": "dOrder"
+        },
+        {
+          "field": "tOrder"
+        }
+      ],
+      "frame": [
+        null,
+        0
+      ]
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "running",
+          "as": "columnEnd"
+        }
+      ],
+      "groupby": [
+        "dwelling"
+      ]
+    },
+    {
+      "calculate": "datum.columnEnd / datum.total",
+      "as": "x2"
+    },
+    {
+      "calculate": "(datum.columnEnd - datum.dwellingTotal) / datum.total",
+      "as": "x"
+    }
+  ],
   "config": {
     "font": "Public Sans",
     "background": "#ffffff",
@@ -395,5 +136,211 @@
       "anchor": "start"
     }
   },
-  "description": "Read this mosaic as columns: wider columns mean more homes of that dwelling type; the coloured heights show tenure within each type. Separate houses, townhouses, apartments, other, then not stated run left to right."
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#fff",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "title": null,
+          "axis": null,
+          "scale": {
+            "domain": [
+              0,
+              1
+            ],
+            "nice": false
+          }
+        },
+        "x2": {
+          "field": "x2"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "title": "Share within dwelling type",
+          "axis": {
+            "format": ".0%",
+            "values": [
+              0,
+              0.25,
+              0.5,
+              0.75,
+              1
+            ]
+          },
+          "scale": {
+            "domain": [
+              0,
+              1
+            ],
+            "nice": false
+          }
+        },
+        "y2": {
+          "field": "y2"
+        },
+        "color": {
+          "field": "tenure",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Owned outright",
+              "Mortgage",
+              "Renting",
+              "Other tenure",
+              "Not stated"
+            ],
+            "range": [
+              "#158374",
+              "#2b6399",
+              "#8f4715",
+              "#9e9e9e",
+              "#dedede"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "dwelling",
+            "type": "nominal",
+            "title": "Dwelling"
+          },
+          {
+            "field": "tenure",
+            "type": "nominal",
+            "title": "Tenure"
+          },
+          {
+            "field": "within",
+            "type": "quantitative",
+            "title": "Share within dwelling type",
+            "format": ".1%"
+          },
+          {
+            "field": "count",
+            "type": "quantitative",
+            "title": "Homes",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "color": "#585858",
+        "baseline": "top",
+        "y": "height",
+        "dy": 6,
+        "lineHeight": 14
+      },
+      "encoding": {
+        "x": {
+          "field": "mid",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.tOrder === 0 && datum.x2 - datum.x > 0.1"
+        },
+        {
+          "calculate": "(datum.x + datum.x2) / 2",
+          "as": "mid"
+        },
+        {
+          "calculate": "datum.dwelling === 'Townhouse' ? ['Town-', 'house'] : datum.dwelling === 'Apartment' ? ['Apart-', 'ment'] : datum.dwelling",
+          "as": "label"
+        }
+      ]
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.dwelling === 'Apartment' && datum.tenure === 'Renting'"
+        },
+        {
+          "calculate": "(datum.x + datum.x2) / 2",
+          "as": "mid"
+        },
+        {
+          "calculate": "(datum.y + datum.y2) / 2",
+          "as": "midY"
+        },
+        {
+          "calculate": "[format(datum.within, '.0%'), 'rented']",
+          "as": "label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontWeight": 600,
+        "color": "#ffffff",
+        "lineHeight": 15
+      },
+      "encoding": {
+        "x": {
+          "field": "mid",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "midY",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.dwelling === 'Separate house' && datum.tenure === 'Renting'"
+        },
+        {
+          "calculate": "(datum.x + datum.x2) / 2",
+          "as": "mid"
+        },
+        {
+          "calculate": "(datum.y + datum.y2) / 2",
+          "as": "midY"
+        },
+        {
+          "calculate": "format(datum.within, '.0%') + ' of houses rented'",
+          "as": "label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontWeight": 600,
+        "color": "#ffffff"
+      },
+      "encoding": {
+        "x": {
+          "field": "mid",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "midY",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ]
 }

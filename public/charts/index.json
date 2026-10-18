@@ -2,7 +2,7 @@
   {
     "id": "tenure",
     "title": "Nearly one in three homes was rented",
-    "description": "A hundred-square waffle shows Australia’s five tenure categories in 2021. Each square is approximately one per cent; the exact shares are listed below.",
+    "description": "Each square is about 1% of Australia’s 9.3 million occupied homes in 2021. Renters (31%) now almost match people who own outright (31%).",
     "data": "tenure",
     "source": "census",
     "tables": "G37",
@@ -13,7 +13,7 @@
   {
     "id": "dwellings",
     "title": "The separate house still defines the landscape",
-    "description": "A treemap nests storey and building types inside five dwelling categories. Area represents occupied private dwellings. Tiny subtypes remain in the data table.",
+    "description": "Box area shows how many occupied homes of each type there were. Seven in ten Australian homes are separate houses.",
     "data": "dwellings",
     "source": "census",
     "tables": "G36",
@@ -24,7 +24,7 @@
   {
     "id": "mosaic",
     "title": "Apartments have a different tenure mix",
-    "description": "Read this mosaic as columns: wider columns mean more homes of that dwelling type; the coloured heights show tenure within each type. Separate houses, townhouses, apartments, other, then not stated run left to right.",
+    "description": "Each column is a dwelling type, as wide as its share of homes; colours show how those homes are held. 63% of apartments are rented, against 21% of houses.",
     "data": "mosaic",
     "source": "census",
     "tables": "G37",
@@ -35,7 +35,7 @@
   {
     "id": "households",
     "title": "Who lives in which kind of home?",
-    "description": "Bands connect household composition to dwelling type. Wider bands mean more households, not movement between homes. Other and unreported dwelling types are combined here.",
+    "description": "Each band links a type of household to the kind of home it lives in; wider bands mean more households. Four in five families live in a separate house, but one in four people living alone has an apartment.",
     "data": "households",
     "source": "census",
     "tables": "G42",
@@ -46,7 +46,7 @@
   {
     "id": "rent-map",
     "title": "A national median hides local differences",
-    "description": "Colour shows each region’s median weekly rent, in $50 steps. Darker means higher rent; grey means no data. Outlines mark the three featured communities.",
+    "description": "Darker regions have higher median weekly rents. Manly in Sydney ($720) costs nine times as much as Arnhem Land in the NT ($80). The city maps are enlarged, so use their 10 km bars to judge distance. Outlines mark the three communities in chapter 3.",
     "data": "sa3",
     "source": "census",
     "tables": "G02, G37; ASGS 2021 boundaries",
@@ -59,7 +59,7 @@
   {
     "id": "renter-map",
     "title": "Where rented homes are concentrated",
-    "description": "Each dot is 1,000 rented homes, placed at random inside its Census region (SA3). Dots show density, not addresses. Zoom with the place buttons, ctrl + scroll or double-click; drag to move.",
+    "description": "Each dot is 1,000 rented homes, placed inside the small Census areas where those renters live. Most dots crowd into the capital cities and the coast. Zoom with the buttons, ctrl + scroll or double-click; drag to move.",
     "data": "sa4",
     "source": "census",
     "tables": "G02, G37; ASGS 2021 boundaries",
@@ -117,8 +117,8 @@
   },
   {
     "id": "rent-distribution",
-    "title": "Most regional medians sit in the middle",
-    "description": "Each bar counts regions whose median weekly rent falls within a $50 interval. This is a distribution of regional medians, not a distribution of renters or their rent payments.",
+    "title": "Most regions charge between $300 and $450",
+    "description": "Each bar counts the regions whose median weekly rent falls in a $50 band. 194 of 335 regions sit between $300 and $449 a week.",
     "data": "sa3",
     "source": "census",
     "tables": "G02",
@@ -129,7 +129,7 @@
   {
     "id": "income-rent",
     "title": "Higher-income places often have higher rents",
-    "description": "One dot is one region. Dashed lines show the published Australian household medians: $1,746 income and $375 rent per week. The association does not establish causation, and dividing these regional medians would not measure rental stress.",
+    "description": "Each dot is a region; dashed lines mark the Australian medians. Melbourne City renters pay above-median rent on below-median incomes.",
     "data": "sa3",
     "source": "census",
     "tables": "G02",
@@ -141,7 +141,7 @@
   {
     "id": "state-spread",
     "title": "There is no single rental market within a state",
-    "description": "Each row is one state. The line runs from its cheapest region to its dearest. The box holds the middle half of its regions. The white mark is the typical region. A long row means rents vary a lot.",
+    "description": "Each row is one state: the line runs from its cheapest region to its dearest, the box holds the middle half of its regions and the white mark is the typical region. NSW alone stretches from $150 to $720 a week.",
     "data": "sa3",
     "source": "census",
     "tables": "G02",
@@ -152,7 +152,7 @@
   {
     "id": "profiles",
     "title": "Similar rents can come with very different homes",
-    "description": "Each line is one region, read across four axes. Each axis has its own scale. Higher means more, not better. Monthly mortgages are shown weekly (×12÷52).",
+    "description": "Each line is a region, read across four measures. Melbourne City and Casey – South charge almost the same rent, but 86% of Melbourne City’s homes are apartments, against 1% in Casey – South.",
     "data": "sa3",
     "source": "census",
     "tables": "G02, G37",
@@ -164,8 +164,8 @@
   },
   {
     "id": "prices",
-    "title": "The cost of renting keeps changing",
-    "description": "Both price indexes start at 100 in April 2024, on an axis from zero. By July 2026, rents were 9.8% higher and all prices 6.9% higher. These are eight-capital-city CPI measures, not advertised rents.",
+    "title": "Rents are rising faster than prices overall",
+    "description": "By July 2026 rents had risen 9.8% since April 2024, against 6.9% for prices across the economy, measured in the eight capital cities.",
     "data": "cpi",
     "source": "cpi",
     "tables": "Table 3, original monthly series",
@@ -175,20 +175,19 @@
   },
   {
     "id": "severe",
-    "title": "Some still spend over half their income on rent",
-    "description": "Each bar shows the share of assistance recipients paying over half their income in rent, after assistance. Zoom with the buttons, ctrl + scroll or double-click; drag to move the map.",
+    "title": "263,800 assistance recipients still pay over half their income in rent",
+    "description": "Circle area shows how many rent-assistance recipients pay more than half their income in rent after assistance; colour shows their share of the state’s recipients. Most live in the big eastern states, but the ACT has the highest share.",
     "data": "cra",
     "source": "aihw",
     "tables": "CRA.3, March 2026",
-    "idiom": "Glyph map (interactive)",
+    "idiom": "Proportional symbol map",
     "chapter": 4,
-    "zoom": true,
     "engine": "vega"
   },
   {
     "id": "payment-stress",
-    "title": "Payment groups face different levels of pressure",
-    "description": "Each cell shows the percentage in rental stress after assistance within that state and primary payment group. The six selected groups are distinct published categories, not the entire recipient population. Student / apprentice means Youth Allowance; single parent means Parenting Payment (Single).",
+    "title": "Students and job seekers face the most pressure",
+    "description": "Each cell is the share of recipients in rental stress after assistance, by state and main payment. Students and apprentices on Youth Allowance top every state, at 74–87%.",
     "data": "heatmap",
     "source": "aihw",
     "tables": "CRA.2, March 2026",
@@ -199,8 +198,8 @@
   },
   {
     "id": "assistance",
-    "title": "Assistance reduces the measured burden",
-    "description": "Each pair describes the same recipients in March 2026. “Without” is a calculation that leaves assistance out, not an earlier observation or a controlled policy experiment. Rental stress means rent exceeds 30% of gross income.",
+    "title": "Assistance helps, but 44% are still in rental stress",
+    "description": "Each pair is the same recipients in March 2026: grey leaves rent assistance out, purple counts it. Rental stress means paying more than 30% of income in rent.",
     "data": "cra",
     "source": "aihw",
     "tables": "CRA.2, March 2026",

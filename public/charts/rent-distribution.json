@@ -1,48 +1,14 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "width": 520,
+  "description": "Each bar counts the regions whose median weekly rent falls in a $50 band. 194 of 335 regions sit between $300 and $449 a week.",
+  "width": "container",
   "height": 320,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
   "data": {
     "url": "data/sa3.json"
-  },
-  "mark": {
-    "type": "bar",
-    "color": "#8f4715",
-    "binSpacing": 1
-  },
-  "encoding": {
-    "x": {
-      "field": "rent",
-      "type": "quantitative",
-      "title": "Regional median weekly rent ($)",
-      "bin": {
-        "step": 50
-      },
-      "axis": {
-        "format": "$,.0f"
-      }
-    },
-    "y": {
-      "aggregate": "count",
-      "type": "quantitative",
-      "title": "Number of regions"
-    },
-    "tooltip": [
-      {
-        "field": "rent",
-        "type": "quantitative",
-        "title": "Rent band starts at",
-        "bin": {
-          "step": 50
-        },
-        "format": "$,.0f"
-      },
-      {
-        "aggregate": "count",
-        "type": "quantitative",
-        "title": "Regions"
-      }
-    ]
   },
   "config": {
     "font": "Public Sans",
@@ -78,5 +44,90 @@
       "anchor": "start"
     }
   },
-  "description": "Each bar counts regions whose median weekly rent falls within a $50 interval. This is a distribution of regional medians, not a distribution of renters or their rent payments."
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "color": "#8f4715",
+        "binSpacing": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "rent",
+          "type": "quantitative",
+          "title": "Regional median weekly rent ($)",
+          "bin": {
+            "step": 50
+          },
+          "axis": {
+            "format": "$,.0f"
+          }
+        },
+        "y": {
+          "aggregate": "count",
+          "type": "quantitative",
+          "title": "Number of regions"
+        },
+        "tooltip": [
+          {
+            "field": "rent",
+            "type": "quantitative",
+            "title": "Rent band starts at",
+            "bin": {
+              "step": 50
+            },
+            "format": "$,.0f"
+          },
+          {
+            "aggregate": "count",
+            "type": "quantitative",
+            "title": "Regions"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "rent": 600,
+            "count": 14,
+            "label": [
+              "Sydney’s dearest",
+              "regions: $600+"
+            ]
+          },
+          {
+            "rent": 80,
+            "count": 9,
+            "label": [
+              "Remote NT",
+              "from $80"
+            ]
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11.5,
+        "color": "#1d1d1d",
+        "align": "left",
+        "lineHeight": 14,
+        "baseline": "bottom"
+      },
+      "encoding": {
+        "x": {
+          "field": "rent",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "count",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ]
 }

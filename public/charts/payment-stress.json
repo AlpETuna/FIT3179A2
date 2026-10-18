@@ -1,7 +1,12 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "width": 1000,
-  "height": 310,
+  "description": "Each cell is the share of recipients in rental stress after assistance, by state and main payment. Students and apprentices on Youth Allowance top every state, at 74–87%.",
+  "width": "container",
+  "height": 330,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
   "data": {
     "url": "data/heatmap.json"
   },
@@ -14,24 +19,6 @@
       },
       "encoding": {
         "x": {
-          "field": "payment",
-          "type": "nominal",
-          "title": null,
-          "sort": [
-            "Age pension",
-            "Disability support",
-            "Carer",
-            "Single parent",
-            "JobSeeker",
-            "Student / apprentice"
-          ],
-          "axis": {
-            "orient": "top",
-            "labelAngle": 0,
-            "labelLimit": 175
-          }
-        },
-        "y": {
           "field": "state",
           "type": "nominal",
           "title": null,
@@ -44,7 +31,29 @@
             "Tas",
             "NT",
             "ACT"
-          ]
+          ],
+          "axis": {
+            "orient": "top",
+            "labelAngle": 0
+          }
+        },
+        "y": {
+          "field": "payment",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Age pension",
+            "Disability support",
+            "Carer",
+            "Single parent",
+            "JobSeeker",
+            "Student / apprentice"
+          ],
+          "axis": {
+            "labelLimit": 110,
+            "labelLineHeight": 15,
+            "labelExpr": "datum.label==='Disability support'?['Disability','support']:datum.label==='Student / apprentice'?['Student /','apprentice']:datum.label==='Single parent'?['Single','parent']:datum.label"
+          }
         },
         "color": {
           "field": "rate",
@@ -62,7 +71,8 @@
           },
           "legend": {
             "orient": "bottom",
-            "gradientLength": 240,
+            "gradientLength": 220,
+            "title": "Recipients in rental stress after assistance (%)",
             "titleLimit": 400
           }
         },
@@ -99,19 +109,6 @@
       },
       "encoding": {
         "x": {
-          "field": "payment",
-          "type": "nominal",
-          "title": null,
-          "sort": [
-            "Age pension",
-            "Disability support",
-            "Carer",
-            "Single parent",
-            "JobSeeker",
-            "Student / apprentice"
-          ]
-        },
-        "y": {
           "field": "state",
           "type": "nominal",
           "title": null,
@@ -124,7 +121,29 @@
             "Tas",
             "NT",
             "ACT"
-          ]
+          ],
+          "axis": {
+            "orient": "top",
+            "labelAngle": 0
+          }
+        },
+        "y": {
+          "field": "payment",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Age pension",
+            "Disability support",
+            "Carer",
+            "Single parent",
+            "JobSeeker",
+            "Student / apprentice"
+          ],
+          "axis": {
+            "labelLimit": 110,
+            "labelLineHeight": 15,
+            "labelExpr": "datum.label==='Disability support'?['Disability','support']:datum.label==='Student / apprentice'?['Student /','apprentice']:datum.label==='Single parent'?['Single','parent']:datum.label"
+          }
         },
         "text": {
           "field": "label",
@@ -173,6 +192,5 @@
       "color": "#1d1d1d",
       "anchor": "start"
     }
-  },
-  "description": "Each cell shows the percentage in rental stress after assistance within that state and primary payment group. The six selected groups are distinct published categories, not the entire recipient population. Student / apprentice means Youth Allowance; single parent means Parenting Payment (Single)."
+  }
 }

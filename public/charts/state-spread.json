@@ -1,45 +1,14 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "width": 520,
+  "description": "Each row is one state: the line runs from its cheapest region to its dearest, the box holds the middle half of its regions and the white mark is the typical region. NSW alone stretches from $150 to $720 a week.",
+  "width": "container",
   "height": 320,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
   "data": {
     "url": "data/sa3.json"
-  },
-  "mark": {
-    "type": "boxplot",
-    "extent": "min-max",
-    "size": 22,
-    "color": "#8f4715",
-    "median": {
-      "color": "#fff",
-      "strokeWidth": 2
-    },
-    "outliers": false
-  },
-  "encoding": {
-    "y": {
-      "field": "state",
-      "type": "nominal",
-      "title": null,
-      "sort": [
-        "NSW",
-        "Vic",
-        "Qld",
-        "SA",
-        "WA",
-        "Tas",
-        "NT",
-        "ACT"
-      ]
-    },
-    "x": {
-      "field": "rent",
-      "type": "quantitative",
-      "title": "Regional median weekly rent ($)",
-      "axis": {
-        "format": "$,.0f"
-      }
-    }
   },
   "config": {
     "font": "Public Sans",
@@ -75,5 +44,105 @@
       "anchor": "start"
     }
   },
-  "description": "Each row is one state. The line runs from its cheapest region to its dearest. The box holds the middle half of its regions. The white mark is the typical region. A long row means rents vary a lot."
+  "layer": [
+    {
+      "mark": {
+        "type": "boxplot",
+        "extent": "min-max",
+        "size": 22,
+        "color": "#8f4715",
+        "median": {
+          "color": "#fff",
+          "strokeWidth": 2
+        },
+        "outliers": false
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "NSW",
+            "Vic",
+            "Qld",
+            "SA",
+            "WA",
+            "Tas",
+            "NT",
+            "ACT"
+          ]
+        },
+        "x": {
+          "field": "rent",
+          "type": "quantitative",
+          "title": "Regional median weekly rent ($)",
+          "axis": {
+            "format": "$,.0f"
+          }
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "state": "NSW",
+            "rent": 720,
+            "label": "Manly $720",
+            "side": "right"
+          },
+          {
+            "state": "NT",
+            "rent": 80,
+            "label": "Arnhem Land $80",
+            "side": "below"
+          },
+          {
+            "state": "ACT",
+            "rent": 290,
+            "label": "Narrowest spread",
+            "side": "left"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11.5,
+        "color": "#1d1d1d",
+        "align": {
+          "expr": "datum.side==='right'?'right':datum.side==='left'?'right':'left'"
+        },
+        "dx": {
+          "expr": "datum.side==='right'?0:datum.side==='left'?-6:2"
+        },
+        "dy": {
+          "expr": "datum.side==='right'||datum.side==='below'?-15:0"
+        }
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": [
+            "NSW",
+            "Vic",
+            "Qld",
+            "SA",
+            "WA",
+            "Tas",
+            "NT",
+            "ACT"
+          ]
+        },
+        "x": {
+          "field": "rent",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ]
 }

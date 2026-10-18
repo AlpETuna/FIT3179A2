@@ -1,10 +1,21 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "width": 520,
+  "description": "By July 2026 rents had risen 9.8% since April 2024, against 6.9% for prices across the economy, measured in the eight capital cities.",
+  "width": "container",
   "height": 420,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
   "data": {
     "url": "data/cpi.json"
   },
+  "transform": [
+    {
+      "calculate": "datum.index - 100",
+      "as": "change"
+    }
+  ],
   "layer": [
     {
       "mark": {
@@ -22,29 +33,27 @@
           }
         },
         "y": {
-          "field": "index",
+          "field": "change",
           "type": "quantitative",
-          "title": [
-            "Price index",
-            "April 2024 = 100"
-          ],
+          "title": "Change since April 2024",
           "scale": {
             "domain": [
               0,
-              120
+              12
             ],
             "nice": false
           },
           "axis": {
             "values": [
               0,
-              20,
-              40,
-              60,
-              80,
-              100,
-              120
-            ]
+              2,
+              4,
+              6,
+              8,
+              10,
+              12
+            ],
+            "labelExpr": "datum.value === 0 ? '0' : '+' + datum.value + '%'"
           }
         },
         "color": {
@@ -61,9 +70,7 @@
               "#1d1d1d"
             ]
           },
-          "legend": {
-            "orient": "top"
-          }
+          "legend": null
         },
         "strokeDash": {
           "field": "series",
@@ -84,9 +91,7 @@
               ]
             ]
           },
-          "legend": {
-            "orient": "top"
-          }
+          "legend": null
         },
         "tooltip": [
           {
@@ -101,40 +106,22 @@
             "title": "Series"
           },
           {
-            "field": "index",
+            "field": "change",
             "type": "quantitative",
-            "title": "April 2024 = 100",
-            "format": ".1f"
+            "title": "Change since April 2024 (%)",
+            "format": "+.1f"
           }
         ]
       }
     },
     {
-      "data": {
-        "values": [
-          {
-            "date": "2026-07-01",
-            "series": "All prices",
-            "sourceIndex": 103.07,
-            "index": 106.9191,
-            "label": "All prices 106.9 (+6.9%)"
-          },
-          {
-            "date": "2026-07-01",
-            "series": "Rents",
-            "sourceIndex": 103,
-            "index": 109.7964,
-            "label": "Rents 109.8 (+9.8%)"
-          }
-        ]
-      },
       "mark": {
         "type": "text",
         "align": "right",
         "fontSize": 12,
         "fontWeight": 600,
         "dy": {
-          "expr": "datum.series==='Rents'?-12:17"
+          "expr": "datum.series==='Rents'?-12:28"
         }
       },
       "encoding": {
@@ -143,7 +130,7 @@
           "type": "temporal"
         },
         "y": {
-          "field": "index",
+          "field": "change",
           "type": "quantitative"
         },
         "text": {
@@ -165,6 +152,58 @@
             ]
           },
           "legend": null
+        }
+      },
+      "transform": [
+        {
+          "joinaggregate": [
+            {
+              "op": "max",
+              "field": "date",
+              "as": "last"
+            }
+          ]
+        },
+        {
+          "filter": "datum.date === datum.last"
+        },
+        {
+          "calculate": "datum.series + ' +' + format(datum.change, '.1f') + '%'",
+          "as": "label"
+        }
+      ]
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "date": "2024-10-01",
+            "change": 9.6
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "color": "#1d1d1d",
+        "align": "left",
+        "lineHeight": 16
+      },
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal"
+        },
+        "y": {
+          "field": "change",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": [
+            "Rents rose faster than",
+            "prices in general",
+            "in every month shown"
+          ]
         }
       }
     }
@@ -202,6 +241,5 @@
       "color": "#1d1d1d",
       "anchor": "start"
     }
-  },
-  "description": "Both price indexes start at 100 in April 2024, on an axis from zero. By July 2026, rents were 9.8% higher and all prices 6.9% higher. These are eight-capital-city CPI measures, not advertised rents."
+  }
 }
