@@ -214,9 +214,9 @@
         "Group household"
       ],
       "range": [
-        "#386b62",
-        "#a46931",
-        "#655775"
+        "#5c5c5c",
+        "#9b9b9b",
+        "#c8c8c8"
       ]
     }
   ],
@@ -236,7 +236,7 @@
             "field": "household"
           },
           "fillOpacity": {
-            "value": 0.65
+            "value": 0.75
           },
           "tooltip": {
             "signal": "{'Household':datum.household,'Dwelling':datum.dwelling,'Homes':format(datum.count,',')}"
@@ -308,6 +308,19 @@
     }
   ],
   "config": {
-    "font": "Public Sans"
+    "text": {
+      "font": "Public Sans"
+    },
+    "axis": {
+      "labelFont": "Public Sans",
+      "titleFont": "Public Sans"
+    },
+    "legend": {
+      "labelFont": "Public Sans",
+      "titleFont": "Public Sans"
+    },
+    "title": {
+      "font": "Public Sans"
+    }
   }
 }

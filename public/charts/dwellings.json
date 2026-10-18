@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v6.json",
-  "description": "Box area shows how many occupied homes of each type there were. Seven in ten Australian homes are separate houses.",
+  "description": "Box area shows how many occupied homes of each type there were. Seven in ten Australian homes are separate houses. Caravans, cabins and other homes (under 1%) are left out.",
   "height": 316,
   "padding": 2,
   "autosize": "none",
@@ -16,9 +16,18 @@
       "url": "data/dwellings.json",
       "transform": [
         {
+          "type": "filter",
+          "expr": "datum.category !== 'Other / not stated'"
+        },
+        {
           "type": "stratify",
           "key": "id",
           "parentKey": "parent"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.count ? 0 : 1",
+          "as": "children"
         },
         {
           "type": "treemap",
@@ -50,6 +59,18 @@
         {
           "type": "filter",
           "expr": "datum.count > 0"
+        },
+        {
+          "type": "joinaggregate",
+          "fields": [
+            "count"
+          ],
+          "ops": [
+            "sum"
+          ],
+          "as": [
+            "total"
+          ]
         }
       ]
     },
@@ -72,15 +93,13 @@
         "Separate house",
         "Townhouse",
         "Apartment",
-        "Other dwelling",
-        "Not stated"
+        "Other / not stated"
       ],
       "range": [
-        "#d7ddd9",
-        "#b3c4ce",
-        "#6e8b9c",
-        "#bbb3a7",
-        "#e8e8e8"
+        "#e4e1db",
+        "#c4bfb6",
+        "#8d877c",
+        "#ece9e4"
       ]
     }
   ],
@@ -131,7 +150,7 @@
             "signal": "datum.y0 + 17"
           },
           "text": {
-            "signal": "datum.x1-datum.x0>95 ? datum.name : ''"
+            "signal": "datum.x1 - datum.x0 > 60 && datum.children ? datum.name : ''"
           },
           "fontSize": {
             "value": 14
@@ -147,9 +166,57 @@
           }
         }
       }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "leaves"
+      },
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "datum.x0 + (width < 450 ? 3 : 7)"
+          },
+          "y": {
+            "signal": "datum.y0 + 7"
+          },
+          "text": {
+            "signal": "datum.x1 - datum.x0 > 38 && datum.y1 - datum.y0 > 48 ? (length(datum.label) ? [datum.label[0], datum.label[1], format(datum.count / datum.total, '.0%')] : format(datum.count / datum.total, '.0%')) : ''"
+          },
+          "baseline": {
+            "value": "top"
+          },
+          "lineHeight": {
+            "signal": "width < 450 ? 12 : 14"
+          },
+          "fontSize": {
+            "signal": "width < 450 ? 9.5 : 11.5"
+          },
+          "limit": {
+            "signal": "datum.x1 - datum.x0 - 4"
+          },
+          "fill": {
+            "signal": "datum.category === 'Apartment' ? '#ffffff' : '#1d1d1d'"
+          }
+        }
+      }
     }
   ],
   "config": {
-    "font": "Public Sans"
+    "text": {
+      "font": "Public Sans"
+    },
+    "axis": {
+      "labelFont": "Public Sans",
+      "titleFont": "Public Sans"
+    },
+    "legend": {
+      "labelFont": "Public Sans",
+      "titleFont": "Public Sans"
+    },
+    "title": {
+      "font": "Public Sans"
+    }
   }
 }

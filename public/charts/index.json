@@ -13,7 +13,7 @@
   {
     "id": "dwellings",
     "title": "The separate house still defines the landscape",
-    "description": "Box area shows how many occupied homes of each type there were. Seven in ten Australian homes are separate houses.",
+    "description": "Box area shows how many occupied homes of each type there were. Seven in ten Australian homes are separate houses. Caravans, cabins and other homes (under 1%) are left out.",
     "data": "dwellings",
     "source": "census",
     "tables": "G36",
@@ -24,7 +24,7 @@
   {
     "id": "mosaic",
     "title": "Apartments have a different tenure mix",
-    "description": "Each column is a dwelling type, as wide as its share of homes; colours show how those homes are held. 63% of apartments are rented, against 21% of houses.",
+    "description": "Each column is a dwelling type, as wide as its share of homes; colours show how those homes are held. 63% of apartments are rented, against 21% of houses. Other and unstated dwelling types (1% of homes) are left out.",
     "data": "mosaic",
     "source": "census",
     "tables": "G37",
@@ -34,7 +34,7 @@
   },
   {
     "id": "households",
-    "title": "Who lives in which kind of home?",
+    "title": "One in four people living alone has an apartment",
     "description": "Each band links a type of household to the kind of home it lives in; wider bands mean more households. Four in five families live in a separate house, but one in four people living alone has an apartment.",
     "data": "households",
     "source": "census",
@@ -58,7 +58,7 @@
   },
   {
     "id": "renter-map",
-    "title": "Where rented homes are concentrated",
+    "title": "Rented homes crowd into the capital cities",
     "description": "Each dot is 1,000 rented homes, placed inside the small Census areas where those renters live. Most dots crowd into the capital cities and the coast. Zoom with the buttons, ctrl + scroll or double-click; drag to move.",
     "data": "sa4",
     "source": "census",
@@ -176,7 +176,7 @@
   {
     "id": "severe",
     "title": "263,800 assistance recipients still pay over half their income in rent",
-    "description": "Circle area shows how many rent-assistance recipients pay more than half their income in rent after assistance; colour shows their share of the state’s recipients. Most live in the big eastern states, but the ACT has the highest share.",
+    "description": "Circle area shows how many rent-assistance recipients pay more than half their income in rent after assistance; colour shows their share of the state’s recipients. NSW has the most, but the ACT has the highest share.",
     "data": "cra",
     "source": "aihw",
     "tables": "CRA.3, March 2026",

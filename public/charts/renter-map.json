@@ -475,6 +475,19 @@
     }
   ],
   "config": {
-    "font": "Public Sans"
+    "text": {
+      "font": "Public Sans"
+    },
+    "axis": {
+      "labelFont": "Public Sans",
+      "titleFont": "Public Sans"
+    },
+    "legend": {
+      "labelFont": "Public Sans",
+      "titleFont": "Public Sans"
+    },
+    "title": {
+      "font": "Public Sans"
+    }
   }
 }

@@ -26,10 +26,11 @@ function cell(key,value){if(value===null||value===undefined)return 'Not availabl
 function tableHTML(rows,keys,caption){return `<div class="table-wrap" tabindex="0" role="region" aria-label="${esc(caption)}"><table><caption>${esc(caption)}</caption><thead><tr>${keys.map(k=>`<th scope="col">${esc(headers[k]||k)}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${keys.map((k,i)=>i===0?`<th scope="row">${cell(k,r[k])}</th>`:`<td>${cell(k,r[k])}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;}
 
 const houseIcon='<svg class="dwelling-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m2 11 10-8 10 8M5 9v12h14V9M10 21v-7h4v7"/></svg>';
+const townIcon='<svg class="dwelling-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M2 21V10l5-5 5 5 5-5 5 5v11M1 21h22M12 10v11M5 21v-4h3v4M16 21v-4h3v4"/></svg>';
 const flatIcon='<svg class="dwelling-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 22V2h14v20M3 22h18M9 6h2m2 0h2M9 10h2m2 0h2M9 14h2m2 0h2M10 22v-4h4v4"/></svg>';
 async function legend(id){
  if(['tenure','mosaic'].includes(id)){const rows=await fetchJSON('data/tenure.json');return `<ul class="figure-legend">${rows.map((d,i)=>`<li><i class="swatch" style="background:${colours[i]}"></i>${esc(d.tenure)}${id==='tenure'?` <span class="legend-value">${pct(d.share*100)}</span>`:''}</li>`).join('')}</ul>`;}
- if(id==='dwellings')return `<ul class="figure-legend"><li>${houseIcon}Separate house</li><li>${houseIcon}Townhouse</li><li>${flatIcon}Apartment</li></ul>`;
+ if(id==='dwellings')return `<ul class="figure-legend"><li>${houseIcon}Separate house</li><li>${townIcon}Townhouse</li><li>${flatIcon}Apartment</li></ul>`;
  if(id==='rent-map'){
    // Read the classes from the specification so the key cannot drift from the map.
    const {domain,range}=(await fetchJSON('charts/rent-map.json')).vconcat[0].layer[0].encoding.color.condition.scale;

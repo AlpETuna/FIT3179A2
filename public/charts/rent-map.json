@@ -312,8 +312,8 @@
                 "lon": 136.4,
                 "lat": -11.4,
                 "label": [
-                  "Arnhem Land, NT: $80,",
-                  "the cheapest regions"
+                  "Arnhem Land, NT:",
+                  "$80 a week, the cheapest"
                 ]
               }
             ]
@@ -351,8 +351,8 @@
                 "lon": 136.4,
                 "lat": -11.4,
                 "label": [
-                  "Arnhem Land, NT: $80,",
-                  "the cheapest regions"
+                  "Arnhem Land, NT:",
+                  "$80 a week, the cheapest"
                 ]
               }
             ]
@@ -379,6 +379,162 @@
             "baseline": "middle",
             "lineHeight": 15,
             "color": "#1d1d1d"
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [
+                      [
+                        150.682,
+                        -34.128
+                      ],
+                      [
+                        150.682,
+                        -33.551
+                      ],
+                      [
+                        151.418,
+                        -33.551
+                      ],
+                      [
+                        151.418,
+                        -34.128
+                      ],
+                      [
+                        150.682,
+                        -34.128
+                      ]
+                    ]
+                  ]
+                }
+              },
+              {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [
+                      [
+                        144.507,
+                        -38.244
+                      ],
+                      [
+                        144.507,
+                        -37.434
+                      ],
+                      [
+                        145.593,
+                        -37.434
+                      ],
+                      [
+                        145.593,
+                        -38.244
+                      ],
+                      [
+                        144.507,
+                        -38.244
+                      ]
+                    ]
+                  ]
+                }
+              },
+              {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [
+                      [
+                        152.57,
+                        -27.859
+                      ],
+                      [
+                        152.57,
+                        -27.139
+                      ],
+                      [
+                        153.43,
+                        -27.139
+                      ],
+                      [
+                        153.43,
+                        -27.859
+                      ],
+                      [
+                        152.57,
+                        -27.859
+                      ]
+                    ]
+                  ]
+                }
+              }
+            ]
+          },
+          "mark": {
+            "type": "geoshape",
+            "filled": false,
+            "stroke": "#1d1d1d",
+            "strokeWidth": 1.5
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "lon": 152.618,
+                "lat": -33.8395,
+                "label": "Sydney",
+                "align": "left",
+                "base": "middle"
+              },
+              {
+                "lon": 145.05,
+                "lat": -38.844,
+                "label": "Melbourne",
+                "align": "center",
+                "base": "top"
+              },
+              {
+                "lon": 154.63,
+                "lat": -27.499000000000002,
+                "label": "Brisbane",
+                "align": "left",
+                "base": "middle"
+              }
+            ]
+          },
+          "mark": {
+            "type": "text",
+            "fontSize": 11.5,
+            "color": "#1d1d1d",
+            "align": {
+              "expr": "datum.align"
+            },
+            "baseline": {
+              "expr": "datum.base"
+            }
+          },
+          "encoding": {
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label"
+            }
           }
         }
       ]
@@ -673,73 +829,10 @@
               },
               "mark": {
                 "type": "circle",
-                "size": 70,
+                "size": 110,
                 "filled": false,
-                "stroke": "#1d1d1d",
-                "strokeWidth": 1.5
-              },
-              "encoding": {
-                "longitude": {
-                  "field": "lon",
-                  "type": "quantitative"
-                },
-                "latitude": {
-                  "field": "lat",
-                  "type": "quantitative"
-                }
-              }
-            },
-            {
-              "data": {
-                "values": [
-                  {
-                    "lon": 151.27,
-                    "lat": -33.7,
-                    "label": [
-                      "Manly: $720,",
-                      "the dearest"
-                    ]
-                  }
-                ]
-              },
-              "encoding": {
-                "longitude": {
-                  "field": "lon",
-                  "type": "quantitative"
-                },
-                "latitude": {
-                  "field": "lat",
-                  "type": "quantitative"
-                },
-                "text": {
-                  "field": "label"
-                }
-              },
-              "mark": {
-                "type": "text",
-                "fontSize": 12,
-                "fontWeight": 600,
-                "align": "right",
-                "dx": -4,
-                "baseline": "middle",
-                "lineHeight": 15,
                 "stroke": "#ffffff",
-                "strokeWidth": 4,
-                "strokeJoin": "round"
-              }
-            },
-            {
-              "data": {
-                "values": [
-                  {
-                    "lon": 151.27,
-                    "lat": -33.7,
-                    "label": [
-                      "Manly: $720,",
-                      "the dearest"
-                    ]
-                  }
-                ]
+                "strokeWidth": 2.5
               },
               "encoding": {
                 "longitude": {
@@ -749,24 +842,17 @@
                 "latitude": {
                   "field": "lat",
                   "type": "quantitative"
-                },
-                "text": {
-                  "field": "label"
                 }
-              },
-              "mark": {
-                "type": "text",
-                "fontSize": 12,
-                "fontWeight": 600,
-                "align": "right",
-                "dx": -4,
-                "baseline": "middle",
-                "lineHeight": 15,
-                "color": "#1d1d1d"
               }
             }
           ],
-          "title": "Sydney"
+          "title": {
+            "text": "Sydney",
+            "subtitle": "Circle: Manly, the dearest region at $720 a week",
+            "subtitleFontSize": 12,
+            "subtitleColor": "#585858",
+            "subtitleFont": "Public Sans"
+          }
         },
         {
           "width": 353,

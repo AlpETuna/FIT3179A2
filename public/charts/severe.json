@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v6.json",
-  "description": "Circle area shows how many rent-assistance recipients pay more than half their income in rent after assistance; colour shows their share of the state’s recipients. Most live in the big eastern states, but the ACT has the highest share.",
+  "description": "Circle area shows how many rent-assistance recipients pay more than half their income in rent after assistance; colour shows their share of the state’s recipients. NSW has the most, but the ACT has the highest share.",
   "padding": {
     "left": 2,
     "right": 2,
@@ -28,7 +28,7 @@
     {
       "name": "maxRadius",
       "update": "min(width, mapHeight * 1.25) * 0.08",
-      "description": "Radius of a circle for 100,000 people."
+      "description": "Radius of a circle for 100,000 recipients."
     }
   ],
   "projections": [
@@ -185,7 +185,7 @@
         },
         {
           "type": "formula",
-          "expr": "datum.r >= 18",
+          "expr": "datum.row.severeCount >= 50000",
           "as": "inside"
         }
       ]
@@ -203,7 +203,7 @@
         },
         {
           "v": 100000,
-          "label": "100,000 people"
+          "label": "100,000 recipients"
         }
       ],
       "transform": [
@@ -247,9 +247,9 @@
       ],
       "range": [
         "#e3d3e5",
-        "#a06aa5",
-        "#7a4180",
-        "#4f1f55"
+        "#8c5891",
+        "#6a3470",
+        "#45184b"
       ]
     },
     {
@@ -263,9 +263,9 @@
       ],
       "range": [
         "#e3d3e5",
-        "#a06aa5",
-        "#7a4180",
-        "#4f1f55"
+        "#8c5891",
+        "#6a3470",
+        "#45184b"
       ]
     }
   ],
@@ -421,10 +421,10 @@
           "encode": {
             "update": {
               "x": {
-                "value": 6
+                "value": 4
               },
               "y": {
-                "signal": "mapHeight - 46"
+                "signal": "mapHeight - 50"
               },
               "baseline": {
                 "value": "top"
@@ -443,7 +443,7 @@
               },
               "text": {
                 "value": [
-                  "NSW: the most people paying",
+                  "NSW: the most recipients paying",
                   "over half their income.",
                   "ACT: the highest share, 27%."
                 ]
@@ -465,7 +465,7 @@
           },
           "text": {
             "value": [
-              "Circle area: people paying",
+              "Circle area: recipients paying",
               "over half their income"
             ]
           },
@@ -621,6 +621,19 @@
     }
   ],
   "config": {
-    "font": "Public Sans"
+    "text": {
+      "font": "Public Sans"
+    },
+    "axis": {
+      "labelFont": "Public Sans",
+      "titleFont": "Public Sans"
+    },
+    "legend": {
+      "labelFont": "Public Sans",
+      "titleFont": "Public Sans"
+    },
+    "title": {
+      "font": "Public Sans"
+    }
   }
 }

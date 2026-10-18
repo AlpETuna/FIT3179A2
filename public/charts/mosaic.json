@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "description": "Each column is a dwelling type, as wide as its share of homes; colours show how those homes are held. 63% of apartments are rented, against 21% of houses.",
+  "description": "Each column is a dwelling type, as wide as its share of homes; colours show how those homes are held. 63% of apartments are rented, against 21% of houses. Other and unstated dwelling types (1% of homes) are left out.",
   "width": "container",
   "height": 300,
   "autosize": {
@@ -12,7 +12,27 @@
   },
   "transform": [
     {
-      "calculate": "indexof([\"Separate house\", \"Townhouse\", \"Apartment\", \"Other dwelling\", \"Not stated\"], datum.dwelling)",
+      "calculate": "datum.dwelling === 'Other dwelling' || datum.dwelling === 'Not stated' ? 'Other / not stated' : datum.dwelling",
+      "as": "dwelling"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "count",
+          "as": "count"
+        }
+      ],
+      "groupby": [
+        "dwelling",
+        "tenure"
+      ]
+    },
+    {
+      "filter": "datum.dwelling !== 'Other / not stated'"
+    },
+    {
+      "calculate": "indexof([\"Separate house\", \"Townhouse\", \"Apartment\", \"Other / not stated\"], datum.dwelling)",
       "as": "dOrder"
     },
     {
