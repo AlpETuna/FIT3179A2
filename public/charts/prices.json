@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "description": "By July 2026 rents had risen 9.8% since April 2024, against 6.9% for prices across the economy, measured in the eight capital cities.",
   "width": "container",
-  "height": 570,
+  "height": 450,
   "autosize": {
     "type": "fit",
     "contains": "padding"
@@ -39,7 +39,7 @@
           "scale": {
             "domain": [
               0,
-              12
+              11
             ],
             "nice": false
           },
@@ -50,8 +50,7 @@
               4,
               6,
               8,
-              10,
-              12
+              10
             ],
             "labelExpr": "datum.value === 0 ? '0' : '+' + datum.value + '%'"
           }

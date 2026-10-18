@@ -15,7 +15,7 @@
     },
     {
       "name": "mapHeight",
-      "update": "min(420, round(width * 0.8))"
+      "update": "min(300, round(width * 0.8))"
     },
     {
       "name": "height",

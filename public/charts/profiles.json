@@ -352,40 +352,6 @@
       }
     },
     {
-      "type": "text",
-      "from": {
-        "data": "ticks"
-      },
-      "encode": {
-        "update": {
-          "x": {
-            "scale": "x",
-            "field": "field",
-            "offset": -7
-          },
-          "y": {
-            "scale": "y",
-            "field": "normal"
-          },
-          "align": {
-            "value": "right"
-          },
-          "baseline": {
-            "value": "middle"
-          },
-          "text": {
-            "signal": "width < 500 ? replace(datum.text, ',000', 'k') : datum.text"
-          },
-          "fill": {
-            "value": "#585858"
-          },
-          "fontSize": {
-            "signal": "width < 500 ? 11 : 12"
-          }
-        }
-      }
-    },
-    {
       "type": "group",
       "from": {
         "facet": {
@@ -498,6 +464,85 @@
           }
         }
       ]
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "ticks"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "scale": "x",
+            "field": "field",
+            "offset": -7
+          },
+          "y": {
+            "scale": "y",
+            "field": "normal"
+          },
+          "align": {
+            "value": "right"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "text": {
+            "signal": "width < 500 ? replace(datum.text, ',000', 'k') : datum.text"
+          },
+          "fill": {
+            "value": "#585858"
+          },
+          "fontSize": {
+            "signal": "width < 500 ? 11 : 12"
+          },
+          "stroke": {
+            "value": "#ffffff"
+          },
+          "strokeWidth": {
+            "value": 3
+          },
+          "strokeJoin": {
+            "value": "round"
+          }
+        }
+      },
+      "interactive": false
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "ticks"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "scale": "x",
+            "field": "field",
+            "offset": -7
+          },
+          "y": {
+            "scale": "y",
+            "field": "normal"
+          },
+          "align": {
+            "value": "right"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "text": {
+            "signal": "width < 500 ? replace(datum.text, ',000', 'k') : datum.text"
+          },
+          "fill": {
+            "value": "#585858"
+          },
+          "fontSize": {
+            "signal": "width < 500 ? 11 : 12"
+          }
+        }
+      },
+      "interactive": false
     }
   ],
   "config": {
