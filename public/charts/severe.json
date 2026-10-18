@@ -15,7 +15,7 @@
     },
     {
       "name": "mapHeight",
-      "update": "min(300, round(width * 0.8))"
+      "update": "min(360, round(width * 0.8))"
     },
     {
       "name": "height",
@@ -386,13 +386,13 @@
           "encode": {
             "update": {
               "x": {
-                "signal": "datum.inside ? datum.x : datum.x + datum.r + 5"
+                "signal": "datum.inside ? datum.x : datum.state === 'SA' ? datum.x - datum.r - 5 : datum.x + datum.r + 5"
               },
               "y": {
                 "field": "y"
               },
               "align": {
-                "signal": "datum.inside ? 'center' : 'left'"
+                "signal": "datum.inside ? 'center' : datum.state === 'SA' ? 'right' : 'left'"
               },
               "baseline": {
                 "value": "middle"
