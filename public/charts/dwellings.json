@@ -97,8 +97,8 @@
       ],
       "range": [
         "#e4e1db",
-        "#c4bfb6",
-        "#8d877c",
+        "#b3ada2",
+        "#6b665d",
         "#ece9e4"
       ]
     }
@@ -188,16 +188,19 @@
             "value": "top"
           },
           "lineHeight": {
-            "signal": "width < 450 ? 12 : 14"
+            "signal": "datum.x1 - datum.x0 > 200 ? 44 : 13"
           },
           "fontSize": {
-            "signal": "width < 450 ? 9.5 : 11.5"
+            "signal": "datum.x1 - datum.x0 > 200 ? (width < 450 ? 28 : 40) : width < 450 ? 9.5 : 11.5"
           },
           "limit": {
             "signal": "datum.x1 - datum.x0 - 4"
           },
           "fill": {
             "signal": "datum.category === 'Apartment' ? '#ffffff' : '#1d1d1d'"
+          },
+          "fontWeight": {
+            "signal": "datum.x1 - datum.x0 > 200 ? 600 : 400"
           }
         }
       }
@@ -205,18 +208,18 @@
   ],
   "config": {
     "text": {
-      "font": "Public Sans"
+      "font": "Libre Franklin"
     },
     "axis": {
-      "labelFont": "Public Sans",
-      "titleFont": "Public Sans"
+      "labelFont": "Libre Franklin",
+      "titleFont": "Libre Franklin"
     },
     "legend": {
-      "labelFont": "Public Sans",
-      "titleFont": "Public Sans"
+      "labelFont": "Libre Franklin",
+      "titleFont": "Libre Franklin"
     },
     "title": {
-      "font": "Public Sans"
+      "font": "Libre Franklin"
     }
   }
 }

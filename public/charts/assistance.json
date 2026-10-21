@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "description": "Each pair is the same recipients in March 2026: grey leaves rent assistance out, purple counts it. Rental stress means paying more than 30% of income in rent.",
   "width": "container",
-  "height": 320,
+  "height": 470,
   "autosize": {
     "type": "fit",
     "contains": "padding"
@@ -19,7 +19,7 @@
             "label": "Australia 75%"
           },
           {
-            "rate": 44.0,
+            "rate": 44,
             "label": "Australia 44%"
           }
         ]
@@ -32,7 +32,7 @@
               3,
               3
             ],
-            "color": "#9a9a9a"
+            "color": "#767676"
           },
           "encoding": {
             "x": {
@@ -67,7 +67,7 @@
     {
       "mark": {
         "type": "rule",
-        "stroke": "#aaa",
+        "stroke": "#8a8a8a",
         "strokeWidth": 2
       },
       "encoding": {
@@ -75,21 +75,16 @@
           "field": "state",
           "type": "nominal",
           "title": null,
-          "sort": [
-            "NSW",
-            "Vic",
-            "Qld",
-            "SA",
-            "WA",
-            "Tas",
-            "NT",
-            "ACT"
-          ]
+          "sort": {
+            "field": "after",
+            "op": "max",
+            "order": "descending"
+          }
         },
         "x": {
           "field": "after",
           "type": "quantitative",
-          "title": "Share of rent-assistance recipients paying over 30% of income in rent",
+          "title": "Recipients paying over 30% of income in rent",
           "scale": {
             "domain": [
               0,
@@ -159,16 +154,11 @@
           "field": "state",
           "type": "nominal",
           "title": null,
-          "sort": [
-            "NSW",
-            "Vic",
-            "Qld",
-            "SA",
-            "WA",
-            "Tas",
-            "NT",
-            "ACT"
-          ]
+          "sort": {
+            "field": "after",
+            "op": "max",
+            "order": "descending"
+          }
         },
         "x": {
           "field": "rate",
@@ -256,16 +246,11 @@
         "y": {
           "field": "state",
           "type": "nominal",
-          "sort": [
-            "NSW",
-            "Vic",
-            "Qld",
-            "SA",
-            "WA",
-            "Tas",
-            "NT",
-            "ACT"
-          ]
+          "sort": {
+            "field": "after",
+            "op": "max",
+            "order": "descending"
+          }
         },
         "x": {
           "field": "after",
@@ -278,7 +263,7 @@
     }
   ],
   "config": {
-    "font": "Public Sans",
+    "font": "Libre Franklin",
     "background": "#ffffff",
     "view": {
       "stroke": null
@@ -304,7 +289,7 @@
       "padding": 8
     },
     "title": {
-      "font": "Public Sans",
+      "font": "Libre Franklin",
       "fontSize": 14,
       "fontWeight": 600,
       "color": "#1d1d1d",

@@ -11,7 +11,7 @@
     "url": "data/sa3.json"
   },
   "config": {
-    "font": "Public Sans",
+    "font": "Libre Franklin",
     "background": "#ffffff",
     "view": {
       "stroke": null
@@ -37,7 +37,7 @@
       "padding": 8
     },
     "title": {
-      "font": "Public Sans",
+      "font": "Libre Franklin",
       "fontSize": 14,
       "fontWeight": 600,
       "color": "#1d1d1d",
@@ -63,14 +63,14 @@
           "type": "nominal",
           "title": null,
           "sort": [
+            "ACT",
             "NSW",
-            "Vic",
             "Qld",
-            "SA",
+            "Vic",
             "WA",
+            "SA",
             "Tas",
-            "NT",
-            "ACT"
+            "NT"
           ]
         },
         "x": {
@@ -117,7 +117,7 @@
           "expr": "datum.side==='right'?0:datum.side==='left'?-6:2"
         },
         "dy": {
-          "expr": "datum.side==='right'||datum.side==='below'?-15:0"
+          "expr": "datum.side==='right'||datum.side==='below'?-15:datum.side==='left'?-12:0"
         }
       },
       "encoding": {
@@ -125,14 +125,14 @@
           "field": "state",
           "type": "nominal",
           "sort": [
+            "ACT",
             "NSW",
-            "Vic",
             "Qld",
-            "SA",
+            "Vic",
             "WA",
+            "SA",
             "Tas",
-            "NT",
-            "ACT"
+            "NT"
           ]
         },
         "x": {

@@ -66,7 +66,7 @@
             ],
             "range": [
               "#8f4715",
-              "#1d1d1d"
+              "#585858"
             ]
           },
           "legend": null
@@ -147,7 +147,7 @@
             ],
             "range": [
               "#8f4715",
-              "#1d1d1d"
+              "#585858"
             ]
           },
           "legend": null
@@ -203,8 +203,7 @@
         },
         "text": {
           "value": [
-            "Rents rose faster than",
-            "prices in general",
+            "Rents outpaced prices",
             "in every month shown"
           ]
         }
@@ -212,7 +211,7 @@
     }
   ],
   "config": {
-    "font": "Public Sans",
+    "font": "Libre Franklin",
     "background": "#ffffff",
     "view": {
       "stroke": null
@@ -238,7 +237,7 @@
       "padding": 8
     },
     "title": {
-      "font": "Public Sans",
+      "font": "Libre Franklin",
       "fontSize": 14,
       "fontWeight": 600,
       "color": "#1d1d1d",

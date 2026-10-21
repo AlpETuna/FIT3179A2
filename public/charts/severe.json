@@ -246,10 +246,10 @@
         25
       ],
       "range": [
-        "#e3d3e5",
-        "#8c5891",
-        "#6a3470",
-        "#45184b"
+        "#cdb3d1",
+        "#875791",
+        "#6f3473",
+        "#3a123f"
       ]
     },
     {
@@ -262,10 +262,10 @@
         3
       ],
       "range": [
-        "#e3d3e5",
-        "#8c5891",
-        "#6a3470",
-        "#45184b"
+        "#cdb3d1",
+        "#875791",
+        "#6f3473",
+        "#3a123f"
       ]
     }
   ],
@@ -365,13 +365,7 @@
                 "scale": "colour",
                 "signal": "datum.row.severe"
               },
-              "stroke": {
-                "value": "#ffffff"
-              },
-              "strokeWidth": {
-                "value": 1.5
-              },
-              "tooltip": {
+              "stroke": {"value": "#45184b"}, "strokeWidth": {"value": 1}, "tooltip": {
                 "signal": "{'State / territory': datum.state, 'Paying over half their income in rent': format(datum.row.severeCount, ','), 'Share of recipients': format(datum.row.severe, '.1f') + '%', 'All rent-assistance recipients': format(datum.row.recipients, ',')}"
               }
             }
@@ -398,7 +392,7 @@
                 "value": "middle"
               },
               "text": {
-                "signal": "[datum.state, format(datum.row.severeCount, ','), format(datum.row.severe, '.0f') + '%']"
+                "signal": "[datum.state, format(round(datum.row.severeCount / 100) * 100, ','), format(datum.row.severe, '.0f') + '%']"
               },
               "lineHeight": {
                 "signal": "width < 450 ? 13 : 14"
@@ -443,8 +437,7 @@
               },
               "text": {
                 "value": [
-                  "NSW: the most recipients paying",
-                  "over half their income.",
+                  "NSW: the most recipients.",
                   "ACT: the highest share, 27%."
                 ]
               }
@@ -622,18 +615,18 @@
   ],
   "config": {
     "text": {
-      "font": "Public Sans"
+      "font": "Libre Franklin"
     },
     "axis": {
-      "labelFont": "Public Sans",
-      "titleFont": "Public Sans"
+      "labelFont": "Libre Franklin",
+      "titleFont": "Libre Franklin"
     },
     "legend": {
-      "labelFont": "Public Sans",
-      "titleFont": "Public Sans"
+      "labelFont": "Libre Franklin",
+      "titleFont": "Libre Franklin"
     },
     "title": {
-      "font": "Public Sans"
+      "font": "Libre Franklin"
     }
   }
 }

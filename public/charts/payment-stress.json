@@ -14,8 +14,8 @@
     {
       "mark": {
         "type": "rect",
-        "stroke": "#fff",
-        "strokeWidth": 3
+        "stroke": "#d8cddb",
+        "strokeWidth": 1
       },
       "encoding": {
         "x": {
@@ -61,20 +61,15 @@
           "title": "In rental stress after assistance (%)",
           "scale": {
             "domain": [
-              0,
-              100
+              20,
+              90
             ],
             "range": [
               "#f5eff6",
               "#6f3473"
             ]
           },
-          "legend": {
-            "orient": "bottom",
-            "gradientLength": 220,
-            "title": "Recipients in rental stress after assistance (%)",
-            "titleLimit": 400
-          }
+          "legend": null
         },
         "tooltip": [
           {
@@ -105,7 +100,9 @@
       ],
       "mark": {
         "type": "text",
-        "fontSize": 14
+        "fontSize": {
+          "expr": "width < 500 ? 10.5 : 14"
+        }
       },
       "encoding": {
         "x": {
@@ -151,7 +148,7 @@
         },
         "color": {
           "condition": {
-            "test": "datum.rate>72",
+            "test": "datum.rate>=71",
             "value": "#fff"
           },
           "value": "#000000"
@@ -160,7 +157,7 @@
     }
   ],
   "config": {
-    "font": "Public Sans",
+    "font": "Libre Franklin",
     "background": "#ffffff",
     "view": {
       "stroke": null
@@ -186,7 +183,7 @@
       "padding": 8
     },
     "title": {
-      "font": "Public Sans",
+      "font": "Libre Franklin",
       "fontSize": 14,
       "fontWeight": 600,
       "color": "#1d1d1d",

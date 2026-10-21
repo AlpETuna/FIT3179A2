@@ -72,7 +72,7 @@
           ],
           "mark": {
             "type": "geoshape",
-            "stroke": "#ffffff",
+            "stroke": "#b3a596",
             "strokeWidth": 0.35,
             "clip": true
           },
@@ -94,18 +94,18 @@
                     500
                   ],
                   "range": [
-                    "#fef0d9",
-                    "#fdcc8a",
-                    "#fc8d59",
-                    "#e34a33",
-                    "#b30000",
-                    "#7a0000",
-                    "#3d0000"
+                    "#fbf1e4",
+                    "#f1d3a8",
+                    "#e5b274",
+                    "#cf8d45",
+                    "#ad6a28",
+                    "#85420f",
+                    "#4a2005"
                   ]
                 },
                 "legend": null
               },
-              "value": "#c4c4c4"
+              "value": "#b8b8b8"
             },
             "tooltip": [
               {
@@ -188,7 +188,7 @@
           "data": {
             "values": [
               {
-                "lon": 129.0,
+                "lon": 129,
                 "lat": -41,
                 "lon2": 134.9514
               }
@@ -612,7 +612,7 @@
               ],
               "mark": {
                 "type": "geoshape",
-                "stroke": "#ffffff",
+                "stroke": "#b3a596",
                 "strokeWidth": 0.35,
                 "clip": true
               },
@@ -634,18 +634,18 @@
                         500
                       ],
                       "range": [
-                        "#fef0d9",
-                        "#fdcc8a",
-                        "#fc8d59",
-                        "#e34a33",
-                        "#b30000",
-                        "#7a0000",
-                        "#3d0000"
+                        "#fbf1e4",
+                        "#f1d3a8",
+                        "#e5b274",
+                        "#cf8d45",
+                        "#ad6a28",
+                        "#85420f",
+                        "#4a2005"
                       ]
                     },
                     "legend": null
                   },
-                  "value": "#c4c4c4"
+                  "value": "#b8b8b8"
                 },
                 "tooltip": [
                   {
@@ -851,7 +851,7 @@
             "subtitle": "Circle: Manly, the dearest region at $720 a week",
             "subtitleFontSize": 12,
             "subtitleColor": "#585858",
-            "subtitleFont": "Public Sans"
+            "subtitleFont": "Libre Franklin"
           }
         },
         {
@@ -925,7 +925,7 @@
               ],
               "mark": {
                 "type": "geoshape",
-                "stroke": "#ffffff",
+                "stroke": "#b3a596",
                 "strokeWidth": 0.35,
                 "clip": true
               },
@@ -947,18 +947,18 @@
                         500
                       ],
                       "range": [
-                        "#fef0d9",
-                        "#fdcc8a",
-                        "#fc8d59",
-                        "#e34a33",
-                        "#b30000",
-                        "#7a0000",
-                        "#3d0000"
+                        "#fbf1e4",
+                        "#f1d3a8",
+                        "#e5b274",
+                        "#cf8d45",
+                        "#ad6a28",
+                        "#85420f",
+                        "#4a2005"
                       ]
                     },
                     "legend": null
                   },
-                  "value": "#c4c4c4"
+                  "value": "#b8b8b8"
                 },
                 "tooltip": [
                   {
@@ -1132,7 +1132,11 @@
               }
             }
           ],
-          "title": "Melbourne"
+          "title": {
+            "text": "Melbourne",
+            "subtitle": " ",
+            "subtitleFontSize": 12
+          }
         },
         {
           "width": 353,
@@ -1140,7 +1144,7 @@
           "projection": {
             "type": "albers",
             "rotate": [
-              -153.0,
+              -153,
               0,
               0
             ],
@@ -1205,7 +1209,7 @@
               ],
               "mark": {
                 "type": "geoshape",
-                "stroke": "#ffffff",
+                "stroke": "#b3a596",
                 "strokeWidth": 0.35,
                 "clip": true
               },
@@ -1227,18 +1231,18 @@
                         500
                       ],
                       "range": [
-                        "#fef0d9",
-                        "#fdcc8a",
-                        "#fc8d59",
-                        "#e34a33",
-                        "#b30000",
-                        "#7a0000",
-                        "#3d0000"
+                        "#fbf1e4",
+                        "#f1d3a8",
+                        "#e5b274",
+                        "#cf8d45",
+                        "#ad6a28",
+                        "#85420f",
+                        "#4a2005"
                       ]
                     },
                     "legend": null
                   },
-                  "value": "#c4c4c4"
+                  "value": "#b8b8b8"
                 },
                 "tooltip": [
                   {
@@ -1412,7 +1416,11 @@
               }
             }
           ],
-          "title": "Brisbane"
+          "title": {
+            "text": "Brisbane",
+            "subtitle": " ",
+            "subtitleFontSize": 12
+          }
         }
       ],
       "spacing": 20,
@@ -1431,7 +1439,7 @@
   },
   "spacing": 16,
   "config": {
-    "font": "Public Sans",
+    "font": "Libre Franklin",
     "background": "#ffffff",
     "view": {
       "stroke": null
@@ -1457,7 +1465,7 @@
       "padding": 8
     },
     "title": {
-      "font": "Public Sans",
+      "font": "Libre Franklin",
       "fontSize": 14,
       "fontWeight": 600,
       "color": "#1d1d1d",

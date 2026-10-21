@@ -2,7 +2,7 @@
   {
     "id": "tenure",
     "title": "Nearly one in three homes was rented",
-    "description": "Each square is about 1% of Australia’s 9.3 million occupied homes in 2021. Renters (31%) now almost match people who own outright (31%).",
+    "description": "Each square is about 1% of 9.3 million occupied homes. Renters (30.6%) nearly match outright owners (31.0%).",
     "data": "tenure",
     "source": "census",
     "tables": "G37",
@@ -13,7 +13,7 @@
   {
     "id": "dwellings",
     "title": "The separate house still defines the landscape",
-    "description": "Box area shows how many occupied homes of each type there were. Seven in ten Australian homes are separate houses. Caravans, cabins and other homes (under 1%) are left out.",
+    "description": "Box area shows how many homes of each type there were. Seven in ten are separate houses. Apartments, the most-rented type, are about 1 in 7 homes. Caravans and other homes (under 1%) are left out.",
     "data": "dwellings",
     "source": "census",
     "tables": "G36",
@@ -23,8 +23,8 @@
   },
   {
     "id": "mosaic",
-    "title": "Apartments have a different tenure mix",
-    "description": "Each column is a dwelling type, as wide as its share of homes; colours show how those homes are held. 63% of apartments are rented, against 21% of houses. Other and unstated dwelling types (1% of homes) are left out.",
+    "title": "63% of apartments are rented, against 21% of houses",
+    "description": "Column width shows each type’s share of homes; colour shows how they are held. Renting sits on the baseline for easy comparison. Other types (1%) are left out.",
     "data": "mosaic",
     "source": "census",
     "tables": "G37",
@@ -35,7 +35,7 @@
   {
     "id": "households",
     "title": "One in four people living alone has an apartment",
-    "description": "Each band links a type of household to the kind of home it lives in; wider bands mean more households. Four in five families live in a separate house, but one in four people living alone has an apartment.",
+    "description": "Each band links a household type to its home; wider bands mean more households. Four in five families live in a house. The dark band is people living alone in apartments.",
     "data": "households",
     "source": "census",
     "tables": "G42",
@@ -46,7 +46,7 @@
   {
     "id": "rent-map",
     "title": "A national median hides local differences",
-    "description": "Darker regions have higher median weekly rents. Manly in Sydney ($720) costs nine times as much as Arnhem Land in the NT ($80). The city maps are enlarged, so use their 10 km bars to judge distance. Outlines mark the three communities in chapter 3.",
+    "description": "Darker regions have higher median weekly rents. Manly ($720) costs nine times Arnhem Land ($80). City insets are enlarged, so use their 10 km bars. Outlines mark the three communities in chapter 3.",
     "data": "sa3",
     "source": "census",
     "tables": "G02, G37; ASGS 2021 boundaries",
@@ -59,7 +59,7 @@
   {
     "id": "renter-map",
     "title": "Rented homes crowd into the capital cities",
-    "description": "Each dot is 1,000 rented homes, placed inside the small Census areas where those renters live. Most dots crowd into the capital cities and the coast. Zoom with the buttons, ctrl + scroll or double-click; drag to move.",
+    "description": "Dots sit in the small areas where renters live. Figure 05 showed price; this shows people. Most crowd into the capitals and the coast.",
     "data": "sa4",
     "source": "census",
     "tables": "G02, G37; ASGS 2021 boundaries",
@@ -113,12 +113,14 @@
           18
         ]
       ]
-    ]
+    ],
+    "side": true,
+    "hint": "Zoom with the buttons, ctrl + scroll or double-click; drag to move."
   },
   {
     "id": "rent-distribution",
-    "title": "Most regions charge between $300 and $450",
-    "description": "Each bar counts the regions whose median weekly rent falls in a $50 band. 194 of 335 regions sit between $300 and $449 a week.",
+    "title": "Most regions charge between $300 and $449",
+    "description": "Each bar counts regions with a median rent in one $50 band. The dark bars are 194 of 335 regions, charging $300 to $449. Each region counts once.",
     "data": "sa3",
     "source": "census",
     "tables": "G02",
@@ -127,9 +129,20 @@
     "engine": "vega-lite"
   },
   {
+    "id": "state-spread",
+    "title": "There is no single rental market within a state",
+    "description": "Each row is a state, sorted by its typical region. Lines run from the cheapest region to the dearest; boxes hold the middle half. NSW alone spans $150 to $720 a week.",
+    "data": "sa3",
+    "source": "census",
+    "tables": "G02",
+    "idiom": "Box plot",
+    "chapter": 2,
+    "engine": "vega-lite"
+  },
+  {
     "id": "income-rent",
     "title": "Higher-income places often have higher rents",
-    "description": "Each dot is a region; dashed lines mark the Australian medians. Melbourne City renters pay above-median rent on below-median incomes.",
+    "description": "Each dot is a region; dashed lines mark the national medians. The grey line shows the overall trend. Melbourne City pays above-median rent on a below-median income. Click a featured dot to focus on it.",
     "data": "sa3",
     "source": "census",
     "tables": "G02",
@@ -139,20 +152,9 @@
     "engine": "vega-lite"
   },
   {
-    "id": "state-spread",
-    "title": "There is no single rental market within a state",
-    "description": "Each row is one state: the line runs from its cheapest region to its dearest, the box holds the middle half of its regions and the white mark is the typical region. NSW alone stretches from $150 to $720 a week.",
-    "data": "sa3",
-    "source": "census",
-    "tables": "G02",
-    "idiom": "Box plot",
-    "chapter": 3,
-    "engine": "vega-lite"
-  },
-  {
     "id": "profiles",
     "title": "Similar rents can come with very different homes",
-    "description": "Each line is a region, read across four measures. Melbourne City and Casey – South charge almost the same rent, but 86% of Melbourne City’s homes are apartments, against 1% in Casey – South.",
+    "description": "Each line is a region, read across four measures. Melbourne City and Casey – South charge almost the same rent. Yet 86% of Melbourne City’s homes are apartments, against 1% in Casey – South. Hover any grey line to trace a region.",
     "data": "sa3",
     "source": "census",
     "tables": "G02, G37",
@@ -165,7 +167,7 @@
   {
     "id": "prices",
     "title": "Rents are rising faster than prices overall",
-    "description": "By July 2026 rents had risen 9.8% since April 2024, against 6.9% for prices across the economy, measured in the eight capital cities.",
+    "description": "By July 2026 rents had risen 9.8% since April 2024. Prices across the economy rose 6.9%. Both are measured across the eight capital cities.",
     "data": "cpi",
     "source": "cpi",
     "tables": "Table 3, original monthly series",
@@ -174,20 +176,20 @@
     "engine": "vega-lite"
   },
   {
-    "id": "severe",
-    "title": "263,800 recipients pay over half their income in rent",
-    "description": "Circle area shows how many rent-assistance recipients pay more than half their income in rent after assistance; colour shows their share of the state’s recipients. NSW has the most, but the ACT has the highest share.",
+    "id": "assistance",
+    "title": "Assistance helps, but 44% stay in rental stress",
+    "description": "Each pair is the same recipients in March 2026. Grey leaves rent assistance out; purple counts it. Rental stress means rent above 30% of income.",
     "data": "cra",
     "source": "aihw",
-    "tables": "CRA.3, March 2026",
-    "idiom": "Proportional symbol map",
+    "tables": "CRA.2, March 2026",
+    "idiom": "Paired-dot chart (counted as basic)",
     "chapter": 4,
-    "engine": "vega"
+    "engine": "vega-lite"
   },
   {
     "id": "payment-stress",
-    "title": "Students and job seekers face the most pressure",
-    "description": "Each cell is the share of recipients in rental stress after assistance, by state and main payment. Students and apprentices on Youth Allowance top every state, at 74–87%.",
+    "title": "Students face the most rental stress in every state",
+    "description": "Each cell is the share of recipients in rental stress after assistance; darker cells mean more stress. Students and apprentices top every state, at 74–87%.",
     "data": "heatmap",
     "source": "aihw",
     "tables": "CRA.2, March 2026",
@@ -197,14 +199,14 @@
     "engine": "vega-lite"
   },
   {
-    "id": "assistance",
-    "title": "Assistance helps, but 44% are still in rental stress",
-    "description": "Each pair is the same recipients in March 2026: grey leaves rent assistance out, purple counts it. Rental stress means paying more than 30% of income in rent.",
+    "id": "severe",
+    "title": "264,000 recipients pay over half their income in rent",
+    "description": "Circle area shows how many recipients pay over half their income in rent, after assistance. Colour shows their share of the state’s recipients. NSW has the most; the ACT has the highest share.",
     "data": "cra",
     "source": "aihw",
-    "tables": "CRA.2, March 2026",
-    "idiom": "Paired-dot chart (counted as basic)",
+    "tables": "CRA.3, March 2026",
+    "idiom": "Proportional symbol map",
     "chapter": 4,
-    "engine": "vega-lite"
+    "engine": "vega"
   }
 ]

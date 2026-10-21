@@ -21,8 +21,8 @@
       "mark": {
         "type": "circle",
         "size": 32,
-        "color": "#9d9d9d",
-        "opacity": 0.45
+        "color": "#8a8a8a",
+        "opacity": 0.55
       },
       "encoding": {
         "x": {
@@ -53,7 +53,16 @@
             "zero": false
           },
           "axis": {
-            "format": "$,.0f"
+            "format": "$,.0f",
+            "values": [
+              100,
+              200,
+              300,
+              400,
+              500,
+              600,
+              700
+            ]
           }
         },
         "tooltip": [
@@ -75,6 +84,34 @@
             "format": "$,.0f"
           }
         ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "regression": "rent",
+          "on": "income"
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "color": "#585858",
+        "strokeWidth": 1.5,
+        "opacity": 0.7,
+        "strokeDash": [
+          1,
+          0
+        ]
+      },
+      "encoding": {
+        "x": {
+          "field": "income",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "rent",
+          "type": "quantitative"
+        }
       }
     },
     {
@@ -389,7 +426,7 @@
     }
   ],
   "config": {
-    "font": "Public Sans",
+    "font": "Libre Franklin",
     "background": "#ffffff",
     "view": {
       "stroke": null
@@ -415,7 +452,7 @@
       "padding": 8
     },
     "title": {
-      "font": "Public Sans",
+      "font": "Libre Franklin",
       "fontSize": 14,
       "fontWeight": 600,
       "color": "#1d1d1d",

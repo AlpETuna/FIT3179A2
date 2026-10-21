@@ -20,6 +20,20 @@
     {
       "name": "featured",
       "value": "all"
+    },
+    {
+      "name": "hovered",
+      "value": null,
+      "on": [
+        {
+          "events": "@context:mouseover",
+          "update": "datum.code"
+        },
+        {
+          "events": "@context:mouseout",
+          "update": "null"
+        }
+      ]
     }
   ],
   "data": [
@@ -288,7 +302,7 @@
             "signal": "height"
           },
           "stroke": {
-            "value": "#c3c3c3"
+            "value": "#8a8a8a"
           }
         }
       }
@@ -377,16 +391,23 @@
                 "field": "normal"
               },
               "stroke": {
-                "value": "#777"
+                "signal": "hovered===datum.code?'#1d1d1d':'#777'"
               },
               "strokeOpacity": {
-                "value": 0.11
+                "signal": "hovered===datum.code?1:0.11"
               },
               "strokeWidth": {
-                "value": 1
+                "signal": "hovered===datum.code?2:1"
+              },
+              "tooltip": {
+                "signal": "{'Region':datum.name}"
+              },
+              "cursor": {
+                "value": "pointer"
               }
             }
-          }
+          },
+          "name": "context"
         }
       ]
     },
@@ -547,18 +568,18 @@
   ],
   "config": {
     "text": {
-      "font": "Public Sans"
+      "font": "Libre Franklin"
     },
     "axis": {
-      "labelFont": "Public Sans",
-      "titleFont": "Public Sans"
+      "labelFont": "Libre Franklin",
+      "titleFont": "Libre Franklin"
     },
     "legend": {
-      "labelFont": "Public Sans",
-      "titleFont": "Public Sans"
+      "labelFont": "Libre Franklin",
+      "titleFont": "Libre Franklin"
     },
     "title": {
-      "font": "Public Sans"
+      "font": "Libre Franklin"
     }
   }
 }

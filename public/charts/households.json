@@ -214,9 +214,9 @@
         "Group household"
       ],
       "range": [
-        "#5c5c5c",
-        "#9b9b9b",
-        "#c8c8c8"
+        "#bdbdbd",
+        "#cfcfcf",
+        "#dddddd"
       ]
     }
   ],
@@ -232,14 +232,98 @@
             "signal": "'M'+xLeft+','+(datum.a*plotHeight)+' C'+(width*.5)+','+(datum.a*plotHeight)+' '+(width*.5)+','+(datum.b*plotHeight)+' '+xRight+','+(datum.b*plotHeight)+' L'+xRight+','+((datum.b+datum.h)*plotHeight)+' C'+(width*.5)+','+((datum.b+datum.h)*plotHeight)+' '+(width*.5)+','+((datum.a+datum.h)*plotHeight)+' '+xLeft+','+((datum.a+datum.h)*plotHeight)+' Z'"
           },
           "fill": {
-            "scale": "colour",
-            "field": "household"
+            "signal": "datum.household==='One person'&&datum.dwelling==='Apartment'?'#1d1d1d':scale('colour',datum.household)"
           },
           "fillOpacity": {
-            "value": 0.75
+            "signal": "datum.household==='One person'&&datum.dwelling==='Apartment'?0.9:0.8"
           },
           "tooltip": {
             "signal": "{'Household':datum.household,'Dwelling':datum.dwelling,'Homes':format(datum.count,',')}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "bands"
+      },
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "width*.5"
+          },
+          "y": {
+            "signal": "((datum.a+datum.b)/2+datum.h/2)*plotHeight-14"
+          },
+          "text": {
+            "value": "1 in 4 people living alone"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "bottom"
+          },
+          "fontSize": {
+            "value": 12.5
+          },
+          "fontWeight": {
+            "value": 600
+          },
+          "fill": {
+            "value": "#1d1d1d"
+          },
+          "stroke": {
+            "value": "#ffffff"
+          },
+          "strokeWidth": {
+            "value": 4
+          },
+          "strokeJoin": {
+            "value": "round"
+          },
+          "opacity": {
+            "signal": "datum.household==='One person'&&datum.dwelling==='Apartment'?1:0"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "bands"
+      },
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "width*.5"
+          },
+          "y": {
+            "signal": "((datum.a+datum.b)/2+datum.h/2)*plotHeight-14"
+          },
+          "text": {
+            "value": "1 in 4 people living alone"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "bottom"
+          },
+          "fontSize": {
+            "value": 12.5
+          },
+          "fontWeight": {
+            "value": 600
+          },
+          "fill": {
+            "value": "#1d1d1d"
+          },
+          "opacity": {
+            "signal": "datum.household==='One person'&&datum.dwelling==='Apartment'?1:0"
           }
         }
       }
@@ -309,18 +393,18 @@
   ],
   "config": {
     "text": {
-      "font": "Public Sans"
+      "font": "Libre Franklin"
     },
     "axis": {
-      "labelFont": "Public Sans",
-      "titleFont": "Public Sans"
+      "labelFont": "Libre Franklin",
+      "titleFont": "Libre Franklin"
     },
     "legend": {
-      "labelFont": "Public Sans",
-      "titleFont": "Public Sans"
+      "labelFont": "Libre Franklin",
+      "titleFont": "Libre Franklin"
     },
     "title": {
-      "font": "Public Sans"
+      "font": "Libre Franklin"
     }
   }
 }

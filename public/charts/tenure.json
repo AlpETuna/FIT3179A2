@@ -108,10 +108,10 @@
           "Not stated"
         ],
         "range": [
-          "#158374",
+          "#5b8fc4",
           "#2b6399",
           "#8f4715",
-          "#9e9e9e",
+          "#8c8c8c",
           "#dedede"
         ]
       },
@@ -138,7 +138,7 @@
     ]
   },
   "config": {
-    "font": "Public Sans",
+    "font": "Libre Franklin",
     "background": "#ffffff",
     "view": {
       "stroke": null
@@ -164,7 +164,7 @@
       "padding": 8
     },
     "title": {
-      "font": "Public Sans",
+      "font": "Libre Franklin",
       "fontSize": 14,
       "fontWeight": 600,
       "color": "#1d1d1d",

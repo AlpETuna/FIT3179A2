@@ -15,7 +15,7 @@
     },
     {
       "name": "height",
-      "update": "min(620, round(width * 0.8))"
+      "update": "min(560, round(width * 0.72))"
     },
     {
       "name": "baseScale",
@@ -400,94 +400,22 @@
           }
         }
       ]
-    },
-    {
-      "type": "rect",
-      "encode": {
-        "update": {
-          "x": {
-            "value": 4
-          },
-          "y": {
-            "signal": "height - 30"
-          },
-          "width": {
-            "value": 196
-          },
-          "height": {
-            "value": 26
-          },
-          "fill": {
-            "value": "#ffffff"
-          },
-          "fillOpacity": {
-            "value": 0.85
-          }
-        }
-      }
-    },
-    {
-      "type": "symbol",
-      "encode": {
-        "update": {
-          "x": {
-            "value": 14
-          },
-          "y": {
-            "signal": "height - 17"
-          },
-          "shape": {
-            "value": "circle"
-          },
-          "size": {
-            "value": 30
-          },
-          "fill": {
-            "value": "#8f4715"
-          }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "encode": {
-        "update": {
-          "x": {
-            "value": 24
-          },
-          "y": {
-            "signal": "height - 17"
-          },
-          "baseline": {
-            "value": "middle"
-          },
-          "text": {
-            "value": "1 dot = 1,000 rented homes"
-          },
-          "fontSize": {
-            "value": 13
-          },
-          "fill": {
-            "value": "#1d1d1d"
-          }
-        }
-      }
     }
   ],
   "config": {
     "text": {
-      "font": "Public Sans"
+      "font": "Libre Franklin"
     },
     "axis": {
-      "labelFont": "Public Sans",
-      "titleFont": "Public Sans"
+      "labelFont": "Libre Franklin",
+      "titleFont": "Libre Franklin"
     },
     "legend": {
-      "labelFont": "Public Sans",
-      "titleFont": "Public Sans"
+      "labelFont": "Libre Franklin",
+      "titleFont": "Libre Franklin"
     },
     "title": {
-      "font": "Public Sans"
+      "font": "Libre Franklin"
     }
   }
 }

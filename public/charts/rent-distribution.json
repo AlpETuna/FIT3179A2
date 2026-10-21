@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "description": "Each bar counts the regions whose median weekly rent falls in a $50 band. 194 of 335 regions sit between $300 and $449 a week.",
   "width": "container",
-  "height": 320,
+  "height": 420,
   "autosize": {
     "type": "fit",
     "contains": "padding"
@@ -11,7 +11,7 @@
     "url": "data/sa3.json"
   },
   "config": {
-    "font": "Public Sans",
+    "font": "Libre Franklin",
     "background": "#ffffff",
     "view": {
       "stroke": null
@@ -37,7 +37,7 @@
       "padding": 8
     },
     "title": {
-      "font": "Public Sans",
+      "font": "Libre Franklin",
       "fontSize": 14,
       "fontWeight": 600,
       "color": "#1d1d1d",
@@ -48,7 +48,6 @@
     {
       "mark": {
         "type": "bar",
-        "color": "#8f4715",
         "binSpacing": 1
       },
       "encoding": {
@@ -83,7 +82,14 @@
             "type": "quantitative",
             "title": "Regions"
           }
-        ]
+        ],
+        "color": {
+          "condition": {
+            "test": "datum.bin_step_50_rent >= 300 && datum.bin_step_50_rent < 450",
+            "value": "#8f4715"
+          },
+          "value": "#d9b48c"
+        }
       }
     },
     {
